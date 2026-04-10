@@ -8,23 +8,13 @@ namespace Hotel.Application.DTOs.Pedido
         [Range(1, int.MaxValue, ErrorMessage = "ID do produto deve ser maior que zero")]
         public int ProdutoId { get; set; }
 
-        [Required(ErrorMessage = "Nome do produto é obrigatório")]
-        [StringLength(200, ErrorMessage = "Nome do produto não pode exceder 200 caracteres")]
-        public string NomeProduto { get; set; } = string.Empty;
-
-        [Required(ErrorMessage = "Preço unitário é obrigatório")]
-        [Range(0.01, double.MaxValue, ErrorMessage = "Preço unitário deve ser maior que zero")]
-        public decimal PrecoUnitario { get; set; }
+        [Required(ErrorMessage = "Preço é obrigatório")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "Preço deve ser maior que zero")]
+        public decimal Preco { get; set; }
 
         [Required(ErrorMessage = "Quantidade é obrigatória")]
         [Range(1, int.MaxValue, ErrorMessage = "Quantidade deve ser maior que zero")]
         public int Quantidade { get; set; } = 1;
-
-        [StringLength(200, ErrorMessage = "Observação não pode exceder 200 caracteres")]
-        public string? Observacao { get; set; }
-
-        [StringLength(100, ErrorMessage = "Categoria não pode exceder 100 caracteres")]
-        public string? Categoria { get; set; }
     }
 
     public class UpdateQuantityItemDto

@@ -103,7 +103,7 @@ namespace Hotel.Api.Controllers
                 {
                     foreach (var item in dto.Itens)
                     {
-                        pedido.AdicionarItem(item.ProdutoId, item.NomeProduto, item.PrecoUnitario, item.Quantidade, item.Observacao);
+                        pedido.AdicionarItem(item.ProdutoId, item.Preco, item.Quantidade);
                     }
                 }
 
@@ -148,7 +148,7 @@ namespace Hotel.Api.Controllers
                 if (pedido == null)
                     return NotFound(new { mensagem = $"Pedido com ID {id} não encontrado." });
 
-                pedido.AdicionarItem(dto.ProdutoId, dto.NomeProduto, dto.PrecoUnitario, dto.Quantidade, dto.Observacao);
+                pedido.AdicionarItem(dto.ProdutoId, dto.Preco, dto.Quantidade);
 
                 await _unitOfWork.Pedidos.Update(pedido);
                 await _unitOfWork.Save();
@@ -436,11 +436,8 @@ namespace Hotel.Api.Controllers
             {
                 Id = i.Id,
                 ProdutoId = i.ProdutoId,
-                NomeProduto = i.NomeProduto,
-                PrecoUnitario = i.PrecoUnitario,
+                Preco = i.Preco,
                 Quantidade = i.Quantidade,
-                Observacao = i.Observacao,
-                Categoria = i.Categoria,
                 ValorTotal = i.ValorTotal
             }).ToList() ?? new()
         };

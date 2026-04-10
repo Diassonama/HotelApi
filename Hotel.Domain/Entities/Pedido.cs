@@ -64,13 +64,12 @@ namespace Hotel.Domain.Entities
         public virtual IReadOnlyCollection<ItemPedido> ItemPedidos => _itemPedidos.AsReadOnly();
 
         // Métodos de negócio
-        public void AdicionarItem(int produtoId, string nomeProduto, decimal precoUnitario, int quantidade = 1, string observacaoItem = null)
+        public void AdicionarItem(int produtoId, decimal preco, int quantidade = 1)
         {
             ValidarPedidoParaEdicao();
             
             if (produtoId <= 0) throw new ArgumentException("ID do produto deve ser maior que zero", nameof(produtoId));
-            if (string.IsNullOrWhiteSpace(nomeProduto)) throw new ArgumentException("Nome do produto é obrigatório", nameof(nomeProduto));
-            if (precoUnitario <= 0) throw new ArgumentException("Preço unitário deve ser maior que zero", nameof(precoUnitario));
+            if (preco <= 0) throw new ArgumentException("Preço deve ser maior que zero", nameof(preco));
             if (quantidade <= 0) throw new ArgumentException("Quantidade deve ser maior que zero", nameof(quantidade));
 
             // Verificar se já existe item com mesmo produto
@@ -82,7 +81,7 @@ namespace Hotel.Domain.Entities
             }
             else
             {
-                var novoItem = new ItemPedido(produtoId, nomeProduto, precoUnitario, quantidade, observacaoItem);
+                var novoItem = new ItemPedido(produtoId, preco, quantidade);
                 _itemPedidos.Add(novoItem);
             }
 
@@ -159,13 +158,6 @@ namespace Hotel.Domain.Entities
                 throw new ArgumentException("Percentual de desconto deve estar entre 0 e 100", nameof(percentualDesconto));
             
             return ValorTotal * (percentualDesconto / 100);
-        }
-
-        public IEnumerable<ItemPedido> ObterItensPorCategoria(string categoria)
-        {
-            if (string.IsNullOrWhiteSpace(categoria)) return Enumerable.Empty<ItemPedido>();
-            
-            return _itemPedidos.Where(i => i.Categoria?.Equals(categoria, StringComparison.OrdinalIgnoreCase) == true);
         }
 
         public bool TemProduto(int produtoId)

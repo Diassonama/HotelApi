@@ -9,35 +9,29 @@ namespace Hotel.Domain.Entities
         private ItemPedido() { }
 
         // Construtor para criação de novos itens
-        public ItemPedido(int produtoId, string nomeProduto, decimal precoUnitario, int quantidade, string observacao = null, string categoria = null)
+        public ItemPedido(int produtoId, decimal preco, int quantidade)
         {
             if (produtoId <= 0) throw new ArgumentException("ID do produto deve ser maior que zero", nameof(produtoId));
-            if (string.IsNullOrWhiteSpace(nomeProduto)) throw new ArgumentException("Nome do produto é obrigatório", nameof(nomeProduto));
-            if (precoUnitario <= 0) throw new ArgumentException("Preço unitário deve ser maior que zero", nameof(precoUnitario));
+            if (preco <= 0) throw new ArgumentException("Preço deve ser maior que zero", nameof(preco));
             if (quantidade <= 0) throw new ArgumentException("Quantidade deve ser maior que zero", nameof(quantidade));
 
             ProdutoId = produtoId;
-            NomeProduto = nomeProduto.Trim();
-            PrecoUnitario = precoUnitario;
+            Preco = preco;
             Quantidade = quantidade;
-            Observacao = observacao?.Trim();
-            Categoria = categoria?.Trim();
         }
 
         // Propriedades
         public int ProdutoId { get; private set; }
-        public string NomeProduto { get; private set; }
-        public decimal PrecoUnitario { get; private set; }
+        public decimal Preco { get; private set; }
         public int Quantidade { get; private set; }
-        public string Observacao { get; private set; }
-        public string Categoria { get; private set; }
 
         // Propriedades calculadas
-        public decimal ValorTotal => PrecoUnitario * Quantidade;
+        public decimal ValorTotal => Preco * Quantidade;
 
         // Navigation Properties
         public int PedidoId { get; private set; }
         public virtual Pedido Pedido { get; private set; }
+        public virtual Produtos Produto { get; private set; }
 
         // Métodos de negócio
         public void AlterarQuantidade(int novaQuantidade)
@@ -52,20 +46,15 @@ namespace Hotel.Domain.Entities
             Quantidade += quantidadeAdicional;
         }
 
-        public void AtualizarObservacao(string novaObservacao)
-        {
-            Observacao = novaObservacao?.Trim();
-        }
-
         public void AtualizarPreco(decimal novoPreco)
         {
             if (novoPreco <= 0) throw new ArgumentException("Preço deve ser maior que zero", nameof(novoPreco));
-            PrecoUnitario = novoPreco;
+            Preco = novoPreco;
         }
 
         public override string ToString()
         {
-            return $"{NomeProduto} - Qtd: {Quantidade} - R$ {ValorTotal:F2}";
+            return $"Produto {ProdutoId} - Qtd: {Quantidade} - R$ {ValorTotal:F2}";
         }
     }
 }

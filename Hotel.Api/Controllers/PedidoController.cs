@@ -91,7 +91,13 @@ namespace Hotel.Api.Controllers
             {
                 _logger.LogInformation("📝 [PEDIDO-CREATE-{CorrelationId}] Criando pedido para checkin: {CheckinId}", correlationId, dto.IdCheckin);
 
-                var pedido = new Pedido(dto.IdCaixa, dto.IdCheckin, dto.HospedeId, dto.PontoVendaId, dto.Observacao);
+                var idCaixaAtual = await _unitOfWork.caixa.getCaixa();
+                if (idCaixaAtual <= 0)
+                {
+                    return BadRequest(new { mensagem = "Nenhum caixa atual aberto foi encontrado no sistema." });
+                }
+
+                var pedido = new Pedido(idCaixaAtual, dto.IdCheckin, dto.HospedeId, dto.PontoVendaId, dto.Observacao);
 
                 if (dto.Itens != null)
                 {

@@ -12,7 +12,6 @@ Authorization: {{authToken}}
 Content-Type: application/json
 
 {
-  "idCaixa": 1,
   "idCheckin": 1,
   "hospedeId": 1,
   "pontoVendaId": 1,

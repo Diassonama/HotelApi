@@ -4,10 +4,6 @@ namespace Hotel.Application.DTOs.Pedido
 {
     public class CreatePedidoDto
     {
-        [Required(ErrorMessage = "ID do caixa é obrigatório")]
-        [Range(1, int.MaxValue, ErrorMessage = "ID do caixa deve ser maior que zero")]
-        public int IdCaixa { get; set; }
-
         [Required(ErrorMessage = "ID do checkin é obrigatório")]
         [Range(1, int.MaxValue, ErrorMessage = "ID do checkin deve ser maior que zero")]
         public int IdCheckin { get; set; }

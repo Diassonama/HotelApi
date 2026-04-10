@@ -425,6 +425,7 @@ namespace Hotel.Api.Controllers
             DataFinalizacao = p.DataFinalizacao,
             SituacaoPagamento = (Hotel.Domain.Enums.SituacaoPagamentoPedido)(int)p.SituacaoPagamento,
             SituacaoPagamentoDescricao = p.SituacaoPagamento.ToString(),
+            Valor = p.Valor,
             ValorTotal = p.ValorTotal,
             QuantidadeItens = p.QuantidadeItens,
             PedidoFinalizado = p.PedidoFinalizado,
@@ -453,6 +454,7 @@ namespace Hotel.Api.Controllers
             DataPedido = p.DataPedido,
             SituacaoPagamento = (Hotel.Domain.Enums.SituacaoPagamentoPedido)(int)p.SituacaoPagamento,
             SituacaoPagamentoDescricao = p.SituacaoPagamento.ToString(),
+            Valor = p.Valor,
             ValorTotal = p.ValorTotal,
             QuantidadeItens = p.QuantidadeItens
         };

@@ -15,6 +15,7 @@ namespace Hotel.Application.DTOs.Pedido
         public DateTime? DataFinalizacao { get; set; }
         public SituacaoPagamentoPedido SituacaoPagamento { get; set; }
         public string SituacaoPagamentoDescricao { get; set; } = string.Empty;
+        public decimal Valor { get; set; }
         public decimal ValorTotal { get; set; }
         public int QuantidadeItens { get; set; }
         public bool PedidoFinalizado { get; set; }
@@ -36,6 +37,7 @@ namespace Hotel.Application.DTOs.Pedido
         public DateTime DataPedido { get; set; }
         public SituacaoPagamentoPedido SituacaoPagamento { get; set; }
         public string SituacaoPagamentoDescricao { get; set; } = string.Empty;
+        public decimal Valor { get; set; }
         public decimal ValorTotal { get; set; }
         public int QuantidadeItens { get; set; }
     }

@@ -16,6 +16,7 @@ namespace Hotel.Domain.Entities
             _itemPedidos = new List<ItemPedido>();
             SituacaoPagamento = SituacaoPagamentoPedido.Pendente;
             DataPedido = DateTime.Now;
+            RecalcularValorTotal();
         }
 
         // Construtor para criação de novos pedidos
@@ -36,6 +37,7 @@ namespace Hotel.Domain.Entities
             SituacaoPagamento = SituacaoPagamentoPedido.Pendente;
             DataPedido = DateTime.Now;
             NumePedido = GerarNumeroPedido();
+            RecalcularValorTotal();
         }
 
         // Propriedades públicas (somente leitura quando apropriado)
@@ -48,9 +50,10 @@ namespace Hotel.Domain.Entities
         public DateTime DataPedido { get; private set; }
         public DateTime? DataFinalizacao { get; private set; }
         public SituacaoPagamentoPedido SituacaoPagamento { get; private set; }
+        public decimal Valor { get; private set; }
         
         // Propriedades calculadas
-        public decimal ValorTotal => _itemPedidos.Sum(item => item.ValorTotal);
+        public decimal ValorTotal => Valor;
         public int QuantidadeItens => _itemPedidos.Count;
         public bool PedidoFinalizado => SituacaoPagamento == SituacaoPagamentoPedido.Pago;
         public bool PodeCancelar => SituacaoPagamento == SituacaoPagamentoPedido.Pendente;
@@ -82,6 +85,8 @@ namespace Hotel.Domain.Entities
                 var novoItem = new ItemPedido(produtoId, nomeProduto, precoUnitario, quantidade, observacaoItem);
                 _itemPedidos.Add(novoItem);
             }
+
+            RecalcularValorTotal();
         }
 
         public void RemoverItem(int produtoId)
@@ -92,6 +97,7 @@ namespace Hotel.Domain.Entities
             if (item == null) throw new InvalidOperationException("Item não encontrado no pedido");
             
             _itemPedidos.Remove(item);
+            RecalcularValorTotal();
         }
 
         public void AlterarQuantidadeItem(int produtoId, int novaQuantidade)
@@ -104,6 +110,7 @@ namespace Hotel.Domain.Entities
             if (item == null) throw new InvalidOperationException("Item não encontrado no pedido");
             
             item.AlterarQuantidade(novaQuantidade);
+            RecalcularValorTotal();
         }
 
         public void AtualizarObservacao(string novaObservacao)
@@ -176,6 +183,11 @@ namespace Hotel.Domain.Entities
         private string GerarNumeroPedido()
         {
             return $"PED{DateTime.Now:yyyyMMdd}{DateTime.Now:HHmmss}";
+        }
+
+        private void RecalcularValorTotal()
+        {
+            Valor = _itemPedidos.Sum(item => item.ValorTotal);
         }
 
         // Override para melhor representação

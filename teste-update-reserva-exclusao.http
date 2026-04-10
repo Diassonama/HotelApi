@@ -1,0 +1,110 @@
+### 🎯 TESTE: Update de Reserva com Exclusão da Própria Reserva
+### 
+### Este arquivo testa a nova funcionalidade onde ao atualizar uma reserva,
+### o sistema verifica disponibilidade EXCLUINDO a própria reserva da verificação.
+### Isso permite que uma reserva "sobrepor" suas próprias datas antigas sem conflito.
+
+@host = https://localhost:7097
+
+### =====================================================
+### CENÁRIO 1: Update Normal - Sem Conflitos
+### =====================================================
+
+PUT {{host}}/api/Reserva
+Content-Type: application/json
+
+{
+    "id": 1,
+    "empresaId": 1,
+    "npx": 2,
+    "quantidadeQuartos": 1,
+    "apartamentosReservados": [
+        {
+            "apartamentosId": 101,
+            "dataEntrada": "2025-02-01T14:00:00",
+            "dataSaida": "2025-02-05T12:00:00", 
+            "clientesId": 1,
+            "tipoHospedagensId": 1,
+            "valorDiaria": 150.00,
+            "reservaConfirmada": true,
+            "reservaNoShow": false
+        }
+    ]
+}
+
+### =====================================================
+### CENÁRIO 2: Update com Sobreposição das Próprias Datas
+### =====================================================
+### ✅ DEVE FUNCIONAR: A reserva ID=1 pode alterar suas datas mesmo
+### que sobreponha com as datas antigas da mesma reserva
+
+PUT {{host}}/api/Reserva
+Content-Type: application/json
+
+{
+    "id": 1,
+    "empresaId": 1,
+    "npx": 2,
+    "quantidadeQuartos": 1,
+    "apartamentosReservados": [
+        {
+            "apartamentosId": 101,
+            "dataEntrada": "2025-01-30T14:00:00",    
+            "dataSaida": "2025-02-10T12:00:00",      
+            "clientesId": 1,
+            "tipoHospedagensId": 1,
+            "valorDiaria": 150.00,
+            "reservaConfirmada": true,
+            "reservaNoShow": false
+        }
+    ]
+}
+
+### =====================================================
+### CENÁRIO 3: Update com Conflito com OUTRA Reserva
+### =====================================================
+### ❌ DEVE FALHAR: A reserva ID=1 NÃO pode conflitar com outras reservas
+
+PUT {{host}}/api/Reserva
+Content-Type: application/json
+
+{
+    "id": 1,
+    "empresaId": 1,
+    "npx": 2,
+    "quantidadeQuartos": 1,
+    "apartamentosReservados": [
+        {
+            "apartamentosId": 102,
+            "dataEntrada": "2025-03-01T14:00:00",    
+            "dataSaida": "2025-03-05T12:00:00",      
+            "clientesId": 1,
+            "tipoHospedagensId": 1,
+            "valorDiaria": 150.00,
+            "reservaConfirmada": true,
+            "reservaNoShow": false
+        }
+    ]
+}
+
+### =====================================================
+### COMPORTAMENTO ESPERADO:
+### =====================================================
+### 
+### 🔹 CENÁRIO 1: ✅ Sucesso - Não há conflitos
+### 
+### 🔹 CENÁRIO 2: ✅ Sucesso - A reserva pode sobrepor suas próprias datas
+###   - Mesmo que as novas datas (30/01 a 10/02) sobreponham 
+###     as antigas (01/02 a 05/02), é permitido porque é a MESMA reserva
+### 
+### 🔹 CENÁRIO 3: ❌ Erro - Conflito com OUTRA reserva 
+###   - Se o apartamento 102 já estiver reservado por OUTRA reserva
+###     no período de 01/03 a 05/03, o update será rejeitado
+###   
+### 📋 LÓGICA IMPLEMENTADA:
+### ✅ VerificarDisponibilidadeAsync(apartamentoId, dataEntrada, dataSaida, reservaIdExcluir)
+### ✅ query.Where(ar => ar.ReservasId != reservaIdExcluir.Value)
+### ✅ UpdateReservaCommand usa request.Id como reservaIdExcluir
+###
+### 🎯 RESULTADO: Uma reserva pode alterar suas próprias datas sem problemas,
+###             mas não pode conflitar com reservas de terceiros!

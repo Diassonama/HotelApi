@@ -1,0 +1,23 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
+
+namespace Hotel.Application.Extensions
+{
+   public static class ClaimsPrincipalExtensions
+    {
+        
+         public static string GetUserName(this ClaimsPrincipal user)
+        {
+            return user.FindFirst(ClaimTypes.Name)?.Value.ToString();
+        }
+
+        public static string GetUserId(this ClaimsPrincipal user)
+        {
+            return user.FindFirst(ClaimTypes.NameIdentifier)?.Value.ToString();
+            
+        }
+    }
+}

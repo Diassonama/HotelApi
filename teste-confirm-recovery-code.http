@@ -1,0 +1,70 @@
+### Endpoint: Confirmar Código de Recuperação de Senha
+### Permite ao usuário confirmar o código recebido por SMS/Email e redefinir a senha
+
+# 1. ✅ Caso de sucesso - Código válido e nova senha
+POST {{base_url}}/api/Usuario/confirm-recovery-code
+Content-Type: application/json
+
+{
+  "username": "admin@example.com",
+  "code": "123456",
+  "newPassword": "NovaSenh@123!",
+  "confirmPassword": "NovaSenh@123!"
+}
+
+###
+
+# 2. ❌ Caso de erro - Usuário não encontrado
+POST {{base_url}}/api/Usuario/confirm-recovery-code
+Content-Type: application/json
+
+{
+  "username": "inexistente@example.com",
+  "code": "123456",
+  "newPassword": "NovaSenh@123!",
+  "confirmPassword": "NovaSenh@123!"
+}
+
+###
+
+# 3. ❌ Caso de erro - Código inválido
+POST {{base_url}}/api/Usuario/confirm-recovery-code
+Content-Type: application/json
+
+{
+  "username": "admin@example.com",
+  "code": "000000",
+  "newPassword": "NovaSenh@123!",
+  "confirmPassword": "NovaSenh@123!"
+}
+
+###
+
+# 4. ❌ Caso de erro - Senhas não coincidem
+POST {{base_url}}/api/Usuario/confirm-recovery-code
+Content-Type: application/json
+
+{
+  "username": "admin@example.com",
+  "code": "123456",
+  "newPassword": "NovaSenh@123!",
+  "confirmPassword": "SenhaDiferente@123!"
+}
+
+###
+
+# 5. ❌ Caso de erro - Dados inválidos (validação)
+POST {{base_url}}/api/Usuario/confirm-recovery-code
+Content-Type: application/json
+
+{
+  "username": "email-invalido",
+  "code": "12",
+  "newPassword": "123",
+  "confirmPassword": "123"
+}
+
+###
+
+# Variável base_url para localhost
+@base_url = https://localhost:7001

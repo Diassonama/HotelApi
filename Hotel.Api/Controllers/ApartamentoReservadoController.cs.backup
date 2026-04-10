@@ -1,0 +1,293 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
+using AutoMapper;
+using Hotel.Api.Controllers.Shared;
+using Hotel.Application.DTOs.ApartamentoReservado;
+using Hotel.Domain.Entities;
+using Hotel.Domain.Interface;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+
+namespace Hotel.Api.Controllers
+{
+    /// <summary>
+    /// Controller para gerenciamento de apartamentos reservados
+    /// </summary>
+    [Authorize]
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ApartamentoReservadoController : ApiControllerBase
+    {
+        private readonly IMapper _mapper;
+        private readonly ILogger<ApartamentoReservadoController> _logger;
+        private readonly IUnitOfWork _unitOfWork;
+
+        public ApartamentoReservadoController(IUnitOfWork unitOfWork, IMapper mapper, ILogger<ApartamentoReservadoController> logger) 
+            : base(unitOfWork) 
+        { 
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
+            _logger = logger;
+        }
+
+        /// <summary>
+        /// Obtém todas as reservas de apartamentos
+        /// </summary>
+        /// <param name="apenasAtivos">Se true, retorna apenas reservas ativas</param>
+        /// <returns>Lista de apartamentos reservados</returns>
+        [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<ApartamentoReservadoDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<ApartamentoReservadoDto>>> GetAllApartamentosReservados([FromQuery] bool apenasAtivos = true)
+        {
+            try
+            {
+                var apartamentosReservados = await _unitOfWork.apartamentoReservado.GetAllAsync();
+                
+                if (apenasAtivos)
+                {
+                    apartamentosReservados = apartamentosReservados.Where(ar => !ar.ReservaNoShow);
+                }
+
+                var dtos = _mapper.Map<IEnumerable<ApartamentoReservadoDto>>(apartamentosReservados);
+                return Ok(dtos);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao obter apartamentos reservados");
+                return StatusCode(500, "Erro interno do servidor");
+            }
+        }
+
+        /// <summary>
+        /// Obtém um apartamento reservado específico por ID
+        /// </summary>
+        /// <param name="id">ID do apartamento reservado</param>
+        /// <returns>Apartamento reservado</returns>
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(ApartamentoReservadoDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<ApartamentoReservadoDto>> GetApartamentoReservadoById(int id)
+        {
+            try
+            {
+                var apartamentoReservado = await _unitOfWork.apartamentoReservado.Get(id);
+                
+                if (apartamentoReservado == null)
+                {
+                    return NotFound($"Apartamento reservado com ID {id} não encontrado");
+                }
+
+                var dto = _mapper.Map<ApartamentoReservadoDto>(apartamentoReservado);
+                return Ok(dto);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao obter apartamento reservado por ID: {Id}", id);
+                return StatusCode(500, "Erro interno do servidor");
+            }
+        }
+
+        /// <summary>
+        /// Obtém apartamentos reservados por período
+        /// </summary>
+        /// <param name="dataInicio">Data de início do período</param>
+        /// <param name="dataFim">Data de fim do período</param>
+        /// <returns>Lista de apartamentos reservados no período</returns>
+        [HttpGet("periodo")]
+        [ProducesResponseType(typeof(IEnumerable<ApartamentoReservadoDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<ApartamentoReservadoDto>>> GetApartamentosReservadosPorPeriodo(
+            [FromQuery, Required] DateTime dataInicio,
+            [FromQuery, Required] DateTime dataFim)
+        {
+            try
+            {
+                if (dataInicio > dataFim)
+                {
+                    return BadRequest("Data de início deve ser menor que data de fim");
+                }
+
+                var apartamentosReservados = await _unitOfWork.apartamentoReservado.GetAllAsync();
+                
+                var reservasNoPeriodo = apartamentosReservados.Where(ar => 
+                    !ar.ReservaNoShow && // Apenas reservas ativas
+                    ar.DataEntrada <= dataFim && 
+                    ar.DataSaida >= dataInicio);
+
+                var dtos = _mapper.Map<IEnumerable<ApartamentoReservadoDto>>(reservasNoPeriodo);
+                return Ok(dtos);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao obter reservas por período");
+                return StatusCode(500, "Erro interno do servidor");
+            }
+        }
+
+        /// <summary>
+        /// Obtém todas as reservas de um apartamento específico
+        /// </summary>
+        /// <param name="apartamentoId">ID do apartamento</param>
+        /// <returns>Lista de reservas do apartamento</returns>
+        [HttpGet("apartamento/{apartamentoId}")]
+        [ProducesResponseType(typeof(IEnumerable<ApartamentoReservadoDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<ApartamentoReservadoDto>>> GetReservasPorApartamento(int apartamentoId)
+        {
+            try
+            {
+                // Verificar se o apartamento existe
+                var apartamento = await _unitOfWork.Apartamento.Get(apartamentoId);
+                if (apartamento == null)
+                {
+                    return NotFound($"Apartamento com ID {apartamentoId} não encontrado");
+                }
+
+                var apartamentosReservados = await _unitOfWork.apartamentoReservado.GetAllAsync();
+                
+                var reservasDoApartamento = apartamentosReservados
+                    .Where(ar => ar.ApartamentosId == apartamentoId && !ar.ReservaNoShow)
+                    .OrderBy(ar => ar.DataEntrada);
+
+                var dtos = _mapper.Map<IEnumerable<ApartamentoReservadoDto>>(reservasDoApartamento);
+                return Ok(dtos);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao obter reservas do apartamento: {ApartamentoId}", apartamentoId);
+                return StatusCode(500, "Erro interno do servidor");
+            }
+        }
+
+        /// <summary>
+        /// Verifica disponibilidade de um apartamento em um período
+        /// </summary>
+        /// <param name="apartamentoId">ID do apartamento</param>
+        /// <param name="dataInicio">Data de início</param>
+        /// <param name="dataFim">Data de fim</param>
+        /// <returns>Resultado da verificação de disponibilidade</returns>
+        [HttpGet("disponibilidade/{apartamentoId}")]
+        [ProducesResponseType(typeof(object), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> VerificarDisponibilidade(
+            int apartamentoId,
+            [FromQuery, Required] DateTime dataInicio,
+            [FromQuery, Required] DateTime dataFim)
+        {
+            try
+            {
+                if (dataInicio > dataFim)
+                {
+                    return BadRequest("Data de início deve ser menor que data de fim");
+                }
+
+                // Verificar se o apartamento existe
+                var apartamento = await _unitOfWork.Apartamento.Get(apartamentoId);
+                if (apartamento == null)
+                {
+                    return NotFound($"Apartamento com ID {apartamentoId} não encontrado");
+                }
+
+                // Verificar disponibilidade
+                var disponivel = await _unitOfWork.apartamentoReservado
+                    .VerificarDisponibilidadeAsync(apartamentoId, dataInicio, dataFim);
+
+                return Ok(new
+                {
+                    apartamentoId,
+                    periodo = new { dataInicio, dataFim },
+                    disponivel = !disponivel, // O método retorna true se há conflito
+                    mensagem = !disponivel 
+                        ? $"Apartamento disponível no período de {dataInicio:dd/MM/yyyy} a {dataFim:dd/MM/yyyy}"
+                        : $"Apartamento não disponível no período solicitado"
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao verificar disponibilidade do apartamento {ApartamentoId}", apartamentoId);
+                return StatusCode(500, "Erro interno do servidor");
+            }
+        }
+
+        /// <summary>
+        /// Cria uma nova reserva de apartamento
+        /// </summary>
+        /// <param name="dto">Dados da reserva</param>
+        /// <returns>Resultado da criação</returns>
+        [HttpPost]
+        [ProducesResponseType(typeof(ApartamentoReservadoDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<ApartamentoReservadoDto>> CreateApartamentoReservado([FromBody] ApartamentoReservadoDto dto)
+        {
+            try
+            {
+                // Validações básicas
+                if (dto.DataEntrada >= dto.DataSaida)
+                {
+                    return BadRequest("Data de entrada deve ser menor que data de saída");
+                }
+
+                // Verificar se o apartamento existe
+                var apartamento = await _unitOfWork.Apartamento.Get(dto.ApartamentoId);
+                if (apartamento == null)
+                {
+                    return BadRequest($"Apartamento com ID {dto.ApartamentoId} não encontrado");
+                }
+
+                // Verificar se a reserva existe
+                var reserva = await _unitOfWork.Reservas.Get(dto.ReservaId);
+                if (reserva == null)
+                {
+                    return BadRequest($"Reserva com ID {dto.ReservaId} não encontrada");
+                }
+
+                // Verificar disponibilidade
+                var conflito = await _unitOfWork.apartamentoReservado
+                    .VerificarDisponibilidadeAsync(dto.ApartamentoId, dto.DataEntrada, dto.DataSaida);
+
+                if (conflito)
+                {
+                    return BadRequest($"Apartamento não disponível no período de {dto.DataEntrada:dd/MM/yyyy} a {dto.DataSaida:dd/MM/yyyy}");
+                }
+
+                // Criar a entidade
+                var apartamentoReservado = new ApartamentosReservado(
+                    dto.ReservaId,
+                    dto.ApartamentoId,
+                    dto.DataEntrada,
+                    dto.DataSaida,
+                    0, // ClientesId - seria necessário obter da reserva
+                    0, // TipoHospedagensId - seria necessário definir
+                    dto.UtilizadoresId,
+                    dto.ValorDiaria,
+                    true, // ReservaConfirmada
+                    false // ReservaNoShow
+                );
+
+                // Salvar no banco
+                await _unitOfWork.apartamentoReservado.Add(apartamentoReservado);
+                await _unitOfWork.Save();
+
+                // Retornar resultado
+                var resultDto = _mapper.Map<ApartamentoReservadoDto>(apartamentoReservado);
+                return CreatedAtAction(nameof(GetApartamentoReservadoById), new { id = apartamentoReservado.Id }, resultDto);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao criar apartamento reservado");
+                return StatusCode(500, "Erro interno do servidor");
+            }
+        }
+    }
+}

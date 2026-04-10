@@ -1,0 +1,16 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Hotel.Domain.Entities;
+using Hotel.Domain.Interface.Shared;
+
+namespace Hotel.Domain.Interface
+{
+    public interface IClienteRepository : IRepositoryBase<Cliente>
+    {
+        Task<IEnumerable<Cliente>> GetAllAsync();
+        Task<Cliente> GetByIdAsync(int Id);
+        IQueryable GetFilteredAsync(PaginationFilter paginationFilter);
+    }
+}

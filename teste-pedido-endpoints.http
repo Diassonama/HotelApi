@@ -1,0 +1,120 @@
+### Testes para PedidoController
+### Endpoints: GET, POST, PUT, DELETE
+
+@baseUrl = http://localhost:5055
+@authToken = Bearer SEU_TOKEN_AQUI
+@pedidoId = 1
+@checkinId = 1
+
+### 1. Criar pedido
+POST {{baseUrl}}/api/Pedido
+Authorization: {{authToken}}
+Content-Type: application/json
+
+{
+  "idCaixa": 1,
+  "idCheckin": 1,
+  "hospedeId": 1,
+  "pontoVendaId": 1,
+  "observacao": "Pedido inicial do quarto",
+  "itens": [
+    {
+      "produtoId": 101,
+      "nomeProduto": "Água 500ml",
+      "precoUnitario": 500,
+      "quantidade": 2,
+      "observacao": "Sem gelo",
+      "categoria": "Bebidas"
+    },
+    {
+      "produtoId": 102,
+      "nomeProduto": "Sandes Mista",
+      "precoUnitario": 2500,
+      "quantidade": 1,
+      "observacao": "",
+      "categoria": "Comidas"
+    }
+  ]
+}
+
+### 2. Buscar pedido por ID
+GET {{baseUrl}}/api/Pedido/{{pedidoId}}
+Authorization: {{authToken}}
+
+### 3. Listar pedidos por checkin
+GET {{baseUrl}}/api/Pedido/checkin/{{checkinId}}
+Authorization: {{authToken}}
+
+### 4. Adicionar item ao pedido
+POST {{baseUrl}}/api/Pedido/{{pedidoId}}/itens
+Authorization: {{authToken}}
+Content-Type: application/json
+
+{
+  "produtoId": 103,
+  "nomeProduto": "Sumo Natural",
+  "precoUnitario": 1200,
+  "quantidade": 1,
+  "observacao": "Laranja",
+  "categoria": "Bebidas"
+}
+
+### 5. Atualizar quantidade de item
+PUT {{baseUrl}}/api/Pedido/{{pedidoId}}/itens/quantidade
+Authorization: {{authToken}}
+Content-Type: application/json
+
+{
+  "produtoId": 101,
+  "novaQuantidade": 3
+}
+
+### 6. Atualizar observacao do pedido
+PUT {{baseUrl}}/api/Pedido/{{pedidoId}}/observacao
+Authorization: {{authToken}}
+Content-Type: application/json
+
+{
+  "observacao": "Entregar no quarto apos as 20h"
+}
+
+### 7. Remover item do pedido
+DELETE {{baseUrl}}/api/Pedido/{{pedidoId}}/itens/103
+Authorization: {{authToken}}
+
+### 8. Confirmar pagamento do pedido
+PUT {{baseUrl}}/api/Pedido/{{pedidoId}}/confirmar-pagamento
+Authorization: {{authToken}}
+
+### 9. Estornar pagamento do pedido
+PUT {{baseUrl}}/api/Pedido/{{pedidoId}}/estornar
+Authorization: {{authToken}}
+Content-Type: application/json
+
+{
+  "motivo": "Cobranca duplicada"
+}
+
+### 10. Cancelar pedido (normalmente deve ser antes de confirmar pagamento)
+PUT {{baseUrl}}/api/Pedido/{{pedidoId}}/cancelar
+Authorization: {{authToken}}
+
+### Exemplos de erro esperados
+
+### 11. Buscar pedido inexistente
+GET {{baseUrl}}/api/Pedido/999999
+Authorization: {{authToken}}
+
+### 12. Adicionar item com dados invalidos (precoUnitario menor ou igual a zero)
+POST {{baseUrl}}/api/Pedido/{{pedidoId}}/itens
+Authorization: {{authToken}}
+Content-Type: application/json
+
+{
+  "produtoId": 200,
+  "nomeProduto": "Item invalido",
+  "precoUnitario": 0,
+  "quantidade": 1,
+  "observacao": "",
+  "categoria": "Teste"
+}

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rack Hotel - Tempo Real</title>
+    <style>
+        .rack-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            padding: 20px;
+        }
+        
+        .apartamento {
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .apartamento.livre {
+            background-color: #d4edda;
+            border-color: #28a745;
+        }
+        
+        .apartamento.ocupado {
+            background-color: #f8d7da;
+            border-color: #dc3545;
+        }
+        
+        .apartamento.reservado {
+            background-color: #fff3cd;
+            border-color: #ffc107;
+        }
+        
+        .apartamento.manutencao {
+            background-color: #e2e3e5;
+            border-color: #6c757d;
+        }
+        
+        .status {
+            font-weight: bold;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        .notifications {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .notification {
+            background: #007bff;
+            color: white;
+            padding: 10px 15px;
+            margin: 5px 0;
+            border-radius: 5px;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Rack Hotel - Atualização em Tempo Real</h1>
+    
+    <div id="notifications" class="notifications"></div>
+    
+    <div class="rack-container" id="rackContainer">
+        <!-- Apartamentos serão carregados dinamicamente -->
+        <div class="apartamento livre" data-apartamento-id="101">
+            <h3>Apto 101</h3>
+            <div class="status">Livre</div>
+        </div>
+        
+        <div class="apartamento ocupado" data-apartamento-id="102">
+            <h3>Apto 102</h3>
+            <div class="status">Ocupado</div>
+        </div>
+        
+        <div class="apartamento reservado" data-apartamento-id="103">
+            <h3>Apto 103</h3>
+            <div class="status">Reservado</div>
+        </div>
+        
+        <div class="apartamento livre" data-apartamento-id="104">
+            <h3>Apto 104</h3>
+            <div class="status">Livre</div>
+        </div>
+    </div>
+
+    <!-- SignalR CDN -->
+    <script src="https://unpkg.com/@microsoft/signalr@latest/dist/browser/signalr.min.js"></script>
+    
+    <script>
+        class RackManager {
+            constructor() {
+                this.connection = null;
+                this.iniciarSignalR();
+            }
+            
+            async iniciarSignalR() {
+                try {
+                    this.connection = new signalR.HubConnectionBuilder()
+                        .withUrl("/rackHub")
+                        .withAutomaticReconnect()
+                        .build();
+                    
+                    this.configurarEventos();
+                    await this.connection.start();
+                    console.log("Conectado ao RackHub");
+                    
+                    await this.connection.invoke("JoinRackGroup");
+                } catch (error) {
+                    console.error("Erro ao conectar:", error);
+                }
+            }
+            
+            configurarEventos() {
+                this.connection.on("AtualizarRack", () => {
+                    this.mostrarNotificacao("Rack atualizado!");
+                    location.reload(); // Recarregar página para demo
+                });
+                
+                this.connection.on("StatusApartamentoAlterado", (data) => {
+                    this.atualizarApartamento(data.ApartamentoId, data.NovoStatus);
+                    this.mostrarNotificacao(`Apartamento ${data.ApartamentoId}: ${data.NovoStatus}`);
+                });
+                
+                this.connection.on("NovaReserva", (data) => {
+                    this.atualizarApartamento(data.ApartamentoId, "Reservado");
+                    this.mostrarNotificacao(`Nova reserva: Apartamento ${data.ApartamentoId}`);
+                });
+                
+                this.connection.on("CheckInRealizado", (data) => {
+                    this.atualizarApartamento(data.ApartamentoId, "Ocupado");
+                    this.mostrarNotificacao(`Check-in: Apartamento ${data.ApartamentoId}`);
+                });
+                
+                this.connection.on("CheckOutRealizado", (data) => {
+                    this.atualizarApartamento(data.ApartamentoId, "Livre");
+                    this.mostrarNotificacao(`Check-out: Apartamento ${data.ApartamentoId}`);
+                });
+            }
+            
+            atualizarApartamento(apartamentoId, novoStatus) {
+                const elemento = document.querySelector(`[data-apartamento-id="${apartamentoId}"]`);
+                if (elemento) {
+                    // Remover classes de status anteriores
+                    elemento.classList.remove('livre', 'ocupado', 'reservado', 'manutencao');
+                    
+                    // Adicionar nova classe
+                    elemento.classList.add(novoStatus.toLowerCase());
+                    
+                    // Atualizar texto do status
+                    const statusElement = elemento.querySelector('.status');
+                    if (statusElement) {
+                        statusElement.textContent = novoStatus;
+                    }
+                }
+            }
+            
+            mostrarNotificacao(mensagem) {
+                const container = document.getElementById('notifications');
+                const notification = document.createElement('div');
+                notification.className = 'notification';
+                notification.textContent = mensagem;
+                
+                container.appendChild(notification);
+                
+                // Remover após 5 segundos
+                setTimeout(() => {
+                    notification.remove();
+                }, 5000);
+            }
+        }
+        
+        // Iniciar quando a página carregar
+        document.addEventListener('DOMContentLoaded', () => {
+            new RackManager();
+        });
+    </script>
+</body>
+</html>

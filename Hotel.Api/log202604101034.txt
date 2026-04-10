@@ -1,0 +1,443 @@
+2026-04-10 10:34:07.945 +01:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5055/api/Menu/MenuByRole?perfil=SUPERADMIN - null null
+2026-04-10 10:34:07.945 +01:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5055/api/MenuRelatorio/menu?perfil=SUPERADMIN - null null
+2026-04-10 10:34:07.944 +01:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5055/api/ConfiguracaoFiscal - null null
+2026-04-10 10:34:07.945 +01:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5055/api/Serial - null null
+2026-04-10 10:34:07.956 +01:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5055/api/Apartamento/ocupados - null null
+2026-04-10 10:34:07.959 +01:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5055/api/Cliente - null null
+2026-04-10 10:34:07.962 +01:00 [INF] CORS policy execution successful.
+2026-04-10 10:34:07.963 +01:00 [INF] HTTP OPTIONS /api/Apartamento/ocupados responded 204 in 1.0979 ms
+2026-04-10 10:34:07.963 +01:00 [INF] CORS policy execution successful.
+2026-04-10 10:34:07.963 +01:00 [INF] CORS policy execution successful.
+2026-04-10 10:34:07.963 +01:00 [INF] CORS policy execution successful.
+2026-04-10 10:34:07.963 +01:00 [INF] HTTP OPTIONS /api/Menu/MenuByRole responded 204 in 2.0238 ms
+2026-04-10 10:34:07.963 +01:00 [INF] CORS policy execution successful.
+2026-04-10 10:34:07.963 +01:00 [INF] CORS policy execution successful.
+2026-04-10 10:34:07.964 +01:00 [INF] HTTP OPTIONS /api/Serial responded 204 in 1.9420 ms
+2026-04-10 10:34:07.964 +01:00 [INF] HTTP OPTIONS /api/ConfiguracaoFiscal responded 204 in 2.0605 ms
+2026-04-10 10:34:07.964 +01:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5055/api/Menu/MenuByRole?perfil=SUPERADMIN - 204 null null 18.8541ms
+2026-04-10 10:34:07.963 +01:00 [INF] HTTP OPTIONS /api/Cliente responded 204 in 1.4786 ms
+2026-04-10 10:34:07.964 +01:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5055/api/Cliente - 204 null null 4.8324ms
+2026-04-10 10:34:07.964 +01:00 [INF] HTTP OPTIONS /api/MenuRelatorio/menu responded 204 in 2.4968 ms
+2026-04-10 10:34:07.964 +01:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5055/api/Apartamento/ocupados - 204 null null 7.0632ms
+2026-04-10 10:34:07.964 +01:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5055/api/ConfiguracaoFiscal - 204 null null 20.449ms
+2026-04-10 10:34:07.964 +01:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5055/api/Serial - 204 null null 19.0309ms
+2026-04-10 10:34:07.965 +01:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5055/api/ProductType - null null
+2026-04-10 10:34:07.965 +01:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5055/api/PontoDeVenda - null null
+2026-04-10 10:34:07.964 +01:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5055/api/MenuRelatorio/menu?perfil=SUPERADMIN - 204 null null 19.6637ms
+2026-04-10 10:34:07.965 +01:00 [INF] CORS policy execution successful.
+2026-04-10 10:34:07.965 +01:00 [INF] CORS policy execution successful.
+2026-04-10 10:34:07.966 +01:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5055/api/TiposPagamentos - null null
+2026-04-10 10:34:07.966 +01:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5055/api/Caixa/CaixaAtual - null null
+2026-04-10 10:34:07.966 +01:00 [INF] HTTP OPTIONS /api/PontoDeVenda responded 204 in 0.6318 ms
+2026-04-10 10:34:07.966 +01:00 [INF] CORS policy execution successful.
+2026-04-10 10:34:07.967 +01:00 [INF] HTTP OPTIONS /api/TiposPagamentos responded 204 in 1.5454 ms
+2026-04-10 10:34:07.966 +01:00 [INF] CORS policy execution successful.
+2026-04-10 10:34:07.968 +01:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5055/api/PontoDeVenda - 204 null null 1.5037ms
+2026-04-10 10:34:07.969 +01:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5055/api/TiposPagamentos - 204 null null 3.4512ms
+2026-04-10 10:34:07.966 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5055/api/Apartamento/ocupados - application/json null
+2026-04-10 10:34:07.970 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5055/api/Menu/MenuByRole?perfil=SUPERADMIN - application/json null
+2026-04-10 10:34:07.970 +01:00 [INF] CORS policy execution successful.
+2026-04-10 10:34:07.966 +01:00 [INF] HTTP OPTIONS /api/ProductType responded 204 in 0.8102 ms
+2026-04-10 10:34:07.971 +01:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5055/api/ProductType - 204 null null 6.2267ms
+2026-04-10 10:34:07.972 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5055/api/ConfiguracaoFiscal - application/json null
+2026-04-10 10:34:07.971 +01:00 [INF] CORS policy execution successful.
+2026-04-10 10:34:07.971 +01:00 [INF] HTTP OPTIONS /api/Caixa/CaixaAtual responded 204 in 3.3822 ms
+2026-04-10 10:34:07.972 +01:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5055/api/Caixa/CaixaAtual - 204 null null 6.4141ms
+2026-04-10 10:34:07.973 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5055/api/Cliente - application/json null
+2026-04-10 10:34:07.973 +01:00 [INF] CORS policy execution successful.
+2026-04-10 10:34:07.973 +01:00 [INF] === TenantService inicializado ===
+2026-04-10 10:34:07.973 +01:00 [INF] === TenantService inicializado ===
+2026-04-10 10:34:07.972 +01:00 [INF] CORS policy execution successful.
+2026-04-10 10:34:07.973 +01:00 [INF] === TenantService inicializado ===
+2026-04-10 10:34:07.973 +01:00 [INF] TenantResolutionMiddleware: Iniciando execução...
+2026-04-10 10:34:07.973 +01:00 [INF] === TenantService inicializado ===
+2026-04-10 10:34:07.973 +01:00 [INF] TenantResolutionMiddleware: Iniciando execução...
+2026-04-10 10:34:07.973 +01:00 [INF] TenantId identificado: localhost
+2026-04-10 10:34:07.973 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5055/api/MenuRelatorio/menu?perfil=SUPERADMIN - application/json null
+2026-04-10 10:34:07.973 +01:00 [INF] TenantResolutionMiddleware: Iniciando execução...
+2026-04-10 10:34:07.973 +01:00 [INF] TenantId identificado: localhost
+2026-04-10 10:34:07.973 +01:00 [INF] TenantResolutionMiddleware: Iniciando execução...
+2026-04-10 10:34:07.973 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5055/api/Serial - application/json null
+2026-04-10 10:34:07.973 +01:00 [INF] TenantId from headers: 
+2026-04-10 10:34:07.973 +01:00 [INF] CORS policy execution successful.
+2026-04-10 10:34:07.973 +01:00 [INF] === ResolveTenantAsync [969afab8] ===
+2026-04-10 10:34:07.973 +01:00 [INF] Buscando tenant: 'localhost' [969afab8]
+2026-04-10 10:34:07.973 +01:00 [INF] TenantId from headers: 
+2026-04-10 10:34:07.974 +01:00 [INF] === ResolveTenantAsync [6d25ae9d] ===
+2026-04-10 10:34:07.974 +01:00 [INF] Buscando tenant: 'localhost' [6d25ae9d]
+2026-04-10 10:34:07.973 +01:00 [INF] CORS policy execution successful.
+2026-04-10 10:34:07.973 +01:00 [INF] === TenantService inicializado ===
+2026-04-10 10:34:07.973 +01:00 [INF] TenantId identificado: localhost
+2026-04-10 10:34:07.973 +01:00 [INF] TenantId identificado: localhost
+2026-04-10 10:34:07.975 +01:00 [INF] TenantResolutionMiddleware: Iniciando execução...
+2026-04-10 10:34:07.975 +01:00 [INF] TenantId from headers: 
+2026-04-10 10:34:07.975 +01:00 [INF] TenantId from headers: 
+2026-04-10 10:34:07.975 +01:00 [INF] TenantId identificado: localhost
+2026-04-10 10:34:07.975 +01:00 [INF] === ResolveTenantAsync [61873263] ===
+2026-04-10 10:34:07.976 +01:00 [INF] === ResolveTenantAsync [5abbc989] ===
+2026-04-10 10:34:07.976 +01:00 [INF] TenantId from headers: 
+2026-04-10 10:34:07.976 +01:00 [INF] === TenantService inicializado ===
+2026-04-10 10:34:07.976 +01:00 [INF] === ResolveTenantAsync [a7b04861] ===
+2026-04-10 10:34:07.976 +01:00 [INF] Buscando tenant: 'localhost' [a7b04861]
+2026-04-10 10:34:07.976 +01:00 [INF] Buscando tenant: 'localhost' [61873263]
+2026-04-10 10:34:07.976 +01:00 [INF] Buscando tenant: 'localhost' [5abbc989]
+2026-04-10 10:34:07.976 +01:00 [INF] TenantResolutionMiddleware: Iniciando execução...
+2026-04-10 10:34:07.976 +01:00 [INF] TenantId identificado: localhost
+2026-04-10 10:34:07.976 +01:00 [INF] TenantId from headers: 
+2026-04-10 10:34:07.976 +01:00 [INF] === ResolveTenantAsync [42e6e8a8] ===
+2026-04-10 10:34:07.976 +01:00 [INF] Buscando tenant: 'localhost' [42e6e8a8]
+2026-04-10 10:34:08.160 +01:00 [INF] Executed DbCommand (178ms) [Parameters=[@__tenantId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[ConnectionString], [t].[DatabaseName], [t].[DatabaseServerName], [t].[Name], [t].[Password], [t].[UserID], [t].[Metadata_CustomSettings], [t].[Metadata_IsActive], [t].[Metadata_KeySerial], [t].[Metadata_MaxUsers], [t].[Metadata_Prazo], [t].[Metadata_Region]
+FROM [Tenant] AS [t]
+WHERE [t].[Id] = @__tenantId_0
+2026-04-10 10:34:08.161 +01:00 [INF] ✅ Tenant encontrado: ID='localhost', Name='localhost', Database='db_abc40d_ghotelhomolog' [5abbc989]
+2026-04-10 10:34:08.161 +01:00 [INF] === SetCurrentTenant ===
+2026-04-10 10:34:08.161 +01:00 [INF] Definindo tenant atual: ID='localhost', Name='localhost'
+2026-04-10 10:34:08.161 +01:00 [INF] ✅ Tenant atual definido com sucesso: 'localhost'
+2026-04-10 10:34:08.161 +01:00 [INF] Audit Log: {"TenantId":"localhost","Path":{"Value":"/api/Cliente","HasValue":true,"$type":"PathString"},"Method":"GET","Timestamp":"2026-04-10T09:34:08.1613800Z","UserAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36","IPAddress":"::1"}
+2026-04-10 10:34:08.161 +01:00 [INF] Executed DbCommand (180ms) [Parameters=[@__tenantId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[ConnectionString], [t].[DatabaseName], [t].[DatabaseServerName], [t].[Name], [t].[Password], [t].[UserID], [t].[Metadata_CustomSettings], [t].[Metadata_IsActive], [t].[Metadata_KeySerial], [t].[Metadata_MaxUsers], [t].[Metadata_Prazo], [t].[Metadata_Region]
+FROM [Tenant] AS [t]
+WHERE [t].[Id] = @__tenantId_0
+2026-04-10 10:34:08.161 +01:00 [INF] ✅ Tenant encontrado: ID='localhost', Name='localhost', Database='db_abc40d_ghotelhomolog' [6d25ae9d]
+2026-04-10 10:34:08.161 +01:00 [INF] === SetCurrentTenant ===
+2026-04-10 10:34:08.162 +01:00 [INF] Definindo tenant atual: ID='localhost', Name='localhost'
+2026-04-10 10:34:08.162 +01:00 [INF] ✅ Tenant atual definido com sucesso: 'localhost'
+2026-04-10 10:34:08.162 +01:00 [INF] Audit Log: {"TenantId":"localhost","Path":{"Value":"/api/Menu/MenuByRole","HasValue":true,"$type":"PathString"},"Method":"GET","Timestamp":"2026-04-10T09:34:08.1620820Z","UserAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36","IPAddress":"::1"}
+2026-04-10 10:34:08.163 +01:00 [INF] Executing endpoint 'Hotel.Api.Controllers.MenuController.Role (Hotel.Api)'
+2026-04-10 10:34:08.163 +01:00 [INF] Executing endpoint 'Hotel.Api.Controllers.ClienteController.GetAllUsers (Hotel.Api)'
+2026-04-10 10:34:08.163 +01:00 [INF] Route matched with {action = "GetAllUsers", controller = "Cliente", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Collections.Generic.IEnumerable`1[Hotel.Domain.Entities.Cliente]] GetAllUsers() on controller Hotel.Api.Controllers.ClienteController (Hotel.Api).
+2026-04-10 10:34:08.163 +01:00 [INF] Route matched with {action = "Role", controller = "Menu", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Hotel.Application.Responses.BaseCommandResponse] Role(System.String) on controller Hotel.Api.Controllers.MenuController (Hotel.Api).
+2026-04-10 10:34:08.164 +01:00 [INF] UnitOfWork - HttpContextAccessor: NULL
+2026-04-10 10:34:08.164 +01:00 [INF] UnitOfWork - HttpContextAccessor: NULL
+2026-04-10 10:34:08.165 +01:00 [INF] UnitOfWork - HttpContextAccessor: NULL
+2026-04-10 10:34:08.165 +01:00 [INF] UnitOfWork - HttpContextAccessor: NULL
+2026-04-10 10:34:08.344 +01:00 [INF] Executed DbCommand (177ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Bairro], [c].[Cargo], [c].[Celular], [c].[Cidade], [c].[Complemento], [c].[CreatedBy], [c].[DataAniversario], [c].[DateCreated], [c].[Email], [c].[EmpresasId], [c].[Endereco], [c].[Generos], [c].[HoraParaAcordar], [c].[HoraParaDormir], [c].[IdTenant], [c].[Idioma], [c].[IsActive], [c].[LastModifiedDate], [c].[Nome], [c].[Observacao], [c].[PaisId], [c].[PercetualDesconto], [c].[Preferencias], [c].[Profissao], [c].[Telefone], [e].[Id], [p].[Id], [h].[Id], [h].[CheckinsId], [h].[ClientesId], [h].[CreatedBy], [h].[DateCreated], [h].[Estado], [h].[IdTenant], [h].[IsActive], [h].[LastModifiedDate], [e].[Bairro], [e].[Cidade], [e].[CreatedBy], [e].[DateCreated], [e].[Email], [e].[Endereco], [e].[IdTenant], [e].[IsActive], [e].[LastModifiedDate], [e].[NumContribuinte], [e].[PercentualDesconto], [e].[RazaoSocial], [e].[Telefone], [l].[Id], [l].[CaixaAberto], [l].[ClientesId], [l].[CreatedBy], [l].[DataEntrada], [l].[DataSaida], [l].[DateCreated], [l].[IdTenant], [l].[IsActive], [l].[LastModifiedDate], [l].[PercentagemDesconto], [l].[RegistoPagamento], [l].[SituacaoPagamento], [l].[SituacaoServico], [l].[UtilizadoresId], [l].[Valor], [l].[ValorDesconto], [p].[CreatedBy], [p].[DateCreated], [p].[IdTenant], [p].[IsActive], [p].[LastModifiedDate], [p].[Nacionalidade], [p].[Nome]
+FROM [Clientes] AS [c]
+INNER JOIN [Empresas] AS [e] ON [c].[EmpresasId] = [e].[Id]
+INNER JOIN [Paises] AS [p] ON [c].[PaisId] = [p].[Id]
+LEFT JOIN [Hospedes] AS [h] ON [c].[Id] = [h].[ClientesId]
+LEFT JOIN [lavandarias] AS [l] ON [c].[Id] = [l].[ClientesId]
+ORDER BY [c].[Id], [e].[Id], [p].[Id], [h].[Id]
+2026-04-10 10:34:08.350 +01:00 [INF] Executed DbCommand (183ms) [Parameters=[@__ToUpper_0='SUPERADMIN' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT [m].[MenuId], [m].[RoleId], [a].[Id], [a].[CreatedBy], [a].[DateCreated], [a].[IdTenant], [a].[IsActive], [a].[LastModifiedDate], [a].[Nome], [a].[Path], [a].[PostIcon], [a].[PreIcon], [r].[Id], [r].[ConcurrencyStamp], [r].[Name], [r].[NormalizedName]
+FROM [MenuRole] AS [m]
+INNER JOIN [Role] AS [r] ON [m].[RoleId] = [r].[Id]
+INNER JOIN [AppMenu] AS [a] ON [m].[MenuId] = [a].[Id]
+WHERE UPPER([r].[Name]) = @__ToUpper_0
+2026-04-10 10:34:08.357 +01:00 [INF] Executing ObjectResult, writing value of type 'Hotel.Application.Responses.BaseCommandResponse'.
+2026-04-10 10:34:08.359 +01:00 [INF] Executed action Hotel.Api.Controllers.MenuController.Role (Hotel.Api) in 194.9528ms
+2026-04-10 10:34:08.359 +01:00 [INF] Executed endpoint 'Hotel.Api.Controllers.MenuController.Role (Hotel.Api)'
+2026-04-10 10:34:08.359 +01:00 [INF] HTTP GET /api/Menu/MenuByRole responded 200 in 388.9690 ms
+2026-04-10 10:34:08.359 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5055/api/Menu/MenuByRole?perfil=SUPERADMIN - 200 8834 application/json; charset=utf-8 389.3917ms
+2026-04-10 10:34:08.360 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5055/api/PontoDeVenda - application/json null
+2026-04-10 10:34:08.360 +01:00 [INF] CORS policy execution successful.
+2026-04-10 10:34:08.360 +01:00 [INF] === TenantService inicializado ===
+2026-04-10 10:34:08.361 +01:00 [INF] TenantResolutionMiddleware: Iniciando execução...
+2026-04-10 10:34:08.361 +01:00 [INF] TenantId identificado: localhost
+2026-04-10 10:34:08.361 +01:00 [INF] TenantId from headers: 
+2026-04-10 10:34:08.361 +01:00 [INF] === ResolveTenantAsync [a67747e6] ===
+2026-04-10 10:34:08.361 +01:00 [INF] Buscando tenant: 'localhost' [a67747e6]
+2026-04-10 10:34:08.538 +01:00 [INF] Executed DbCommand (177ms) [Parameters=[@__tenantId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[ConnectionString], [t].[DatabaseName], [t].[DatabaseServerName], [t].[Name], [t].[Password], [t].[UserID], [t].[Metadata_CustomSettings], [t].[Metadata_IsActive], [t].[Metadata_KeySerial], [t].[Metadata_MaxUsers], [t].[Metadata_Prazo], [t].[Metadata_Region]
+FROM [Tenant] AS [t]
+WHERE [t].[Id] = @__tenantId_0
+2026-04-10 10:34:08.538 +01:00 [INF] ✅ Tenant encontrado: ID='localhost', Name='localhost', Database='db_abc40d_ghotelhomolog' [a67747e6]
+2026-04-10 10:34:08.539 +01:00 [INF] === SetCurrentTenant ===
+2026-04-10 10:34:08.539 +01:00 [INF] Definindo tenant atual: ID='localhost', Name='localhost'
+2026-04-10 10:34:08.539 +01:00 [INF] ✅ Tenant atual definido com sucesso: 'localhost'
+2026-04-10 10:34:08.539 +01:00 [INF] Audit Log: {"TenantId":"localhost","Path":{"Value":"/api/PontoDeVenda","HasValue":true,"$type":"PathString"},"Method":"GET","Timestamp":"2026-04-10T09:34:08.5391390Z","UserAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36","IPAddress":"::1"}
+2026-04-10 10:34:08.539 +01:00 [INF] Executing endpoint 'Hotel.Api.Controllers.PontoDeVendaController.GetAll (Hotel.Api)'
+2026-04-10 10:34:08.539 +01:00 [INF] Route matched with {action = "GetAll", controller = "PontoDeVenda", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller Hotel.Api.Controllers.PontoDeVendaController (Hotel.Api).
+2026-04-10 10:34:08.540 +01:00 [INF] UnitOfWork - HttpContextAccessor: NULL
+2026-04-10 10:34:08.617 +01:00 [INF] Executed DbCommand (636ms) [Parameters=[@__tenantId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[ConnectionString], [t].[DatabaseName], [t].[DatabaseServerName], [t].[Name], [t].[Password], [t].[UserID], [t].[Metadata_CustomSettings], [t].[Metadata_IsActive], [t].[Metadata_KeySerial], [t].[Metadata_MaxUsers], [t].[Metadata_Prazo], [t].[Metadata_Region]
+FROM [Tenant] AS [t]
+WHERE [t].[Id] = @__tenantId_0
+2026-04-10 10:34:08.617 +01:00 [INF] ✅ Tenant encontrado: ID='localhost', Name='localhost', Database='db_abc40d_ghotelhomolog' [a7b04861]
+2026-04-10 10:34:08.617 +01:00 [INF] === SetCurrentTenant ===
+2026-04-10 10:34:08.617 +01:00 [INF] Definindo tenant atual: ID='localhost', Name='localhost'
+2026-04-10 10:34:08.617 +01:00 [INF] ✅ Tenant atual definido com sucesso: 'localhost'
+2026-04-10 10:34:08.617 +01:00 [INF] Audit Log: {"TenantId":"localhost","Path":{"Value":"/api/Serial","HasValue":true,"$type":"PathString"},"Method":"GET","Timestamp":"2026-04-10T09:34:08.6179790Z","UserAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36","IPAddress":"::1"}
+2026-04-10 10:34:08.618 +01:00 [INF] Executing endpoint 'Hotel.Api.Controllers.SerialController.ObterSerialSistema (Hotel.Api)'
+2026-04-10 10:34:08.618 +01:00 [INF] Route matched with {action = "ObterSerialSistema", controller = "Serial", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Hotel.Application.DTOs.Response.SerialResponse] ObterSerialSistema() on controller Hotel.Api.Controllers.SerialController (Hotel.Api).
+2026-04-10 10:34:08.660 +01:00 [INF] Executed DbCommand (679ms) [Parameters=[@__tenantId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[ConnectionString], [t].[DatabaseName], [t].[DatabaseServerName], [t].[Name], [t].[Password], [t].[UserID], [t].[Metadata_CustomSettings], [t].[Metadata_IsActive], [t].[Metadata_KeySerial], [t].[Metadata_MaxUsers], [t].[Metadata_Prazo], [t].[Metadata_Region]
+FROM [Tenant] AS [t]
+WHERE [t].[Id] = @__tenantId_0
+2026-04-10 10:34:08.660 +01:00 [INF] ✅ Tenant encontrado: ID='localhost', Name='localhost', Database='db_abc40d_ghotelhomolog' [61873263]
+2026-04-10 10:34:08.660 +01:00 [INF] === SetCurrentTenant ===
+2026-04-10 10:34:08.660 +01:00 [INF] Definindo tenant atual: ID='localhost', Name='localhost'
+2026-04-10 10:34:08.660 +01:00 [INF] ✅ Tenant atual definido com sucesso: 'localhost'
+2026-04-10 10:34:08.660 +01:00 [INF] Audit Log: {"TenantId":"localhost","Path":{"Value":"/api/ConfiguracaoFiscal","HasValue":true,"$type":"PathString"},"Method":"GET","Timestamp":"2026-04-10T09:34:08.6606140Z","UserAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36","IPAddress":"::1"}
+2026-04-10 10:34:08.661 +01:00 [INF] Executing endpoint 'Hotel.Api.Controllers.ConfiguracaoFiscalController.Get (Hotel.Api)'
+2026-04-10 10:34:08.661 +01:00 [INF] Route matched with {action = "Get", controller = "ConfiguracaoFiscal", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Hotel.Application.Responses.BaseCommandResponse] Get() on controller Hotel.Api.Controllers.ConfiguracaoFiscalController (Hotel.Api).
+2026-04-10 10:34:08.661 +01:00 [INF] UnitOfWork - HttpContextAccessor: NULL
+2026-04-10 10:34:08.661 +01:00 [INF] UnitOfWork - HttpContextAccessor: NULL
+2026-04-10 10:34:08.700 +01:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Hotel.Domain.Entities.Cliente, Hotel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-10 10:34:08.707 +01:00 [INF] Executed action Hotel.Api.Controllers.ClienteController.GetAllUsers (Hotel.Api) in 543.2575ms
+2026-04-10 10:34:08.707 +01:00 [INF] Executed endpoint 'Hotel.Api.Controllers.ClienteController.GetAllUsers (Hotel.Api)'
+2026-04-10 10:34:08.707 +01:00 [INF] HTTP GET /api/Cliente responded 200 in 734.3680 ms
+2026-04-10 10:34:08.707 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5055/api/Cliente - 200 266357 application/json; charset=utf-8 734.6437ms
+2026-04-10 10:34:08.708 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5055/api/TiposPagamentos - application/json null
+2026-04-10 10:34:08.708 +01:00 [INF] CORS policy execution successful.
+2026-04-10 10:34:08.709 +01:00 [INF] === TenantService inicializado ===
+2026-04-10 10:34:08.709 +01:00 [INF] TenantResolutionMiddleware: Iniciando execução...
+2026-04-10 10:34:08.709 +01:00 [INF] TenantId identificado: localhost
+2026-04-10 10:34:08.709 +01:00 [INF] TenantId from headers: 
+2026-04-10 10:34:08.709 +01:00 [INF] === ResolveTenantAsync [5cdeb8ed] ===
+2026-04-10 10:34:08.709 +01:00 [INF] Buscando tenant: 'localhost' [5cdeb8ed]
+2026-04-10 10:34:08.770 +01:00 [INF] Executed DbCommand (229ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[CreatedBy], [p].[DateCreated], [p].[IdTenant], [p].[IsActive], [p].[LastModifiedDate], [p].[Nome]
+FROM [PonteDeVendas] AS [p]
+2026-04-10 10:34:08.772 +01:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Hotel.Domain.Entities.PontoDeVenda, Hotel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-10 10:34:08.772 +01:00 [INF] Executed action Hotel.Api.Controllers.PontoDeVendaController.GetAll (Hotel.Api) in 232.9716ms
+2026-04-10 10:34:08.772 +01:00 [INF] Executed endpoint 'Hotel.Api.Controllers.PontoDeVendaController.GetAll (Hotel.Api)'
+2026-04-10 10:34:08.773 +01:00 [INF] HTTP GET /api/PontoDeVenda responded 200 in 412.2534 ms
+2026-04-10 10:34:08.773 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5055/api/PontoDeVenda - 200 918 application/json; charset=utf-8 412.4599ms
+2026-04-10 10:34:08.773 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5055/api/ProductType - application/json null
+2026-04-10 10:34:08.773 +01:00 [INF] CORS policy execution successful.
+2026-04-10 10:34:08.774 +01:00 [INF] === TenantService inicializado ===
+2026-04-10 10:34:08.774 +01:00 [INF] TenantResolutionMiddleware: Iniciando execução...
+2026-04-10 10:34:08.774 +01:00 [INF] TenantId identificado: localhost
+2026-04-10 10:34:08.774 +01:00 [INF] TenantId from headers: 
+2026-04-10 10:34:08.774 +01:00 [INF] === ResolveTenantAsync [300f6e54] ===
+2026-04-10 10:34:08.774 +01:00 [INF] Buscando tenant: 'localhost' [300f6e54]
+2026-04-10 10:34:08.826 +01:00 [INF] Executed DbCommand (206ms) [Parameters=[@__id_0='20241204'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [s].[Id], [s].[Chave], [s].[ContadorData], [s].[CreatedBy], [s].[DataInicial], [s].[DateCreated], [s].[IdTenant], [s].[IsActive], [s].[LastModifiedDate], [s].[NumSerial], [s].[Prazo], [s].[UltimoAcesso]
+FROM [Serial] AS [s]
+WHERE [s].[NumSerial] = @__id_0
+2026-04-10 10:34:08.845 +01:00 [INF] Executed DbCommand (183ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[CalcularHora], [p].[CalcularTaxa], [p].[Cidade], [p].[ContaBancaria], [p].[CreatedBy], [p].[DataFim], [p].[DataInicio], [p].[DateCreated], [p].[Email], [p].[Endereco], [p].[Estabelecimento], [p].[IVA], [p].[IdTenant], [p].[IsActive], [p].[Isencao], [p].[LastModifiedDate], [p].[LogoCaminho], [p].[NomeEmpresa], [p].[NumContribuinte], [p].[Regime], [p].[RegistroPorPagina], [p].[SistemaContabilistico], [p].[Taxa], [p].[Telefone], [p].[TipoRecibo], [p].[Tolerancia]
+FROM [Params] AS [p]
+2026-04-10 10:34:08.956 +01:00 [INF] Executed DbCommand (181ms) [Parameters=[@__tenantId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[ConnectionString], [t].[DatabaseName], [t].[DatabaseServerName], [t].[Name], [t].[Password], [t].[UserID], [t].[Metadata_CustomSettings], [t].[Metadata_IsActive], [t].[Metadata_KeySerial], [t].[Metadata_MaxUsers], [t].[Metadata_Prazo], [t].[Metadata_Region]
+FROM [Tenant] AS [t]
+WHERE [t].[Id] = @__tenantId_0
+2026-04-10 10:34:08.956 +01:00 [INF] ✅ Tenant encontrado: ID='localhost', Name='localhost', Database='db_abc40d_ghotelhomolog' [300f6e54]
+2026-04-10 10:34:08.956 +01:00 [INF] === SetCurrentTenant ===
+2026-04-10 10:34:08.956 +01:00 [INF] Definindo tenant atual: ID='localhost', Name='localhost'
+2026-04-10 10:34:08.956 +01:00 [INF] ✅ Tenant atual definido com sucesso: 'localhost'
+2026-04-10 10:34:08.956 +01:00 [INF] Audit Log: {"TenantId":"localhost","Path":{"Value":"/api/ProductType","HasValue":true,"$type":"PathString"},"Method":"GET","Timestamp":"2026-04-10T09:34:08.9565530Z","UserAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36","IPAddress":"::1"}
+2026-04-10 10:34:08.957 +01:00 [INF] Executing endpoint 'Hotel.Api.Controllers.ProductTypeController.GetAll (Hotel.Api)'
+2026-04-10 10:34:08.957 +01:00 [INF] Route matched with {action = "GetAll", controller = "ProductType", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller Hotel.Api.Controllers.ProductTypeController (Hotel.Api).
+2026-04-10 10:34:08.957 +01:00 [INF] UnitOfWork - HttpContextAccessor: NULL
+2026-04-10 10:34:09.009 +01:00 [INF] Executed DbCommand (182ms) [Parameters=[@__id_0='20241204'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [s].[Id], [s].[Chave], [s].[ContadorData], [s].[CreatedBy], [s].[DataInicial], [s].[DateCreated], [s].[IdTenant], [s].[IsActive], [s].[LastModifiedDate], [s].[NumSerial], [s].[Prazo], [s].[UltimoAcesso]
+FROM [Serial] AS [s]
+WHERE [s].[NumSerial] = @__id_0
+2026-04-10 10:34:09.136 +01:00 [INF] Executed DbCommand (179ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[ProductTypeCode], [p].[CaminhoImagem], [p].[ProductTypeDescription]
+FROM [ProductTypes] AS [p]
+2026-04-10 10:34:09.137 +01:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.OrderedEnumerable`2[[Hotel.Domain.Entities.ProductType, Hotel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-10 10:34:09.137 +01:00 [INF] Executed action Hotel.Api.Controllers.ProductTypeController.GetAll (Hotel.Api) in 180.1651ms
+2026-04-10 10:34:09.137 +01:00 [INF] Executed endpoint 'Hotel.Api.Controllers.ProductTypeController.GetAll (Hotel.Api)'
+2026-04-10 10:34:09.137 +01:00 [INF] HTTP GET /api/ProductType responded 200 in 363.6849 ms
+2026-04-10 10:34:09.137 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5055/api/ProductType - 200 592 application/json; charset=utf-8 364.0001ms
+2026-04-10 10:34:09.138 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5055/api/Caixa/CaixaAtual - application/json null
+2026-04-10 10:34:09.138 +01:00 [INF] CORS policy execution successful.
+2026-04-10 10:34:09.138 +01:00 [INF] === TenantService inicializado ===
+2026-04-10 10:34:09.138 +01:00 [INF] TenantResolutionMiddleware: Iniciando execução...
+2026-04-10 10:34:09.138 +01:00 [INF] TenantId identificado: localhost
+2026-04-10 10:34:09.138 +01:00 [INF] TenantId from headers: 
+2026-04-10 10:34:09.138 +01:00 [INF] === ResolveTenantAsync [6aeb28d5] ===
+2026-04-10 10:34:09.138 +01:00 [INF] Buscando tenant: 'localhost' [6aeb28d5]
+2026-04-10 10:34:09.320 +01:00 [INF] Executed DbCommand (181ms) [Parameters=[@__tenantId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[ConnectionString], [t].[DatabaseName], [t].[DatabaseServerName], [t].[Name], [t].[Password], [t].[UserID], [t].[Metadata_CustomSettings], [t].[Metadata_IsActive], [t].[Metadata_KeySerial], [t].[Metadata_MaxUsers], [t].[Metadata_Prazo], [t].[Metadata_Region]
+FROM [Tenant] AS [t]
+WHERE [t].[Id] = @__tenantId_0
+2026-04-10 10:34:09.320 +01:00 [INF] ✅ Tenant encontrado: ID='localhost', Name='localhost', Database='db_abc40d_ghotelhomolog' [6aeb28d5]
+2026-04-10 10:34:09.320 +01:00 [INF] === SetCurrentTenant ===
+2026-04-10 10:34:09.320 +01:00 [INF] Definindo tenant atual: ID='localhost', Name='localhost'
+2026-04-10 10:34:09.320 +01:00 [INF] ✅ Tenant atual definido com sucesso: 'localhost'
+2026-04-10 10:34:09.320 +01:00 [INF] Audit Log: {"TenantId":"localhost","Path":{"Value":"/api/Caixa/CaixaAtual","HasValue":true,"$type":"PathString"},"Method":"GET","Timestamp":"2026-04-10T09:34:09.3205330Z","UserAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36","IPAddress":"::1"}
+2026-04-10 10:34:09.321 +01:00 [INF] Executing endpoint 'Hotel.Api.Controllers.CaixaController.CaixaAtual (Hotel.Api)'
+2026-04-10 10:34:09.321 +01:00 [INF] Route matched with {action = "CaixaAtual", controller = "Caixa", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Int32] CaixaAtual() on controller Hotel.Api.Controllers.CaixaController (Hotel.Api).
+2026-04-10 10:34:09.321 +01:00 [INF] UnitOfWork - HttpContextAccessor: NULL
+2026-04-10 10:34:09.321 +01:00 [INF] UnitOfWork - HttpContextAccessor: NULL
+2026-04-10 10:34:09.338 +01:00 [INF] Executed DbCommand (489ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+EXEC CriaSerie
+2026-04-10 10:34:09.338 +01:00 [INF] Executing ObjectResult, writing value of type 'Hotel.Application.Responses.BaseCommandResponse'.
+2026-04-10 10:34:09.339 +01:00 [INF] Executed action Hotel.Api.Controllers.ConfiguracaoFiscalController.Get (Hotel.Api) in 677.8617ms
+2026-04-10 10:34:09.339 +01:00 [INF] Executed endpoint 'Hotel.Api.Controllers.ConfiguracaoFiscalController.Get (Hotel.Api)'
+2026-04-10 10:34:09.339 +01:00 [INF] HTTP GET /api/ConfiguracaoFiscal responded 200 in 1366.9033 ms
+2026-04-10 10:34:09.339 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5055/api/ConfiguracaoFiscal - 200 781 application/json; charset=utf-8 1367.1782ms
+2026-04-10 10:34:09.339 +01:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5055/api/Produto?pontoVendaId=4 - null null
+2026-04-10 10:34:09.339 +01:00 [INF] CORS policy execution successful.
+2026-04-10 10:34:09.340 +01:00 [INF] HTTP OPTIONS /api/Produto responded 204 in 0.1512 ms
+2026-04-10 10:34:09.340 +01:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5055/api/Produto?pontoVendaId=4 - 204 null null 0.3345ms
+2026-04-10 10:34:09.340 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5055/api/Produto?pontoVendaId=4 - application/json null
+2026-04-10 10:34:09.340 +01:00 [INF] CORS policy execution successful.
+2026-04-10 10:34:09.341 +01:00 [INF] === TenantService inicializado ===
+2026-04-10 10:34:09.341 +01:00 [INF] TenantResolutionMiddleware: Iniciando execução...
+2026-04-10 10:34:09.341 +01:00 [INF] TenantId identificado: localhost
+2026-04-10 10:34:09.341 +01:00 [INF] TenantId from headers: 
+2026-04-10 10:34:09.341 +01:00 [INF] === ResolveTenantAsync [4d41883b] ===
+2026-04-10 10:34:09.341 +01:00 [INF] Buscando tenant: 'localhost' [4d41883b]
+2026-04-10 10:34:09.388 +01:00 [INF] Executed DbCommand (199ms) [Parameters=[@p11='6', @p0='2024' (Size = 4000), @p1='234,4/10/2026' (Size = 4000), @p2=NULL (Size = 4000), @p3='8/19/2025' (Size = 4000), @p4='0001-01-01T00:00:00.0000000', @p5='0', @p6='False', @p7='2026-04-10T10:34:09.1890010+01:00', @p8='20241204', @p9='180', @p10='4/10/2026 12:00:00 AM' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Serial] SET [Chave] = @p0, [ContadorData] = @p1, [CreatedBy] = @p2, [DataInicial] = @p3, [DateCreated] = @p4, [IdTenant] = @p5, [IsActive] = @p6, [LastModifiedDate] = @p7, [NumSerial] = @p8, [Prazo] = @p9, [UltimoAcesso] = @p10
+OUTPUT 1
+WHERE [Id] = @p11;
+2026-04-10 10:34:09.392 +01:00 [INF] Executed DbCommand (682ms) [Parameters=[@__tenantId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[ConnectionString], [t].[DatabaseName], [t].[DatabaseServerName], [t].[Name], [t].[Password], [t].[UserID], [t].[Metadata_CustomSettings], [t].[Metadata_IsActive], [t].[Metadata_KeySerial], [t].[Metadata_MaxUsers], [t].[Metadata_Prazo], [t].[Metadata_Region]
+FROM [Tenant] AS [t]
+WHERE [t].[Id] = @__tenantId_0
+2026-04-10 10:34:09.392 +01:00 [INF] ✅ Tenant encontrado: ID='localhost', Name='localhost', Database='db_abc40d_ghotelhomolog' [5cdeb8ed]
+2026-04-10 10:34:09.392 +01:00 [INF] === SetCurrentTenant ===
+2026-04-10 10:34:09.392 +01:00 [INF] Definindo tenant atual: ID='localhost', Name='localhost'
+2026-04-10 10:34:09.392 +01:00 [INF] ✅ Tenant atual definido com sucesso: 'localhost'
+2026-04-10 10:34:09.392 +01:00 [INF] Audit Log: {"TenantId":"localhost","Path":{"Value":"/api/TiposPagamentos","HasValue":true,"$type":"PathString"},"Method":"GET","Timestamp":"2026-04-10T09:34:09.3925310Z","UserAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36","IPAddress":"::1"}
+2026-04-10 10:34:09.392 +01:00 [INF] Executing endpoint 'Hotel.Api.Controllers.TiposPagamentosController.Get (Hotel.Api)'
+2026-04-10 10:34:09.393 +01:00 [INF] Route matched with {action = "Get", controller = "TiposPagamentos", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Hotel.Application.Responses.BaseCommandResponse] Get() on controller Hotel.Api.Controllers.TiposPagamentosController (Hotel.Api).
+2026-04-10 10:34:09.393 +01:00 [INF] UnitOfWork - HttpContextAccessor: NULL
+2026-04-10 10:34:09.393 +01:00 [INF] UnitOfWork - HttpContextAccessor: NULL
+2026-04-10 10:34:09.439 +01:00 [INF] Executed DbCommand (186ms) [Parameters=[@__tenantId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[ConnectionString], [t].[DatabaseName], [t].[DatabaseServerName], [t].[Name], [t].[Password], [t].[UserID], [t].[Metadata_CustomSettings], [t].[Metadata_IsActive], [t].[Metadata_KeySerial], [t].[Metadata_MaxUsers], [t].[Metadata_Prazo], [t].[Metadata_Region]
+FROM [Tenant] AS [t]
+WHERE [t].[Id] = @__tenantId_0
+2026-04-10 10:34:09.439 +01:00 [INF] Executed DbCommand (186ms) [Parameters=[@__tenantId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[ConnectionString], [t].[DatabaseName], [t].[DatabaseServerName], [t].[Name], [t].[Password], [t].[UserID], [t].[Metadata_CustomSettings], [t].[Metadata_IsActive], [t].[Metadata_KeySerial], [t].[Metadata_MaxUsers], [t].[Metadata_Prazo], [t].[Metadata_Region]
+FROM [Tenant] AS [t]
+WHERE [t].[Id] = @__tenantId_0
+2026-04-10 10:34:09.439 +01:00 [INF] ✅ Tenant encontrado: ID='localhost', Name='localhost', Database='db_abc40d_ghotelhomolog' [969afab8]
+2026-04-10 10:34:09.439 +01:00 [INF] ✅ Tenant encontrado: ID='localhost', Name='localhost', Database='db_abc40d_ghotelhomolog' [42e6e8a8]
+2026-04-10 10:34:09.439 +01:00 [INF] === SetCurrentTenant ===
+2026-04-10 10:34:09.439 +01:00 [INF] === SetCurrentTenant ===
+2026-04-10 10:34:09.439 +01:00 [INF] Definindo tenant atual: ID='localhost', Name='localhost'
+2026-04-10 10:34:09.439 +01:00 [INF] Definindo tenant atual: ID='localhost', Name='localhost'
+2026-04-10 10:34:09.439 +01:00 [INF] ✅ Tenant atual definido com sucesso: 'localhost'
+2026-04-10 10:34:09.439 +01:00 [INF] ✅ Tenant atual definido com sucesso: 'localhost'
+2026-04-10 10:34:09.439 +01:00 [INF] Audit Log: {"TenantId":"localhost","Path":{"Value":"/api/Apartamento/ocupados","HasValue":true,"$type":"PathString"},"Method":"GET","Timestamp":"2026-04-10T09:34:09.4396660Z","UserAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36","IPAddress":"::1"}
+2026-04-10 10:34:09.439 +01:00 [INF] Audit Log: {"TenantId":"localhost","Path":{"Value":"/api/MenuRelatorio/menu","HasValue":true,"$type":"PathString"},"Method":"GET","Timestamp":"2026-04-10T09:34:09.4397160Z","UserAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36","IPAddress":"::1"}
+2026-04-10 10:34:09.440 +01:00 [INF] Executing endpoint 'Hotel.Api.Controllers.ApartamentoController.GetAPartamentoOcupados (Hotel.Api)'
+2026-04-10 10:34:09.440 +01:00 [INF] Executing endpoint 'Hotel.Api.Controllers.MenuRelatorioController.GetMenu (Hotel.Api)'
+2026-04-10 10:34:09.440 +01:00 [INF] Route matched with {action = "GetAPartamentoOcupados", controller = "Apartamento", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Collections.Generic.IEnumerable`1[Hotel.Domain.Entities.Apartamentos]] GetAPartamentoOcupados() on controller Hotel.Api.Controllers.ApartamentoController (Hotel.Api).
+2026-04-10 10:34:09.440 +01:00 [INF] Route matched with {action = "GetMenu", controller = "MenuRelatorio", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMenu(System.String) on controller Hotel.Api.Controllers.MenuRelatorioController (Hotel.Api).
+2026-04-10 10:34:09.440 +01:00 [INF] UnitOfWork - HttpContextAccessor: NULL
+2026-04-10 10:34:09.440 +01:00 [INF] UnitOfWork - HttpContextAccessor: NULL
+2026-04-10 10:34:09.503 +01:00 [INF] Executed DbCommand (181ms) [Parameters=[@__today_0='2026-04-10T00:00:00.0000000+01:00', @__tomorrow_1='2026-04-11T00:00:00.0000000+01:00'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[CreatedBy], [c].[DataDeAbertura], [c].[DataDeFechamento], [c].[DateCreated], [c].[Entrada], [c].[IdTenant], [c].[IsActive], [c].[LastModifiedDate], [c].[Saida], [c].[SaldoAtual], [c].[SaldoFinal], [c].[SaldoInicial], [c].[SaldoPendenteCaixaAnterior], [c].[SaldoPendeteCaixaAtual], [c].[UtilizadoresId]
+FROM [Caixas] AS [c]
+WHERE [c].[DataDeAbertura] >= @__today_0 AND [c].[DataDeAbertura] < @__tomorrow_1
+2026-04-10 10:34:09.503 +01:00 [INF] Executing ObjectResult, writing value of type 'System.Int32'.
+2026-04-10 10:34:09.503 +01:00 [INF] Executed action Hotel.Api.Controllers.CaixaController.CaixaAtual (Hotel.Api) in 182.5983ms
+2026-04-10 10:34:09.503 +01:00 [INF] Executed endpoint 'Hotel.Api.Controllers.CaixaController.CaixaAtual (Hotel.Api)'
+2026-04-10 10:34:09.504 +01:00 [INF] HTTP GET /api/Caixa/CaixaAtual responded 200 in 365.9593 ms
+2026-04-10 10:34:09.504 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5055/api/Caixa/CaixaAtual - 200 4 application/json; charset=utf-8 366.3235ms
+2026-04-10 10:34:09.524 +01:00 [INF] Executed DbCommand (181ms) [Parameters=[@__tenantId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[ConnectionString], [t].[DatabaseName], [t].[DatabaseServerName], [t].[Name], [t].[Password], [t].[UserID], [t].[Metadata_CustomSettings], [t].[Metadata_IsActive], [t].[Metadata_KeySerial], [t].[Metadata_MaxUsers], [t].[Metadata_Prazo], [t].[Metadata_Region]
+FROM [Tenant] AS [t]
+WHERE [t].[Id] = @__tenantId_0
+2026-04-10 10:34:09.524 +01:00 [INF] ✅ Tenant encontrado: ID='localhost', Name='localhost', Database='db_abc40d_ghotelhomolog' [4d41883b]
+2026-04-10 10:34:09.524 +01:00 [INF] === SetCurrentTenant ===
+2026-04-10 10:34:09.524 +01:00 [INF] Definindo tenant atual: ID='localhost', Name='localhost'
+2026-04-10 10:34:09.524 +01:00 [INF] ✅ Tenant atual definido com sucesso: 'localhost'
+2026-04-10 10:34:09.524 +01:00 [INF] Audit Log: {"TenantId":"localhost","Path":{"Value":"/api/Produto","HasValue":true,"$type":"PathString"},"Method":"GET","Timestamp":"2026-04-10T09:34:09.5249690Z","UserAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36","IPAddress":"::1"}
+2026-04-10 10:34:09.525 +01:00 [INF] Executing endpoint 'Hotel.Api.Controllers.ProdutoController.GetAllProdutos (Hotel.Api)'
+2026-04-10 10:34:09.525 +01:00 [INF] Route matched with {action = "GetAllProdutos", controller = "Produto", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllProdutos(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Boolean], System.Nullable`1[System.Boolean], System.String) on controller Hotel.Api.Controllers.ProdutoController (Hotel.Api).
+2026-04-10 10:34:09.525 +01:00 [INF] 🌐 [PRODUTOS-GET-ALL-af878c9b] Requisição recebida - Filtros: CategoriaId=null, PontoVendasId=null, ApenasAtivos=true, Nome=null
+2026-04-10 10:34:09.526 +01:00 [INF] UnitOfWork - HttpContextAccessor: NULL
+2026-04-10 10:34:09.526 +01:00 [INF] 🔍 [GET-ALL-PRODUTOS-288481a6] Iniciando busca de produtos - Filtros: CategoriaId=null, PontoVendasId=null, ApenasAtivos=true
+2026-04-10 10:34:09.572 +01:00 [INF] Executed DbCommand (183ms) [Parameters=[@__id_0='20241204'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [s].[Id], [s].[Chave], [s].[ContadorData], [s].[CreatedBy], [s].[DataInicial], [s].[DateCreated], [s].[IdTenant], [s].[IsActive], [s].[LastModifiedDate], [s].[NumSerial], [s].[Prazo], [s].[UltimoAcesso]
+FROM [Serial] AS [s]
+WHERE [s].[NumSerial] = @__id_0
+2026-04-10 10:34:09.572 +01:00 [INF] Executing ObjectResult, writing value of type 'Hotel.Application.DTOs.Response.SerialResponse'.
+2026-04-10 10:34:09.572 +01:00 [INF] Executed action Hotel.Api.Controllers.SerialController.ObterSerialSistema (Hotel.Api) in 954.0708ms
+2026-04-10 10:34:09.573 +01:00 [INF] Executed endpoint 'Hotel.Api.Controllers.SerialController.ObterSerialSistema (Hotel.Api)'
+2026-04-10 10:34:09.573 +01:00 [INF] HTTP GET /api/Serial responded 200 in 1599.1579 ms
+2026-04-10 10:34:09.573 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5055/api/Serial - 200 28 application/json; charset=utf-8 1599.3362ms
+2026-04-10 10:34:09.574 +01:00 [INF] Executed DbCommand (180ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedBy], [t].[DateCreated], [t].[Descricao], [t].[IdTenant], [t].[IsActive], [t].[LastModifiedDate]
+FROM [TipoPagamentos] AS [t]
+2026-04-10 10:34:09.575 +01:00 [INF] Executing ObjectResult, writing value of type 'Hotel.Application.Responses.BaseCommandResponse'.
+2026-04-10 10:34:09.575 +01:00 [INF] Executed action Hotel.Api.Controllers.TiposPagamentosController.Get (Hotel.Api) in 182.1299ms
+2026-04-10 10:34:09.575 +01:00 [INF] Executed endpoint 'Hotel.Api.Controllers.TiposPagamentosController.Get (Hotel.Api)'
+2026-04-10 10:34:09.575 +01:00 [INF] HTTP GET /api/TiposPagamentos responded 200 in 866.6194 ms
+2026-04-10 10:34:09.575 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5055/api/TiposPagamentos - 200 1286 application/json; charset=utf-8 867.1019ms
+2026-04-10 10:34:09.616 +01:00 [INF] Executed DbCommand (175ms) [Parameters=[@__perfil_0='SUPERADMIN' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT [m].[Id], [m].[Action], [m].[Label], [m].[ParentId], [m].[Perfil], [m].[SubmenuRef]
+FROM [MenuItem] AS [m]
+WHERE [m].[Perfil] = @__perfil_0
+2026-04-10 10:34:09.616 +01:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Hotel.Domain.Dtos.MenuItemDto, Hotel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-10 10:34:09.617 +01:00 [INF] Executed action Hotel.Api.Controllers.MenuRelatorioController.GetMenu (Hotel.Api) in 176.6687ms
+2026-04-10 10:34:09.617 +01:00 [INF] Executed endpoint 'Hotel.Api.Controllers.MenuRelatorioController.GetMenu (Hotel.Api)'
+2026-04-10 10:34:09.617 +01:00 [INF] HTTP GET /api/MenuRelatorio/menu responded 200 in 1643.4983 ms
+2026-04-10 10:34:09.617 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5055/api/MenuRelatorio/menu?perfil=SUPERADMIN - 200 2 application/json; charset=utf-8 1643.9184ms
+2026-04-10 10:34:09.711 +01:00 [INF] Executed DbCommand (185ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[AdicionarStock], [p].[CaminhoImagem], [p].[CategoriaId], [p].[CreatedBy], [p].[DataExpiracao], [p].[DateCreated], [p].[Desconto], [p].[DescontoPercentagem], [p].[EstoqueMinimo], [p].[IdTenant], [p].[IsActive], [p].[LastModifiedDate], [p].[Lucro], [p].[MargemLucro], [p].[Nome], [p].[PontoDeVendasId], [p].[PrecoCIva], [p].[PrecoCompra], [p].[ProductTypeCode], [p].[Quantidade], [p].[TaxExemptionReasonCode], [p].[TaxTableEntryId], [p].[Valor], [p].[ValorFixo]
+FROM [Produtos] AS [p]
+2026-04-10 10:34:09.712 +01:00 [INF] 🔍 [GET-ALL-PRODUTOS-288481a6] 3 produtos encontrados antes dos filtros
+2026-04-10 10:34:09.712 +01:00 [INF] 🔍 [GET-ALL-PRODUTOS-288481a6] Após filtro apenas ativos: 3 produtos
+2026-04-10 10:34:09.712 +01:00 [INF] ✅ [GET-ALL-PRODUTOS-288481a6] Busca concluída - 3 produtos encontrados
+2026-04-10 10:34:09.712 +01:00 [INF] ✅ [PRODUTOS-GET-ALL-af878c9b] Sucesso - 3 produtos retornados
+2026-04-10 10:34:09.712 +01:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType40`5[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[Hotel.Domain.Entities.Produtos, Hotel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-10 10:34:09.713 +01:00 [INF] Executed action Hotel.Api.Controllers.ProdutoController.GetAllProdutos (Hotel.Api) in 187.3495ms
+2026-04-10 10:34:09.713 +01:00 [INF] Executed endpoint 'Hotel.Api.Controllers.ProdutoController.GetAllProdutos (Hotel.Api)'
+2026-04-10 10:34:09.713 +01:00 [INF] HTTP GET /api/Produto responded 200 in 372.2534 ms
+2026-04-10 10:34:09.713 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5055/api/Produto?pontoVendaId=4 - 200 2546 application/json; charset=utf-8 372.4466ms
+2026-04-10 10:34:10.650 +01:00 [INF] Executed DbCommand (192ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[CafeDaManha], [a].[CheckinsId], [a].[Codigo], [a].[CodigoRamal], [a].[CreatedBy], [a].[DateCreated], [a].[Frigobar], [a].[IdTenant], [a].[IsActive], [a].[LastModifiedDate], [a].[NaoPertube], [a].[Observacao], [a].[Situacao], [a].[TipoApartamentosId], [a].[TipoGovernancasId], [t].[Id], [t].[CreatedBy], [t].[DateCreated], [t].[Descricao], [t].[Domingo], [t].[IdTenant], [t].[IsActive], [t].[LastModifiedDate], [t].[MobiliaTipoApartamentoId], [t].[Quarta], [t].[Quinta], [t].[Sabado], [t].[Segunda], [t].[Sexta], [t].[Terca], [t].[ValorDiariaDouble], [t].[ValorDiariaQuadruple], [t].[ValorDiariaSingle], [t].[ValorDiariaTriple], [t].[ValorDuasHora], [t].[ValorNoite], [t].[ValorQuatroHora], [t].[ValorTresHora], [t].[ValorUmaHora], [t0].[Id], [t0].[CreatedBy], [t0].[DateCreated], [t0].[Descricao], [t0].[IdTenant], [t0].[IsActive], [t0].[LastModifiedDate], [c].[Id], [c].[CaixaId], [c].[CamaExtra], [c].[CheckoutRealizado], [c].[CreatedBy], [c].[DataEntrada], [c].[DataSaida], [c].[DateCreated], [c].[IdCaixaCheckOut], [c].[IdCaixaCheckin], [c].[IdHospedeCheckOut], [c].[IdTenant], [c].[IdUtilizadorCheckOut], [c].[IdUtilizadorCheckin], [c].[IsActive], [c].[LastModifiedDate], [c].[Observacao], [c].[PercentualDesconto], [c].[ValorDesconto], [c].[ValorTotalConsumo], [c].[ValorTotalDiaria], [c].[ValorTotalFinal], [c].[ValorTotalLigacao], [c].[situacaoDoPagamento], [t1].[Id], [t1].[CheckinsId], [t1].[ClientesId], [t1].[CreatedBy], [t1].[DateCreated], [t1].[Estado], [t1].[IdTenant], [t1].[IsActive], [t1].[LastModifiedDate], [t1].[Id0], [t1].[Bairro], [t1].[Cargo], [t1].[Celular], [t1].[Cidade], [t1].[Complemento], [t1].[CreatedBy0], [t1].[DataAniversario], [t1].[DateCreated0], [t1].[Email], [t1].[EmpresasId], [t1].[Endereco], [t1].[Generos], [t1].[HoraParaAcordar], [t1].[HoraParaDormir], [t1].[IdTenant0], [t1].[Idioma], [t1].[IsActive0], [t1].[LastModifiedDate0], [t1].[Nome], [t1].[Observacao], [t1].[PaisId], [t1].[PercetualDesconto], [t1].[Preferencias], [t1].[Profissao], [t1].[Telefone], [t2].[Id], [t2].[ApartamentosId], [t2].[CheckinsId], [t2].[CreatedBy], [t2].[DataAbertura], [t2].[DataFechamento], [t2].[DateCreated], [t2].[Descricao], [t2].[DiariaAntecipada], [t2].[EarlyCheckin], [t2].[EmpresasId], [t2].[IdTenant], [t2].[IsActive], [t2].[LastModifiedDate], [t2].[MotivoViagensId], [t2].[PrevisaoFechamento], [t2].[QuantidadeCrianca], [t2].[QuantidadeDeDiarias], [t2].[QuantidadeHomens], [t2].[QuantidadeMulheres], [t2].[TipoHospedagensId], [t2].[ValorDiaria], [t2].[Id0], [t2].[Bairro], [t2].[Cidade], [t2].[CreatedBy0], [t2].[DateCreated0], [t2].[Email], [t2].[Endereco], [t2].[IdTenant0], [t2].[IsActive0], [t2].[LastModifiedDate0], [t2].[NumContribuinte], [t2].[PercentualDesconto], [t2].[RazaoSocial], [t2].[Telefone], [t3].[Id], [t3].[CheckinsId], [t3].[CreatedBy], [t3].[DataVencimento], [t3].[DateCreated], [t3].[HospedesId], [t3].[IdTenant], [t3].[IsActive], [t3].[LastModifiedDate], [t3].[Observacao], [t3].[Origem], [t3].[OrigemId], [t3].[Status], [t3].[UtilizadoresId], [t3].[Valor], [t3].[Id0], [t3].[CheckinsId0], [t3].[ClientesId], [t3].[CreatedBy0], [t3].[DateCreated0], [t3].[Estado], [t3].[IdTenant0], [t3].[IsActive0], [t3].[LastModifiedDate0], [t3].[Id1], [t3].[CaixasId], [t3].[CreatedBy1], [t3].[DataHoraLancamento], [t3].[DataHoraVencimento], [t3].[DateCreated1], [t3].[IdTenant1], [t3].[IsActive1], [t3].[LastModifiedDate1], [t3].[Observacao0], [t3].[PagamentosId], [t3].[PlanoDeContasId], [t3].[ReferenciaId], [t3].[TipoLancamento], [t3].[TipoPagamentosId], [t3].[Troco], [t3].[UtilizadoresId0], [t3].[Valor0], [t3].[ValorPago]
+FROM [Apartamentos] AS [a]
+INNER JOIN [TipoApartamentos] AS [t] ON [a].[TipoApartamentosId] = [t].[Id]
+INNER JOIN [TipoGovernancas] AS [t0] ON [a].[TipoGovernancasId] = [t0].[Id]
+LEFT JOIN [Checkins] AS [c] ON [a].[CheckinsId] = [c].[Id]
+LEFT JOIN (
+    SELECT [h].[Id], [h].[CheckinsId], [h].[ClientesId], [h].[CreatedBy], [h].[DateCreated], [h].[Estado], [h].[IdTenant], [h].[IsActive], [h].[LastModifiedDate], [c0].[Id] AS [Id0], [c0].[Bairro], [c0].[Cargo], [c0].[Celular], [c0].[Cidade], [c0].[Complemento], [c0].[CreatedBy] AS [CreatedBy0], [c0].[DataAniversario], [c0].[DateCreated] AS [DateCreated0], [c0].[Email], [c0].[EmpresasId], [c0].[Endereco], [c0].[Generos], [c0].[HoraParaAcordar], [c0].[HoraParaDormir], [c0].[IdTenant] AS [IdTenant0], [c0].[Idioma], [c0].[IsActive] AS [IsActive0], [c0].[LastModifiedDate] AS [LastModifiedDate0], [c0].[Nome], [c0].[Observacao], [c0].[PaisId], [c0].[PercetualDesconto], [c0].[Preferencias], [c0].[Profissao], [c0].[Telefone]
+    FROM [Hospedes] AS [h]
+    INNER JOIN [Clientes] AS [c0] ON [h].[ClientesId] = [c0].[Id]
+) AS [t1] ON [c].[Id] = [t1].[CheckinsId]
+LEFT JOIN (
+    SELECT [h0].[Id], [h0].[ApartamentosId], [h0].[CheckinsId], [h0].[CreatedBy], [h0].[DataAbertura], [h0].[DataFechamento], [h0].[DateCreated], [h0].[Descricao], [h0].[DiariaAntecipada], [h0].[EarlyCheckin], [h0].[EmpresasId], [h0].[IdTenant], [h0].[IsActive], [h0].[LastModifiedDate], [h0].[MotivoViagensId], [h0].[PrevisaoFechamento], [h0].[QuantidadeCrianca], [h0].[QuantidadeDeDiarias], [h0].[QuantidadeHomens], [h0].[QuantidadeMulheres], [h0].[TipoHospedagensId], [h0].[ValorDiaria], [e].[Id] AS [Id0], [e].[Bairro], [e].[Cidade], [e].[CreatedBy] AS [CreatedBy0], [e].[DateCreated] AS [DateCreated0], [e].[Email], [e].[Endereco], [e].[IdTenant] AS [IdTenant0], [e].[IsActive] AS [IsActive0], [e].[LastModifiedDate] AS [LastModifiedDate0], [e].[NumContribuinte], [e].[PercentualDesconto], [e].[RazaoSocial], [e].[Telefone]
+    FROM [Hospedagems] AS [h0]
+    INNER JOIN [Empresas] AS [e] ON [h0].[EmpresasId] = [e].[Id]
+) AS [t2] ON [c].[Id] = [t2].[CheckinsId]
+LEFT JOIN (
+    SELECT [p].[Id], [p].[CheckinsId], [p].[CreatedBy], [p].[DataVencimento], [p].[DateCreated], [p].[HospedesId], [p].[IdTenant], [p].[IsActive], [p].[LastModifiedDate], [p].[Observacao], [p].[Origem], [p].[OrigemId], [p].[Status], [p].[UtilizadoresId], [p].[Valor], [h1].[Id] AS [Id0], [h1].[CheckinsId] AS [CheckinsId0], [h1].[ClientesId], [h1].[CreatedBy] AS [CreatedBy0], [h1].[DateCreated] AS [DateCreated0], [h1].[Estado], [h1].[IdTenant] AS [IdTenant0], [h1].[IsActive] AS [IsActive0], [h1].[LastModifiedDate] AS [LastModifiedDate0], [l].[Id] AS [Id1], [l].[CaixasId], [l].[CreatedBy] AS [CreatedBy1], [l].[DataHoraLancamento], [l].[DataHoraVencimento], [l].[DateCreated] AS [DateCreated1], [l].[IdTenant] AS [IdTenant1], [l].[IsActive] AS [IsActive1], [l].[LastModifiedDate] AS [LastModifiedDate1], [l].[Observacao] AS [Observacao0], [l].[PagamentosId], [l].[PlanoDeContasId], [l].[ReferenciaId], [l].[TipoLancamento], [l].[TipoPagamentosId], [l].[Troco], [l].[UtilizadoresId] AS [UtilizadoresId0], [l].[Valor] AS [Valor0], [l].[ValorPago]
+    FROM [Pagamentos] AS [p]
+    INNER JOIN [Hospedes] AS [h1] ON [p].[HospedesId] = [h1].[Id]
+    LEFT JOIN [LancamentoCaixas] AS [l] ON [p].[Id] = [l].[PagamentosId]
+) AS [t3] ON [c].[Id] = [t3].[CheckinsId]
+WHERE [a].[Situacao] <> 'Livre'
+ORDER BY [a].[Id], [t].[Id], [t0].[Id], [c].[Id], [t1].[Id], [t1].[Id0], [t2].[Id], [t2].[Id0], [t3].[Id], [t3].[Id0]
+2026-04-10 10:34:10.830 +01:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Hotel.Domain.Entities.Apartamentos, Hotel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-10 10:34:10.833 +01:00 [INF] Executed action Hotel.Api.Controllers.ApartamentoController.GetAPartamentoOcupados (Hotel.Api) in 1393.241ms
+2026-04-10 10:34:10.833 +01:00 [INF] Executed endpoint 'Hotel.Api.Controllers.ApartamentoController.GetAPartamentoOcupados (Hotel.Api)'
+2026-04-10 10:34:10.833 +01:00 [INF] HTTP GET /api/Apartamento/ocupados responded 200 in 2863.4423 ms
+2026-04-10 10:34:10.834 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5055/api/Apartamento/ocupados - 200 53521 application/json; charset=utf-8 2867.4072ms
+2026-04-10 10:34:13.309 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5055/api/Produto?apenasAtivos=true - null null
+2026-04-10 10:34:13.310 +01:00 [INF] === TenantService inicializado ===
+2026-04-10 10:34:13.310 +01:00 [INF] TenantResolutionMiddleware: Iniciando execução...
+2026-04-10 10:34:13.310 +01:00 [INF] TenantId identificado: localhost
+2026-04-10 10:34:13.310 +01:00 [INF] TenantId from headers: 
+2026-04-10 10:34:13.310 +01:00 [INF] === ResolveTenantAsync [e3e97341] ===
+2026-04-10 10:34:13.310 +01:00 [INF] Buscando tenant: 'localhost' [e3e97341]
+2026-04-10 10:34:13.495 +01:00 [INF] Executed DbCommand (183ms) [Parameters=[@__tenantId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[ConnectionString], [t].[DatabaseName], [t].[DatabaseServerName], [t].[Name], [t].[Password], [t].[UserID], [t].[Metadata_CustomSettings], [t].[Metadata_IsActive], [t].[Metadata_KeySerial], [t].[Metadata_MaxUsers], [t].[Metadata_Prazo], [t].[Metadata_Region]
+FROM [Tenant] AS [t]
+WHERE [t].[Id] = @__tenantId_0
+2026-04-10 10:34:13.496 +01:00 [INF] ✅ Tenant encontrado: ID='localhost', Name='localhost', Database='db_abc40d_ghotelhomolog' [e3e97341]
+2026-04-10 10:34:13.496 +01:00 [INF] === SetCurrentTenant ===
+2026-04-10 10:34:13.496 +01:00 [INF] Definindo tenant atual: ID='localhost', Name='localhost'
+2026-04-10 10:34:13.496 +01:00 [INF] ✅ Tenant atual definido com sucesso: 'localhost'
+2026-04-10 10:34:13.496 +01:00 [INF] Audit Log: {"TenantId":"localhost","Path":{"Value":"/api/Produto","HasValue":true,"$type":"PathString"},"Method":"GET","Timestamp":"2026-04-10T09:34:13.4963640Z","UserAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36","IPAddress":"::1"}
+2026-04-10 10:34:13.497 +01:00 [INF] Executing endpoint 'Hotel.Api.Controllers.ProdutoController.GetAllProdutos (Hotel.Api)'
+2026-04-10 10:34:13.497 +01:00 [INF] Route matched with {action = "GetAllProdutos", controller = "Produto", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllProdutos(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Boolean], System.Nullable`1[System.Boolean], System.String) on controller Hotel.Api.Controllers.ProdutoController (Hotel.Api).
+2026-04-10 10:34:13.498 +01:00 [INF] 🌐 [PRODUTOS-GET-ALL-9f819fd2] Requisição recebida - Filtros: CategoriaId=null, PontoVendasId=null, ApenasAtivos=true, Nome=null
+2026-04-10 10:34:13.499 +01:00 [INF] UnitOfWork - HttpContextAccessor: NULL
+2026-04-10 10:34:13.499 +01:00 [INF] 🔍 [GET-ALL-PRODUTOS-405493a3] Iniciando busca de produtos - Filtros: CategoriaId=null, PontoVendasId=null, ApenasAtivos=true
+2026-04-10 10:34:13.680 +01:00 [INF] Executed DbCommand (180ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[AdicionarStock], [p].[CaminhoImagem], [p].[CategoriaId], [p].[CreatedBy], [p].[DataExpiracao], [p].[DateCreated], [p].[Desconto], [p].[DescontoPercentagem], [p].[EstoqueMinimo], [p].[IdTenant], [p].[IsActive], [p].[LastModifiedDate], [p].[Lucro], [p].[MargemLucro], [p].[Nome], [p].[PontoDeVendasId], [p].[PrecoCIva], [p].[PrecoCompra], [p].[ProductTypeCode], [p].[Quantidade], [p].[TaxExemptionReasonCode], [p].[TaxTableEntryId], [p].[Valor], [p].[ValorFixo]
+FROM [Produtos] AS [p]
+2026-04-10 10:34:13.680 +01:00 [INF] 🔍 [GET-ALL-PRODUTOS-405493a3] 3 produtos encontrados antes dos filtros
+2026-04-10 10:34:13.680 +01:00 [INF] 🔍 [GET-ALL-PRODUTOS-405493a3] Após filtro apenas ativos: 3 produtos
+2026-04-10 10:34:13.680 +01:00 [INF] ✅ [GET-ALL-PRODUTOS-405493a3] Busca concluída - 3 produtos encontrados
+2026-04-10 10:34:13.680 +01:00 [INF] ✅ [PRODUTOS-GET-ALL-9f819fd2] Sucesso - 3 produtos retornados
+2026-04-10 10:34:13.680 +01:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType40`5[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[Hotel.Domain.Entities.Produtos, Hotel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-10 10:34:13.680 +01:00 [INF] Executed action Hotel.Api.Controllers.ProdutoController.GetAllProdutos (Hotel.Api) in 183.2617ms
+2026-04-10 10:34:13.680 +01:00 [INF] Executed endpoint 'Hotel.Api.Controllers.ProdutoController.GetAllProdutos (Hotel.Api)'
+2026-04-10 10:34:13.681 +01:00 [INF] HTTP GET /api/Produto responded 200 in 371.0173 ms
+2026-04-10 10:34:13.681 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5055/api/Produto?apenasAtivos=true - 200 2546 application/json; charset=utf-8 371.5183ms

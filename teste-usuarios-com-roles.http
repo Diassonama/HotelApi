@@ -1,0 +1,89 @@
+### Teste de Usuários com Roles - Hotel API
+
+### 1. Login para obter token
+POST {{baseUrl}}/api/Auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@hotel.com",
+  "password": "Admin@123"
+}
+
+### 2. Listar todos os usuários (versão original atualizada)
+GET {{baseUrl}}/api/Usuario/getAll
+Authorization: Bearer {{token}}
+
+### 3. Listar usuários com roles (nova implementação)
+GET {{baseUrl}}/api/Usuario/getAllWithRoles
+Authorization: Bearer {{token}}
+
+### 4. Atualizar usuário (novo método melhorado)
+PUT {{baseUrl}}/api/Usuario/update
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "id": "USER_ID_AQUI",
+  "email": "usuario_atualizado@hotel.com",
+  "senha": "NovaSenha@123",
+  "primeiroNome": "Nome Atualizado",
+  "ultimoNome": "Sobrenome Atualizado",
+  "perfil": 3
+}
+
+### 5. Obter informações do usuário logado
+GET {{baseUrl}}/api/Usuario/user-info
+Authorization: Bearer {{token}}
+
+### Variáveis do ambiente
+@baseUrl = https://localhost:7001
+@token = SEU_TOKEN_AQUI
+
+### Exemplo de resposta esperada para update:
+# {
+#   "success": true,
+#   "message": "✅ Usuário atualizado com sucesso.",
+#   "data": {
+#     "id": "123",
+#     "email": "usuario_atualizado@hotel.com",
+#     "userName": "usuario_atualizado@hotel.com",
+#     "firstName": "Nome Atualizado",
+#     "lastName": "Sobrenome Atualizado"
+#   },
+#   "errors": null
+# }
+
+### Exemplo de resposta esperada para getAllWithRoles:
+# {
+#   "success": true,
+#   "message": "✅ 5 usuários carregados com roles",
+#   "data": [
+#     {
+#       "id": "1",
+#       "userName": "admin",
+#       "email": "admin@hotel.com",
+#       "firstName": "Administrador",
+#       "lastName": "Sistema",
+#       "userRoles": [
+#         {
+#           "id": "1",
+#           "name": "SuperAdmin"
+#         }
+#       ]
+#     },
+#     {
+#       "id": "2",
+#       "userName": "hotel",
+#       "email": "hotel@hotel.com",
+#       "firstName": "Usuário",
+#       "lastName": "Hotel",
+#       "userRoles": [
+#         {
+#           "id": "3",
+#           "name": "Hotel"
+#         }
+#       ]
+#     }
+#   ],
+#   "errors": null
+# }

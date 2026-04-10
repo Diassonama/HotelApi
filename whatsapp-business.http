@@ -1,0 +1,236 @@
+### WhatsApp Business Integration - Testes dos Endpoints
+### Arquivo: whatsapp-business.http
+
+@baseUrl = https://localhost:7000
+@token = Bearer YOUR_JWT_TOKEN_HERE
+
+### 1. Enviar notificação de Check-in via WhatsApp
+POST {{baseUrl}}/api/racknotification/whatsapp/send-notification
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "phoneNumber": "+351912345678",
+  "messageType": "checkin_confirmation",
+  "content": "Bem-vindo! WiFi: HotelGuest123. Café da manhã: 7h-10h.",
+  "hospedeId": 1,
+  "checkinId": 123,
+  "apartamentoCodigo": "101",
+  "templateParameters": {
+    "nome": "João Silva",
+    "apartamento": "101",
+    "wifi_password": "HotelGuest123"
+  }
+}
+
+###
+
+### 2. Enviar lembrete de Check-out via WhatsApp
+POST {{baseUrl}}/api/racknotification/whatsapp/send-notification
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "phoneNumber": "+351987654321",
+  "messageType": "checkout_reminder",
+  "content": "Check-out até às 12h. Deixe a chave na recepção.",
+  "hospedeId": 2,
+  "apartamentoCodigo": "205",
+  "templateParameters": {
+    "nome": "Maria Santos",
+    "apartamento": "205",
+    "hora": "12:00"
+  }
+}
+
+###
+
+### 3. Confirmação de pagamento via WhatsApp
+POST {{baseUrl}}/api/racknotification/whatsapp/send-notification
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "phoneNumber": "+351911222333",
+  "messageType": "payment_confirmation",
+  "content": "Recibo disponível na recepção ou por email.",
+  "hospedeId": 3,
+  "templateParameters": {
+    "nome": "Ana Costa",
+    "valor": "€150,00"
+  }
+}
+
+###
+
+### 4. Mensagem de boas-vindas via WhatsApp
+POST {{baseUrl}}/api/racknotification/whatsapp/send-notification
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "phoneNumber": "+351933444555",
+  "messageType": "welcome_message",
+  "content": "Restaurante aberto até 22h. Spa disponível das 9h-19h.",
+  "hospedeId": 4,
+  "apartamentoCodigo": "302",
+  "templateParameters": {
+    "nome": "Carlos Pereira",
+    "wifi_password": "Welcome2024"
+  }
+}
+
+###
+
+### 5. Mensagem personalizada via WhatsApp
+POST {{baseUrl}}/api/racknotification/whatsapp/send-notification
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "phoneNumber": "+351955666777",
+  "messageType": "custom_message",
+  "content": "Atenção: Devido à manutenção, o elevador estará indisponível das 14h às 16h. Pedimos desculpa pelo inconveniente.",
+  "hospedeId": 5
+}
+
+###
+
+### 6. Teste com número inválido (deve retornar erro)
+POST {{baseUrl}}/api/racknotification/whatsapp/send-notification
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "phoneNumber": "123456789",
+  "messageType": "test_message",
+  "content": "Teste com número inválido"
+}
+
+###
+
+### 7. Webhook - Simulação de entrega bem-sucedida
+POST {{baseUrl}}/api/racknotification/whatsapp/webhook
+Content-Type: application/json
+
+{
+  "messageId": "wamid.HBgNMzUxOTEyMzQ1Njc4FQIAEhggN0E3...",
+  "status": "delivered",
+  "phoneNumber": "+351912345678",
+  "timestamp": "2025-08-13T14:30:00Z",
+  "metadata": {
+    "messageType": "checkin_confirmation",
+    "hospedeId": 1
+  }
+}
+
+###
+
+### 8. Webhook - Simulação de mensagem lida
+POST {{baseUrl}}/api/racknotification/whatsapp/webhook
+Content-Type: application/json
+
+{
+  "messageId": "wamid.HBgNMzUxOTEyMzQ1Njc4FQIAEhggN0E3...",
+  "status": "read",
+  "phoneNumber": "+351912345678",
+  "timestamp": "2025-08-13T14:35:00Z",
+  "metadata": {
+    "messageType": "checkin_confirmation",
+    "readAt": "2025-08-13T14:35:00Z"
+  }
+}
+
+###
+
+### 9. Webhook - Simulação de falha no envio
+POST {{baseUrl}}/api/racknotification/whatsapp/webhook
+Content-Type: application/json
+
+{
+  "messageId": "wamid.HBgNMzUxOTEyMzQ1Njc4FQIAEhggERROR...",
+  "status": "failed",
+  "phoneNumber": "+351999888777",
+  "timestamp": "2025-08-13T14:40:00Z",
+  "error": "Phone number not registered on WhatsApp",
+  "metadata": {
+    "messageType": "welcome_message",
+    "errorCode": "131026"
+  }
+}
+
+###
+
+### 10. Listar templates disponíveis
+GET {{baseUrl}}/api/racknotification/whatsapp/templates
+Authorization: {{token}}
+
+###
+
+### 11. Teste de envio em massa (simular múltiplos hóspedes)
+POST {{baseUrl}}/api/racknotification/whatsapp/send-notification
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "phoneNumber": "+351911111111",
+  "messageType": "custom_message",
+  "content": "🏨 Informamos que o WiFi foi atualizado. Nova senha: NewGuest2024. Obrigado!",
+  "templateParameters": {
+    "broadcast": true,
+    "priority": "normal"
+  }
+}
+
+###
+
+### 12. Notificação de emergência
+POST {{baseUrl}}/api/racknotification/whatsapp/send-notification
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "phoneNumber": "+351922222222",
+  "messageType": "custom_message",
+  "content": "🚨 EMERGÊNCIA: Evacuação do edifício por precaução. Dirija-se ao ponto de encontro no jardim. Siga as instruções da equipe.",
+  "templateParameters": {
+    "priority": "high",
+    "emergency": true
+  }
+}
+
+###
+
+### 13. Teste de validação - Campos obrigatórios em falta
+POST {{baseUrl}}/api/racknotification/whatsapp/send-notification
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "phoneNumber": "",
+  "messageType": "",
+  "content": ""
+}
+
+###
+
+### 14. Teste com mensagem muito longa (deve retornar erro)
+POST {{baseUrl}}/api/racknotification/whatsapp/send-notification
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "phoneNumber": "+351933333333",
+  "messageType": "custom_message",
+  "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?"
+}
+
+###
+
+### Notas de Uso:
+### 1. Substitua YOUR_JWT_TOKEN_HERE pelo token real de autenticação
+### 2. Ajuste a baseUrl conforme seu ambiente (desenvolvimento/produção)
+### 3. Os números de telefone devem estar em formato internacional (+351...)
+### 4. Para produção, configure a integração real com WhatsApp Business API
+### 5. O webhook deve ser configurado no painel do WhatsApp Business
+### 6. Monitore os logs do RackHub para ver as notificações em tempo real

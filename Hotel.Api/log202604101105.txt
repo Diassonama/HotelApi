@@ -1,0 +1,38 @@
+2026-04-10 11:05:24.731 +01:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5055/api/Apartamento/QuartoAtrasados - null null
+2026-04-10 11:05:24.755 +01:00 [INF] CORS policy execution successful.
+2026-04-10 11:05:24.756 +01:00 [INF] HTTP OPTIONS /api/Apartamento/QuartoAtrasados responded 204 in 7.7785 ms
+2026-04-10 11:05:24.756 +01:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5055/api/Apartamento/QuartoAtrasados - 204 null null 25.8355ms
+2026-04-10 11:05:24.759 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5055/api/Apartamento/QuartoAtrasados - application/json null
+2026-04-10 11:05:24.759 +01:00 [INF] CORS policy execution successful.
+2026-04-10 11:05:24.760 +01:00 [INF] === TenantService inicializado ===
+2026-04-10 11:05:24.760 +01:00 [INF] TenantResolutionMiddleware: Iniciando execução...
+2026-04-10 11:05:24.760 +01:00 [INF] TenantId identificado: localhost
+2026-04-10 11:05:24.760 +01:00 [INF] TenantId from headers: 
+2026-04-10 11:05:24.760 +01:00 [INF] === ResolveTenantAsync [d2b761a2] ===
+2026-04-10 11:05:24.760 +01:00 [INF] Buscando tenant: 'localhost' [d2b761a2]
+2026-04-10 11:05:26.053 +01:00 [INF] Executed DbCommand (187ms) [Parameters=[@__tenantId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[ConnectionString], [t].[DatabaseName], [t].[DatabaseServerName], [t].[Name], [t].[Password], [t].[UserID], [t].[Metadata_CustomSettings], [t].[Metadata_IsActive], [t].[Metadata_KeySerial], [t].[Metadata_MaxUsers], [t].[Metadata_Prazo], [t].[Metadata_Region]
+FROM [Tenant] AS [t]
+WHERE [t].[Id] = @__tenantId_0
+2026-04-10 11:05:26.058 +01:00 [INF] ✅ Tenant encontrado: ID='localhost', Name='localhost', Database='db_abc40d_ghotelhomolog' [d2b761a2]
+2026-04-10 11:05:26.058 +01:00 [INF] === SetCurrentTenant ===
+2026-04-10 11:05:26.058 +01:00 [INF] Definindo tenant atual: ID='localhost', Name='localhost'
+2026-04-10 11:05:26.058 +01:00 [INF] ✅ Tenant atual definido com sucesso: 'localhost'
+2026-04-10 11:05:26.059 +01:00 [INF] Audit Log: {"TenantId":"localhost","Path":{"Value":"/api/Apartamento/QuartoAtrasados","HasValue":true,"$type":"PathString"},"Method":"GET","Timestamp":"2026-04-10T10:05:26.0587050Z","UserAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36","IPAddress":"::1"}
+2026-04-10 11:05:26.066 +01:00 [INF] Executing endpoint 'Hotel.Api.Controllers.ApartamentoController.GetAtrasados (Hotel.Api)'
+2026-04-10 11:05:26.066 +01:00 [INF] Route matched with {action = "GetAtrasados", controller = "Apartamento", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Hotel.Application.Responses.BaseCommandResponse] GetAtrasados() on controller Hotel.Api.Controllers.ApartamentoController (Hotel.Api).
+2026-04-10 11:05:26.067 +01:00 [INF] UnitOfWork - HttpContextAccessor: NULL
+2026-04-10 11:05:26.067 +01:00 [INF] UnitOfWork - HttpContextAccessor: NULL
+2026-04-10 11:05:26.248 +01:00 [INF] Executed DbCommand (179ms) [Parameters=[@__dataAtual_0='2026-04-10T00:00:00.0000000+01:00'], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[CafeDaManha], [a].[CheckinsId], [a].[Codigo], [a].[CodigoRamal], [a].[CreatedBy], [a].[DateCreated], [a].[Frigobar], [a].[IdTenant], [a].[IsActive], [a].[LastModifiedDate], [a].[NaoPertube], [a].[Observacao], [a].[Situacao], [a].[TipoApartamentosId], [a].[TipoGovernancasId]
+FROM [Apartamentos] AS [a]
+LEFT JOIN [Checkins] AS [c] ON [a].[CheckinsId] = [c].[Id]
+WHERE [a].[Situacao] <> 'Livre' AND [c].[Id] IS NOT NULL AND EXISTS (
+    SELECT 1
+    FROM [Hospedagems] AS [h]
+    WHERE [c].[Id] IS NOT NULL AND [c].[Id] = [h].[CheckinsId] AND CONVERT(date, [h].[PrevisaoFechamento]) < @__dataAtual_0)
+2026-04-10 11:05:26.249 +01:00 [INF] Executing ObjectResult, writing value of type 'Hotel.Application.Responses.BaseCommandResponse'.
+2026-04-10 11:05:26.249 +01:00 [INF] Executed action Hotel.Api.Controllers.ApartamentoController.GetAtrasados (Hotel.Api) in 183.0157ms
+2026-04-10 11:05:26.249 +01:00 [INF] Executed endpoint 'Hotel.Api.Controllers.ApartamentoController.GetAtrasados (Hotel.Api)'
+2026-04-10 11:05:26.249 +01:00 [INF] HTTP GET /api/Apartamento/QuartoAtrasados responded 200 in 1490.6327 ms
+2026-04-10 11:05:26.250 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5055/api/Apartamento/QuartoAtrasados - 200 578 application/json; charset=utf-8 1490.8645ms

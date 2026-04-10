@@ -1,0 +1,79 @@
+### Testes de Validação - Update User
+
+### 1. Login para obter token
+POST {{baseUrl}}/api/Auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@hotel.com",
+  "password": "Admin@123"
+}
+
+### 2. Teste de atualização com ID inválido
+PUT {{baseUrl}}/api/Usuario/update
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "id": "ID_INEXISTENTE",
+  "email": "teste@hotel.com",
+  "primeiroNome": "Teste",
+  "ultimoNome": "Usuario"
+}
+
+### 3. Teste de atualização com email duplicado
+PUT {{baseUrl}}/api/Usuario/update
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "id": "USER_ID_VALIDO",
+  "email": "admin@hotel.com",
+  "primeiroNome": "Teste",
+  "ultimoNome": "Usuario"
+}
+
+### 4. Teste de atualização somente nome (sem senha)
+PUT {{baseUrl}}/api/Usuario/update
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "id": "USER_ID_VALIDO",
+  "primeiroNome": "Novo Nome",
+  "ultimoNome": "Novo Sobrenome"
+}
+
+### 5. Teste de atualização com mudança de role
+PUT {{baseUrl}}/api/Usuario/update
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "id": "USER_ID_VALIDO",
+  "email": "usuario@hotel.com",
+  "primeiroNome": "Usuario",
+  "ultimoNome": "Hotel",
+  "perfil": 4
+}
+
+### 6. Teste de atualização somente senha
+PUT {{baseUrl}}/api/Usuario/update
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "id": "USER_ID_VALIDO",
+  "senha": "NovaSenhaSegura@123"
+}
+
+### Variáveis
+@baseUrl = https://localhost:7001
+@token = SEU_TOKEN_AQUI
+
+### Roles disponíveis:
+# 1 = SuperAdmin
+# 2 = Administrador  
+# 3 = Hotel
+# 4 = Finanças
+# 5 = Lavandaria

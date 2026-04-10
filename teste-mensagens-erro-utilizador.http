@@ -1,0 +1,186 @@
+### 🎯 TESTE: Mensagens de Erro Melhoradas para o Usuário
+### 
+### Este arquivo demonstra como as mensagens de erro agora são apresentadas
+### de forma clara e amigável para o usuário final.
+
+@host = https://localhost:7097
+
+### =====================================================
+### CENÁRIO 1: Teste CreateReservaWithDetails (Resposta Estruturada)
+### =====================================================
+### ✅ Este endpoint retorna mensagens de erro detalhadas e estruturadas
+
+POST {{host}}/api/Reserva/create-with-details
+Content-Type: application/json
+
+{
+    "empresaId": 1,
+    "npx": 2,
+    "quantidadeQuartos": 1,
+    "apartamentosReservados": [
+        {
+            "apartamentosId": 999,
+            "dataEntrada": "2025-02-01T14:00:00",
+            "dataSaida": "2025-02-05T12:00:00", 
+            "clientesId": 1,
+            "tipoHospedagensId": 1,
+            "valorDiaria": 150.00,
+            "reservaConfirmada": true,
+            "reservaNoShow": false
+        }
+    ]
+}
+
+### ⬆️ RESPOSTA ESPERADA PARA APARTAMENTO INEXISTENTE:
+### {
+###   "success": false,
+###   "message": "❌ Não foi possível criar a reserva: Apartamento com ID 999 não foi encontrado.",
+###   "errors": [
+###     "🏨 Apartamento: 999",
+###     "📅 Período solicitado: 01/02/2025 a 05/02/2025",
+###     "⚠️ Motivo: Apartamento com ID 999 não foi encontrado."
+###   ]
+### }
+
+### =====================================================
+### CENÁRIO 2: Teste CreateReserva Original (Exception)
+### =====================================================
+### ✅ Este endpoint captura exceções e as converte em mensagens amigáveis
+
+POST {{host}}/api/Reserva/create-original
+Content-Type: application/json
+
+{
+    "empresaId": 1,
+    "npx": 2,
+    "quantidadeQuartos": 1,
+    "apartamentosReservados": [
+        {
+            "apartamentosId": 101,
+            "dataEntrada": "2025-02-01T14:00:00",
+            "dataSaida": "2025-02-05T12:00:00", 
+            "clientesId": 1,
+            "tipoHospedagensId": 1,
+            "valorDiaria": 150.00,
+            "reservaConfirmada": true,
+            "reservaNoShow": false
+        }
+    ]
+}
+
+### ⬆️ RESPOSTA ESPERADA PARA APARTAMENTO JÁ RESERVADO:
+### {
+###   "success": false,
+###   "message": "❌ Não foi possível criar a reserva: Apartamento 101 (Suite Master) já está reservado para João Silva de 01/02/2025 a 05/02/2025 (Reserva #5).",
+###   "errors": [
+###     "💡 Sugestão: Verifique outros apartamentos ou datas disponíveis",
+###     "❌ Não foi possível criar a reserva: Apartamento 101 (Suite Master) já está reservado para João Silva de 01/02/2025 a 05/02/2025 (Reserva #5)."
+###   ]
+### }
+
+### =====================================================
+### CENÁRIO 3: Teste CreateReserva (Endpoint Principal)
+### =====================================================
+### ✅ Endpoint principal com tratamento de erro melhorado
+
+POST {{host}}/api/Reserva
+Content-Type: application/json
+
+{
+    "empresaId": 1,
+    "npx": 2,
+    "quantidadeQuartos": 1,
+    "apartamentosReservados": [
+        {
+            "apartamentosId": 102,
+            "dataEntrada": "2025-03-01T14:00:00",
+            "dataSaida": "2025-03-05T12:00:00", 
+            "clientesId": 1,
+            "tipoHospedagensId": 1,
+            "valorDiaria": 200.00,
+            "reservaConfirmada": true,
+            "reservaNoShow": false
+        }
+    ]
+}
+
+### ⬆️ RESPOSTA ESPERADA PARA APARTAMENTO OCUPADO:
+### {
+###   "success": false,
+###   "message": "❌ Não foi possível criar a reserva: Apartamento 102 (Standard) está ocupado de 28/02/2025 a 10/03/2025.",
+###   "errors": [
+###     "💡 Sugestão: Tente selecionar outro apartamento ou período",
+###     "❌ Não foi possível criar a reserva: Apartamento 102 (Standard) está ocupado de 28/02/2025 a 10/03/2025."
+###   ]
+### }
+
+### =====================================================
+### CENÁRIO 4: Sucesso - Para Comparação
+### =====================================================
+### ✅ Quando tudo dá certo, as mensagens também são amigáveis
+
+POST {{host}}/api/Reserva/create-with-details
+Content-Type: application/json
+
+{
+    "empresaId": 1,
+    "npx": 2,
+    "quantidadeQuartos": 1,
+    "apartamentosReservados": [
+        {
+            "apartamentosId": 103,
+            "dataEntrada": "2025-04-01T14:00:00",
+            "dataSaida": "2025-04-05T12:00:00", 
+            "clientesId": 1,
+            "tipoHospedagensId": 1,
+            "valorDiaria": 180.00,
+            "reservaConfirmada": true,
+            "reservaNoShow": false
+        }
+    ]
+}
+
+### ⬆️ RESPOSTA ESPERADA PARA SUCESSO:
+### {
+###   "success": true,
+###   "message": "✅ Reserva criada com sucesso!",
+###   "data": {
+###     "reservaId": 15,
+###     "quantidadeApartamentos": 1,
+###     "valorTotal": 180.00,
+###     "apartamentos": [
+###       {
+###         "apartamentoId": 103,
+###         "dataEntrada": "01/04/2025",
+###         "dataSaida": "05/04/2025",
+###         "valorDiaria": 180.00
+###       }
+###     ]
+###   }
+### }
+
+### =====================================================
+### MELHORIAS IMPLEMENTADAS:
+### =====================================================
+### 
+### 🎯 COMANDOS:
+### ✅ CreateReservaWithResponseCommand: Mensagens estruturadas com emojis e detalhes
+### ✅ CreateReservaCommand: Exceções melhoradas com prefixo "❌ Não foi possível criar a reserva"
+### 
+### 🎯 CONTROLLER:
+### ✅ Erros de disponibilidade: Usa mensagem detalhada do comando + sugestões
+### ✅ Erros gerais: Mensagens amigáveis + informações técnicas para suporte
+### ✅ Sucesso: Resposta detalhada com informações úteis ao usuário
+### 
+### 🎯 TIPOS DE ERROS COBERTOS:
+### ✅ Apartamento não encontrado
+### ✅ Apartamento já reservado (com cliente, datas, número da reserva)
+### ✅ Apartamento ocupado (com período de ocupação)
+### ✅ Erros de sistema (com sugestão de contato ao suporte)
+### 
+### 🎯 BENEFÍCIOS PARA O USUÁRIO:
+### ✅ Mensagens claras e em português
+### ✅ Informações específicas sobre o problema
+### ✅ Sugestões de ação para resolver o problema
+### ✅ Detalhes técnicos para suporte quando necessário
+### ✅ Emojis para melhor experiência visual

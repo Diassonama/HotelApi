@@ -1,0 +1,243 @@
+<!-- Cabeçalho do Dashboard -->
+<div class="rack-dashboard">
+  
+  <!-- Status da Conexão -->
+  <div class="connection-status" [class]="getConnectionStatusClass()">
+    <div class="status-indicator">
+      <h2>🏨 Rack Hotel - Dashboard em Tempo Real</h2>
+      <div class="connection-info">
+        <span class="status-text">{{ getConnectionStatusText() }}</span>
+        <button 
+          class="btn btn-reconnect" 
+          (click)="reconnect()" 
+          [disabled]="connectionStatus.status === 'connecting'">
+          🔄 Reconectar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Controles -->
+  <div class="controls-section">
+    <div class="control-group">
+      <button 
+        class="btn btn-test" 
+        (click)="sendTestMessage()" 
+        [disabled]="!canSendCommands()">
+        🧪 Enviar Teste
+      </button>
+      
+      <button 
+        class="btn btn-clear" 
+        (click)="clearNotifications()">
+        🗑️ Limpar Notificações
+      </button>
+    </div>
+
+    <div class="group-controls">
+      <div class="input-group">
+        <input 
+          type="text" 
+          #groupInput 
+          placeholder="Nome do grupo (ex: reception)" 
+          class="form-control">
+        <button 
+          class="btn btn-join" 
+          (click)="joinGroup(groupInput.value)" 
+          [disabled]="!canSendCommands() || !groupInput.value">
+          ➕ Entrar
+        </button>
+        <button 
+          class="btn btn-leave" 
+          (click)="leaveGroup(groupInput.value)" 
+          [disabled]="!canSendCommands() || !groupInput.value">
+          ➖ Sair
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Estatísticas Rápidas -->
+  <div class="stats-grid">
+    <div class="stat-card checkins">
+      <div class="stat-icon">✅</div>
+      <div class="stat-content">
+        <h3>{{ stats.totalCheckins }}</h3>
+        <p>Check-ins Hoje</p>
+      </div>
+    </div>
+
+    <div class="stat-card checkouts">
+      <div class="stat-icon">🚪</div>
+      <div class="stat-content">
+        <h3>{{ stats.totalCheckouts }}</h3>
+        <p>Check-outs Hoje</p>
+      </div>
+    </div>
+
+    <div class="stat-card status-changes">
+      <div class="stat-icon">🏨</div>
+      <div class="stat-content">
+        <h3>{{ stats.totalStatusChanges }}</h3>
+        <p>Mudanças Status</p>
+      </div>
+    </div>
+
+    <div class="stat-card notifications">
+      <div class="stat-icon">📢</div>
+      <div class="stat-content">
+        <h3>{{ stats.totalNotifications }}</h3>
+        <p>Notificações</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Grid Principal -->
+  <div class="main-grid">
+    
+    <!-- Rack de Apartamentos -->
+    <div class="apartment-rack">
+      <h3>🏨 Rack dos Apartamentos</h3>
+      <div class="apartments-grid">
+        <div 
+          *ngFor="let apartment of apartments" 
+          class="apartment-card"
+          [class]="getApartmentStatusClass(apartment.status)">
+          
+          <div class="apartment-header">
+            <span class="apartment-code">{{ apartment.codigo }}</span>
+            <span class="apartment-id">#{{ apartment.id }}</span>
+          </div>
+          
+          <div class="apartment-status">
+            <span class="status-badge">{{ apartment.status }}</span>
+          </div>
+          
+          <div class="apartment-footer">
+            <small>Atualizado: {{ formatDate(apartment.lastUpdate) }}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dados Mais Recentes -->
+    <div class="recent-data">
+      
+      <!-- Último Check-in -->
+      <div class="data-section" *ngIf="latestCheckin">
+        <h4>✅ Último Check-in</h4>
+        <div class="data-card checkin-card">
+          <div class="data-row">
+            <strong>ID:</strong> {{ latestCheckin.checkinId }}
+          </div>
+          <div class="data-row">
+            <strong>Hóspede:</strong> {{ latestCheckin.nomeHospede }}
+          </div>
+          <div class="data-row">
+            <strong>Apartamentos:</strong> {{ latestCheckin.apartamentosCodigos.join(', ') }}
+          </div>
+          <div class="data-row">
+            <strong>Data:</strong> {{ formatDate(latestCheckin.dataCheckin) }}
+          </div>
+          <div class="data-row" *ngIf="latestCheckin.observacoes">
+            <strong>Observações:</strong> {{ latestCheckin.observacoes }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Último Check-out -->
+      <div class="data-section" *ngIf="latestCheckout">
+        <h4>🚪 Último Check-out</h4>
+        <div class="data-card checkout-card">
+          <div class="data-row">
+            <strong>ID:</strong> {{ latestCheckout.checkoutId }}
+          </div>
+          <div class="data-row">
+            <strong>Hóspede:</strong> {{ latestCheckout.nomeHospede }}
+          </div>
+          <div class="data-row">
+            <strong>Apartamentos:</strong> {{ latestCheckout.apartamentosCodigos.join(', ') }}
+          </div>
+          <div class="data-row">
+            <strong>Data:</strong> {{ formatDate(latestCheckout.dataCheckout) }}
+          </div>
+          <div class="data-row" *ngIf="latestCheckout.totalPago">
+            <strong>Total Pago:</strong> {{ latestCheckout.totalPago | currency:'EUR':'symbol':'1.2-2' }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Última Mudança de Status -->
+      <div class="data-section" *ngIf="latestApartmentStatus">
+        <h4>🏨 Última Mudança de Status</h4>
+        <div class="data-card status-card">
+          <div class="data-row">
+            <strong>Apartamento:</strong> {{ latestApartmentStatus.codigo }}
+          </div>
+          <div class="data-row">
+            <strong>Status:</strong> 
+            <span [class]="getApartmentStatusClass(latestApartmentStatus.situacao)">
+              {{ latestApartmentStatus.situacao }}
+            </span>
+          </div>
+          <div class="data-row">
+            <strong>Anterior:</strong> {{ latestApartmentStatus.situacaoAnterior }}
+          </div>
+          <div class="data-row">
+            <strong>Alterado:</strong> {{ formatDate(latestApartmentStatus.dataAlteracao) }}
+          </div>
+          <div class="data-row" *ngIf="latestApartmentStatus.observacoes">
+            <strong>Observações:</strong> {{ latestApartmentStatus.observacoes }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feed de Notificações -->
+  <div class="notifications-section">
+    <h3>📢 Feed de Notificações em Tempo Real</h3>
+    
+    <div class="notifications-container" *ngIf="notifications.length > 0; else noNotifications">
+      <div 
+        *ngFor="let notification of notifications | slice:0:10; trackBy: trackNotification" 
+        class="notification-item"
+        [class]="'notification-' + notification.type.toLowerCase()">
+        
+        <div class="notification-icon">
+          {{ getNotificationIcon(notification.type) }}
+        </div>
+        
+        <div class="notification-content">
+          <div class="notification-header">
+            <span class="notification-type">{{ notification.type }}</span>
+            <span class="notification-time">{{ formatDate(notification.timestamp) }}</span>
+          </div>
+          <div class="notification-message">{{ notification.message }}</div>
+          <div class="notification-data" *ngIf="notification.data">
+            <pre>{{ notification.data | json }}</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noNotifications>
+      <div class="no-notifications">
+        <p>🤷‍♂️ Ainda não há notificações...</p>
+        <p>As notificações aparecerão aqui em tempo real quando houver check-ins, check-outs ou mudanças no rack.</p>
+      </div>
+    </ng-template>
+  </div>
+
+  <!-- Debug Information (opcional - remover em produção) -->
+  <div class="debug-section" *ngIf="connectionStatus.status !== 'connected'">
+    <h4>🐛 Debug Information</h4>
+    <div class="debug-info">
+      <p><strong>Connection Status:</strong> {{ connectionStatus.status }}</p>
+      <p><strong>Is Connected:</strong> {{ connectionStatus.isConnected }}</p>
+      <p><strong>Error:</strong> {{ connectionStatus.error || 'Nenhum erro' }}</p>
+      <p><strong>Timestamp:</strong> {{ formatDate(new Date()) }}</p>
+    </div>
+  </div>
+
+</div>

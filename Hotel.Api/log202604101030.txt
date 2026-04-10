@@ -1,0 +1,277 @@
+2026-04-10 10:30:00.069 +01:00 [INF] Executed DbCommand (179ms) [Parameters=[@__tenantId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[ConnectionString], [t].[DatabaseName], [t].[DatabaseServerName], [t].[Name], [t].[Password], [t].[UserID], [t].[Metadata_CustomSettings], [t].[Metadata_IsActive], [t].[Metadata_KeySerial], [t].[Metadata_MaxUsers], [t].[Metadata_Prazo], [t].[Metadata_Region]
+FROM [Tenant] AS [t]
+WHERE [t].[Id] = @__tenantId_0
+2026-04-10 10:30:00.071 +01:00 [INF] ✅ Tenant encontrado: ID='localhost', Name='localhost', Database='db_abc40d_ghotelhomolog' [4f860f26]
+2026-04-10 10:30:00.071 +01:00 [INF] === SetCurrentTenant ===
+2026-04-10 10:30:00.071 +01:00 [INF] Definindo tenant atual: ID='localhost', Name='localhost'
+2026-04-10 10:30:00.072 +01:00 [INF] ✅ Tenant atual definido com sucesso: 'localhost'
+2026-04-10 10:30:00.072 +01:00 [INF] Audit Log: {"TenantId":"localhost","Path":{"Value":"/api/Caixa/CaixaAtual","HasValue":true,"$type":"PathString"},"Method":"GET","Timestamp":"2026-04-10T09:30:00.0720750Z","UserAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36","IPAddress":"::1"}
+2026-04-10 10:30:00.072 +01:00 [INF] Executing endpoint 'Hotel.Api.Controllers.CaixaController.CaixaAtual (Hotel.Api)'
+2026-04-10 10:30:00.074 +01:00 [INF] Route matched with {action = "CaixaAtual", controller = "Caixa", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Int32] CaixaAtual() on controller Hotel.Api.Controllers.CaixaController (Hotel.Api).
+2026-04-10 10:30:00.074 +01:00 [INF] UnitOfWork - HttpContextAccessor: NULL
+2026-04-10 10:30:00.080 +01:00 [INF] UnitOfWork - HttpContextAccessor: NULL
+2026-04-10 10:30:00.121 +01:00 [INF] Executed DbCommand (186ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedBy], [t].[DateCreated], [t].[Descricao], [t].[IdTenant], [t].[IsActive], [t].[LastModifiedDate]
+FROM [TipoPagamentos] AS [t]
+2026-04-10 10:30:00.127 +01:00 [INF] Executing ObjectResult, writing value of type 'Hotel.Application.Responses.BaseCommandResponse'.
+2026-04-10 10:30:00.128 +01:00 [INF] Executed action Hotel.Api.Controllers.TiposPagamentosController.Get (Hotel.Api) in 196.5228ms
+2026-04-10 10:30:00.128 +01:00 [INF] Executed endpoint 'Hotel.Api.Controllers.TiposPagamentosController.Get (Hotel.Api)'
+2026-04-10 10:30:00.128 +01:00 [INF] HTTP GET /api/TiposPagamentos responded 200 in 381.7383 ms
+2026-04-10 10:30:00.128 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5055/api/TiposPagamentos - 200 1286 application/json; charset=utf-8 381.9445ms
+2026-04-10 10:30:00.130 +01:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5055/api/Produto?pontoVendaId=4 - null null
+2026-04-10 10:30:00.130 +01:00 [INF] CORS policy execution successful.
+2026-04-10 10:30:00.130 +01:00 [INF] HTTP OPTIONS /api/Produto responded 204 in 0.1002 ms
+2026-04-10 10:30:00.130 +01:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5055/api/Produto?pontoVendaId=4 - 204 null null 0.274ms
+2026-04-10 10:30:00.134 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5055/api/Produto?pontoVendaId=4 - application/json null
+2026-04-10 10:30:00.134 +01:00 [INF] CORS policy execution successful.
+2026-04-10 10:30:00.134 +01:00 [INF] === TenantService inicializado ===
+2026-04-10 10:30:00.134 +01:00 [INF] TenantResolutionMiddleware: Iniciando execução...
+2026-04-10 10:30:00.134 +01:00 [INF] TenantId identificado: localhost
+2026-04-10 10:30:00.134 +01:00 [INF] TenantId from headers: 
+2026-04-10 10:30:00.134 +01:00 [INF] === ResolveTenantAsync [392e4d76] ===
+2026-04-10 10:30:00.134 +01:00 [INF] Buscando tenant: 'localhost' [392e4d76]
+2026-04-10 10:30:00.205 +01:00 [INF] Executed DbCommand (176ms) [Parameters=[@p11='6', @p0='2024' (Size = 4000), @p1='234,4/10/2026' (Size = 4000), @p2=NULL (Size = 4000), @p3='8/19/2025' (Size = 4000), @p4='0001-01-01T00:00:00.0000000', @p5='0', @p6='False', @p7='2026-04-10T10:30:00.0268190+01:00', @p8='20241204', @p9='180', @p10='4/10/2026 12:00:00 AM' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Serial] SET [Chave] = @p0, [ContadorData] = @p1, [CreatedBy] = @p2, [DataInicial] = @p3, [DateCreated] = @p4, [IdTenant] = @p5, [IsActive] = @p6, [LastModifiedDate] = @p7, [NumSerial] = @p8, [Prazo] = @p9, [UltimoAcesso] = @p10
+OUTPUT 1
+WHERE [Id] = @p11;
+2026-04-10 10:30:00.267 +01:00 [INF] Executed DbCommand (182ms) [Parameters=[@__today_0='2026-04-10T00:00:00.0000000+01:00', @__tomorrow_1='2026-04-11T00:00:00.0000000+01:00'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[CreatedBy], [c].[DataDeAbertura], [c].[DataDeFechamento], [c].[DateCreated], [c].[Entrada], [c].[IdTenant], [c].[IsActive], [c].[LastModifiedDate], [c].[Saida], [c].[SaldoAtual], [c].[SaldoFinal], [c].[SaldoInicial], [c].[SaldoPendenteCaixaAnterior], [c].[SaldoPendeteCaixaAtual], [c].[UtilizadoresId]
+FROM [Caixas] AS [c]
+WHERE [c].[DataDeAbertura] >= @__today_0 AND [c].[DataDeAbertura] < @__tomorrow_1
+2026-04-10 10:30:00.281 +01:00 [INF] Executing ObjectResult, writing value of type 'System.Int32'.
+2026-04-10 10:30:00.281 +01:00 [INF] Executed action Hotel.Api.Controllers.CaixaController.CaixaAtual (Hotel.Api) in 207.3556ms
+2026-04-10 10:30:00.281 +01:00 [INF] Executed endpoint 'Hotel.Api.Controllers.CaixaController.CaixaAtual (Hotel.Api)'
+2026-04-10 10:30:00.281 +01:00 [INF] HTTP GET /api/Caixa/CaixaAtual responded 200 in 393.8782 ms
+2026-04-10 10:30:00.281 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5055/api/Caixa/CaixaAtual - 200 4 application/json; charset=utf-8 394.0736ms
+2026-04-10 10:30:00.319 +01:00 [INF] Executed DbCommand (184ms) [Parameters=[@__tenantId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[ConnectionString], [t].[DatabaseName], [t].[DatabaseServerName], [t].[Name], [t].[Password], [t].[UserID], [t].[Metadata_CustomSettings], [t].[Metadata_IsActive], [t].[Metadata_KeySerial], [t].[Metadata_MaxUsers], [t].[Metadata_Prazo], [t].[Metadata_Region]
+FROM [Tenant] AS [t]
+WHERE [t].[Id] = @__tenantId_0
+2026-04-10 10:30:00.319 +01:00 [INF] Executed DbCommand (186ms) [Parameters=[@__tenantId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[ConnectionString], [t].[DatabaseName], [t].[DatabaseServerName], [t].[Name], [t].[Password], [t].[UserID], [t].[Metadata_CustomSettings], [t].[Metadata_IsActive], [t].[Metadata_KeySerial], [t].[Metadata_MaxUsers], [t].[Metadata_Prazo], [t].[Metadata_Region]
+FROM [Tenant] AS [t]
+WHERE [t].[Id] = @__tenantId_0
+2026-04-10 10:30:00.319 +01:00 [INF] Executed DbCommand (186ms) [Parameters=[@__tenantId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[ConnectionString], [t].[DatabaseName], [t].[DatabaseServerName], [t].[Name], [t].[Password], [t].[UserID], [t].[Metadata_CustomSettings], [t].[Metadata_IsActive], [t].[Metadata_KeySerial], [t].[Metadata_MaxUsers], [t].[Metadata_Prazo], [t].[Metadata_Region]
+FROM [Tenant] AS [t]
+WHERE [t].[Id] = @__tenantId_0
+2026-04-10 10:30:00.319 +01:00 [INF] Executed DbCommand (186ms) [Parameters=[@__tenantId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[ConnectionString], [t].[DatabaseName], [t].[DatabaseServerName], [t].[Name], [t].[Password], [t].[UserID], [t].[Metadata_CustomSettings], [t].[Metadata_IsActive], [t].[Metadata_KeySerial], [t].[Metadata_MaxUsers], [t].[Metadata_Prazo], [t].[Metadata_Region]
+FROM [Tenant] AS [t]
+WHERE [t].[Id] = @__tenantId_0
+2026-04-10 10:30:00.320 +01:00 [INF] ✅ Tenant encontrado: ID='localhost', Name='localhost', Database='db_abc40d_ghotelhomolog' [392e4d76]
+2026-04-10 10:30:00.320 +01:00 [INF] ✅ Tenant encontrado: ID='localhost', Name='localhost', Database='db_abc40d_ghotelhomolog' [0d29460b]
+2026-04-10 10:30:00.320 +01:00 [INF] ✅ Tenant encontrado: ID='localhost', Name='localhost', Database='db_abc40d_ghotelhomolog' [74274996]
+2026-04-10 10:30:00.320 +01:00 [INF] === SetCurrentTenant ===
+2026-04-10 10:30:00.320 +01:00 [INF] ✅ Tenant encontrado: ID='localhost', Name='localhost', Database='db_abc40d_ghotelhomolog' [3f231731]
+2026-04-10 10:30:00.320 +01:00 [INF] === SetCurrentTenant ===
+2026-04-10 10:30:00.320 +01:00 [INF] === SetCurrentTenant ===
+2026-04-10 10:30:00.320 +01:00 [INF] Definindo tenant atual: ID='localhost', Name='localhost'
+2026-04-10 10:30:00.320 +01:00 [INF] === SetCurrentTenant ===
+2026-04-10 10:30:00.320 +01:00 [INF] Definindo tenant atual: ID='localhost', Name='localhost'
+2026-04-10 10:30:00.320 +01:00 [INF] Definindo tenant atual: ID='localhost', Name='localhost'
+2026-04-10 10:30:00.320 +01:00 [INF] ✅ Tenant atual definido com sucesso: 'localhost'
+2026-04-10 10:30:00.320 +01:00 [INF] Definindo tenant atual: ID='localhost', Name='localhost'
+2026-04-10 10:30:00.320 +01:00 [INF] Audit Log: {"TenantId":"localhost","Path":{"Value":"/api/Produto","HasValue":true,"$type":"PathString"},"Method":"GET","Timestamp":"2026-04-10T09:30:00.3206730Z","UserAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36","IPAddress":"::1"}
+2026-04-10 10:30:00.320 +01:00 [INF] ✅ Tenant atual definido com sucesso: 'localhost'
+2026-04-10 10:30:00.320 +01:00 [INF] ✅ Tenant atual definido com sucesso: 'localhost'
+2026-04-10 10:30:00.320 +01:00 [INF] ✅ Tenant atual definido com sucesso: 'localhost'
+2026-04-10 10:30:00.320 +01:00 [INF] Audit Log: {"TenantId":"localhost","Path":{"Value":"/api/Menu/MenuByRole","HasValue":true,"$type":"PathString"},"Method":"GET","Timestamp":"2026-04-10T09:30:00.3209430Z","UserAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36","IPAddress":"::1"}
+2026-04-10 10:30:00.321 +01:00 [INF] Audit Log: {"TenantId":"localhost","Path":{"Value":"/api/Cliente","HasValue":true,"$type":"PathString"},"Method":"GET","Timestamp":"2026-04-10T09:30:00.3211340Z","UserAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36","IPAddress":"::1"}
+2026-04-10 10:30:00.321 +01:00 [INF] Executing endpoint 'Hotel.Api.Controllers.ProdutoController.GetAllProdutos (Hotel.Api)'
+2026-04-10 10:30:00.321 +01:00 [INF] Audit Log: {"TenantId":"localhost","Path":{"Value":"/api/ProductType","HasValue":true,"$type":"PathString"},"Method":"GET","Timestamp":"2026-04-10T09:30:00.3211850Z","UserAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36","IPAddress":"::1"}
+2026-04-10 10:30:00.321 +01:00 [INF] Executing endpoint 'Hotel.Api.Controllers.MenuController.Role (Hotel.Api)'
+2026-04-10 10:30:00.321 +01:00 [INF] Executing endpoint 'Hotel.Api.Controllers.ClienteController.GetAllUsers (Hotel.Api)'
+2026-04-10 10:30:00.321 +01:00 [INF] Executing endpoint 'Hotel.Api.Controllers.ProductTypeController.GetAll (Hotel.Api)'
+2026-04-10 10:30:00.323 +01:00 [INF] Route matched with {action = "GetAll", controller = "ProductType", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller Hotel.Api.Controllers.ProductTypeController (Hotel.Api).
+2026-04-10 10:30:00.323 +01:00 [INF] Route matched with {action = "Role", controller = "Menu", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Hotel.Application.Responses.BaseCommandResponse] Role(System.String) on controller Hotel.Api.Controllers.MenuController (Hotel.Api).
+2026-04-10 10:30:00.323 +01:00 [INF] Route matched with {action = "GetAllUsers", controller = "Cliente", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Collections.Generic.IEnumerable`1[Hotel.Domain.Entities.Cliente]] GetAllUsers() on controller Hotel.Api.Controllers.ClienteController (Hotel.Api).
+2026-04-10 10:30:00.323 +01:00 [INF] Route matched with {action = "GetAllProdutos", controller = "Produto", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllProdutos(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Boolean], System.Nullable`1[System.Boolean], System.String) on controller Hotel.Api.Controllers.ProdutoController (Hotel.Api).
+2026-04-10 10:30:00.324 +01:00 [INF] UnitOfWork - HttpContextAccessor: NULL
+2026-04-10 10:30:00.324 +01:00 [INF] UnitOfWork - HttpContextAccessor: NULL
+2026-04-10 10:30:00.324 +01:00 [INF] UnitOfWork - HttpContextAccessor: NULL
+2026-04-10 10:30:00.326 +01:00 [INF] UnitOfWork - HttpContextAccessor: NULL
+2026-04-10 10:30:00.326 +01:00 [INF] 🌐 [PRODUTOS-GET-ALL-eefca0b1] Requisição recebida - Filtros: CategoriaId=null, PontoVendasId=null, ApenasAtivos=true, Nome=null
+2026-04-10 10:30:00.326 +01:00 [INF] UnitOfWork - HttpContextAccessor: NULL
+2026-04-10 10:30:00.327 +01:00 [INF] UnitOfWork - HttpContextAccessor: NULL
+2026-04-10 10:30:00.329 +01:00 [INF] 🔍 [GET-ALL-PRODUTOS-6a94c83c] Iniciando busca de produtos - Filtros: CategoriaId=null, PontoVendasId=null, ApenasAtivos=true
+2026-04-10 10:30:00.336 +01:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-04-10 10:30:00.389 +01:00 [INF] Executed DbCommand (182ms) [Parameters=[@__id_0='20241204'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [s].[Id], [s].[Chave], [s].[ContadorData], [s].[CreatedBy], [s].[DataInicial], [s].[DateCreated], [s].[IdTenant], [s].[IsActive], [s].[LastModifiedDate], [s].[NumSerial], [s].[Prazo], [s].[UltimoAcesso]
+FROM [Serial] AS [s]
+WHERE [s].[NumSerial] = @__id_0
+2026-04-10 10:30:00.389 +01:00 [INF] Executing ObjectResult, writing value of type 'Hotel.Application.DTOs.Response.SerialResponse'.
+2026-04-10 10:30:00.390 +01:00 [INF] Executed action Hotel.Api.Controllers.SerialController.ObterSerialSistema (Hotel.Api) in 1922.1765ms
+2026-04-10 10:30:00.390 +01:00 [INF] Executed endpoint 'Hotel.Api.Controllers.SerialController.ObterSerialSistema (Hotel.Api)'
+2026-04-10 10:30:00.390 +01:00 [INF] HTTP GET /api/Serial responded 200 in 2130.3395 ms
+2026-04-10 10:30:00.390 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5055/api/Serial - 200 28 application/json; charset=utf-8 2130.7912ms
+2026-04-10 10:30:00.514 +01:00 [ERR] Failed executing DbCommand (186ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[ProductTypeCode], [p].[CaminhoImagem], [p].[ProductTypeDescription]
+FROM [ProductTypes] AS [p]
+2026-04-10 10:30:00.516 +01:00 [ERR] An exception occurred while iterating over the results of a query for context type 'Hotel.Infrastruture.Persistence.Context.GhotelDbContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'CaminhoImagem'.
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:0b8d92b4-fd0c-4905-aee2-c40278c7ab45
+Error Number:207,State:1,Class:16
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'CaminhoImagem'.
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:0b8d92b4-fd0c-4905-aee2-c40278c7ab45
+Error Number:207,State:1,Class:16
+2026-04-10 10:30:00.517 +01:00 [ERR] Erro ao listar ProductTypes
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'CaminhoImagem'.
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Hotel.Infrastruture.Persistence.Shared.RepositoryBase`1.GetAllAsync() in /Users/florindo/Documents/HOTEL/Hotel.Infrastruture/Persistence/Shared/RepositoryBase.cs:line 155
+   at Hotel.Api.Controllers.ProductTypeController.GetAll() in /Users/florindo/Documents/HOTEL/Hotel.Api/Controllers/ProductTypeController.cs:line 32
+ClientConnectionId:0b8d92b4-fd0c-4905-aee2-c40278c7ab45
+Error Number:207,State:1,Class:16
+2026-04-10 10:30:00.520 +01:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType3`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-10 10:30:00.523 +01:00 [INF] Executed action Hotel.Api.Controllers.ProductTypeController.GetAll (Hotel.Api) in 199.5805ms
+2026-04-10 10:30:00.523 +01:00 [INF] Executed endpoint 'Hotel.Api.Controllers.ProductTypeController.GetAll (Hotel.Api)'
+2026-04-10 10:30:00.523 +01:00 [ERR] HTTP GET /api/ProductType responded 500 in 2250.3026 ms
+2026-04-10 10:30:00.523 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5055/api/ProductType - 500 50 application/json; charset=utf-8 2250.7092ms
+2026-04-10 10:30:00.526 +01:00 [INF] Executed DbCommand (194ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[AdicionarStock], [p].[CaminhoImagem], [p].[CategoriaId], [p].[CreatedBy], [p].[DataExpiracao], [p].[DateCreated], [p].[Desconto], [p].[DescontoPercentagem], [p].[EstoqueMinimo], [p].[IdTenant], [p].[IsActive], [p].[LastModifiedDate], [p].[Lucro], [p].[MargemLucro], [p].[Nome], [p].[PontoDeVendasId], [p].[PrecoCIva], [p].[PrecoCompra], [p].[ProductTypeCode], [p].[Quantidade], [p].[TaxExemptionReasonCode], [p].[TaxTableEntryId], [p].[Valor], [p].[ValorFixo]
+FROM [Produtos] AS [p]
+2026-04-10 10:30:00.544 +01:00 [INF] 🔍 [GET-ALL-PRODUTOS-6a94c83c] 3 produtos encontrados antes dos filtros
+2026-04-10 10:30:00.544 +01:00 [INF] 🔍 [GET-ALL-PRODUTOS-6a94c83c] Após filtro apenas ativos: 3 produtos
+2026-04-10 10:30:00.544 +01:00 [INF] ✅ [GET-ALL-PRODUTOS-6a94c83c] Busca concluída - 3 produtos encontrados
+2026-04-10 10:30:00.544 +01:00 [INF] ✅ [PRODUTOS-GET-ALL-eefca0b1] Sucesso - 3 produtos retornados
+2026-04-10 10:30:00.545 +01:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType40`5[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[Hotel.Domain.Entities.Produtos, Hotel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-10 10:30:00.552 +01:00 [INF] Executed action Hotel.Api.Controllers.ProdutoController.GetAllProdutos (Hotel.Api) in 227.3231ms
+2026-04-10 10:30:00.552 +01:00 [INF] Executed endpoint 'Hotel.Api.Controllers.ProdutoController.GetAllProdutos (Hotel.Api)'
+2026-04-10 10:30:00.552 +01:00 [INF] HTTP GET /api/Produto responded 200 in 418.0692 ms
+2026-04-10 10:30:00.552 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5055/api/Produto?pontoVendaId=4 - 200 2546 application/json; charset=utf-8 418.3518ms
+2026-04-10 10:30:01.496 +01:00 [INF] Executed DbCommand (241ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Bairro], [c].[Cargo], [c].[Celular], [c].[Cidade], [c].[Complemento], [c].[CreatedBy], [c].[DataAniversario], [c].[DateCreated], [c].[Email], [c].[EmpresasId], [c].[Endereco], [c].[Generos], [c].[HoraParaAcordar], [c].[HoraParaDormir], [c].[IdTenant], [c].[Idioma], [c].[IsActive], [c].[LastModifiedDate], [c].[Nome], [c].[Observacao], [c].[PaisId], [c].[PercetualDesconto], [c].[Preferencias], [c].[Profissao], [c].[Telefone], [e].[Id], [p].[Id], [h].[Id], [h].[CheckinsId], [h].[ClientesId], [h].[CreatedBy], [h].[DateCreated], [h].[Estado], [h].[IdTenant], [h].[IsActive], [h].[LastModifiedDate], [e].[Bairro], [e].[Cidade], [e].[CreatedBy], [e].[DateCreated], [e].[Email], [e].[Endereco], [e].[IdTenant], [e].[IsActive], [e].[LastModifiedDate], [e].[NumContribuinte], [e].[PercentualDesconto], [e].[RazaoSocial], [e].[Telefone], [l].[Id], [l].[CaixaAberto], [l].[ClientesId], [l].[CreatedBy], [l].[DataEntrada], [l].[DataSaida], [l].[DateCreated], [l].[IdTenant], [l].[IsActive], [l].[LastModifiedDate], [l].[PercentagemDesconto], [l].[RegistoPagamento], [l].[SituacaoPagamento], [l].[SituacaoServico], [l].[UtilizadoresId], [l].[Valor], [l].[ValorDesconto], [p].[CreatedBy], [p].[DateCreated], [p].[IdTenant], [p].[IsActive], [p].[LastModifiedDate], [p].[Nacionalidade], [p].[Nome]
+FROM [Clientes] AS [c]
+INNER JOIN [Empresas] AS [e] ON [c].[EmpresasId] = [e].[Id]
+INNER JOIN [Paises] AS [p] ON [c].[PaisId] = [p].[Id]
+LEFT JOIN [Hospedes] AS [h] ON [c].[Id] = [h].[ClientesId]
+LEFT JOIN [lavandarias] AS [l] ON [c].[Id] = [l].[ClientesId]
+ORDER BY [c].[Id], [e].[Id], [p].[Id], [h].[Id]
+2026-04-10 10:30:01.496 +01:00 [INF] Executed DbCommand (241ms) [Parameters=[@__ToUpper_0='SUPERADMIN' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT [m].[MenuId], [m].[RoleId], [a].[Id], [a].[CreatedBy], [a].[DateCreated], [a].[IdTenant], [a].[IsActive], [a].[LastModifiedDate], [a].[Nome], [a].[Path], [a].[PostIcon], [a].[PreIcon], [r].[Id], [r].[ConcurrencyStamp], [r].[Name], [r].[NormalizedName]
+FROM [MenuRole] AS [m]
+INNER JOIN [Role] AS [r] ON [m].[RoleId] = [r].[Id]
+INNER JOIN [AppMenu] AS [a] ON [m].[MenuId] = [a].[Id]
+WHERE UPPER([r].[Name]) = @__ToUpper_0
+2026-04-10 10:30:01.509 +01:00 [INF] Executing ObjectResult, writing value of type 'Hotel.Application.Responses.BaseCommandResponse'.
+2026-04-10 10:30:01.512 +01:00 [INF] Executed action Hotel.Api.Controllers.MenuController.Role (Hotel.Api) in 1188.5702ms
+2026-04-10 10:30:01.512 +01:00 [INF] Executed endpoint 'Hotel.Api.Controllers.MenuController.Role (Hotel.Api)'
+2026-04-10 10:30:01.512 +01:00 [INF] HTTP GET /api/Menu/MenuByRole responded 200 in 3254.3587 ms
+2026-04-10 10:30:01.512 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5055/api/Menu/MenuByRole?perfil=SUPERADMIN - 200 8834 application/json; charset=utf-8 3255.0438ms
+2026-04-10 10:30:02.043 +01:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Hotel.Domain.Entities.Cliente, Hotel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-10 10:30:02.054 +01:00 [INF] Executed action Hotel.Api.Controllers.ClienteController.GetAllUsers (Hotel.Api) in 1730.2405ms
+2026-04-10 10:30:02.055 +01:00 [INF] Executed endpoint 'Hotel.Api.Controllers.ClienteController.GetAllUsers (Hotel.Api)'
+2026-04-10 10:30:02.055 +01:00 [INF] HTTP GET /api/Cliente responded 200 in 3794.2749 ms
+2026-04-10 10:30:02.055 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5055/api/Cliente - 200 266357 application/json; charset=utf-8 3795.0174ms
+2026-04-10 10:30:29.568 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5055/api/ProductType - null null
+2026-04-10 10:30:29.570 +01:00 [INF] === TenantService inicializado ===
+2026-04-10 10:30:29.570 +01:00 [INF] TenantResolutionMiddleware: Iniciando execução...
+2026-04-10 10:30:29.570 +01:00 [INF] TenantId identificado: localhost
+2026-04-10 10:30:29.570 +01:00 [INF] TenantId from headers: 
+2026-04-10 10:30:29.570 +01:00 [INF] === ResolveTenantAsync [b695b222] ===
+2026-04-10 10:30:29.570 +01:00 [INF] Buscando tenant: 'localhost' [b695b222]
+2026-04-10 10:30:29.766 +01:00 [INF] Executed DbCommand (182ms) [Parameters=[@__tenantId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[ConnectionString], [t].[DatabaseName], [t].[DatabaseServerName], [t].[Name], [t].[Password], [t].[UserID], [t].[Metadata_CustomSettings], [t].[Metadata_IsActive], [t].[Metadata_KeySerial], [t].[Metadata_MaxUsers], [t].[Metadata_Prazo], [t].[Metadata_Region]
+FROM [Tenant] AS [t]
+WHERE [t].[Id] = @__tenantId_0
+2026-04-10 10:30:29.767 +01:00 [INF] ✅ Tenant encontrado: ID='localhost', Name='localhost', Database='db_abc40d_ghotelhomolog' [b695b222]
+2026-04-10 10:30:29.767 +01:00 [INF] === SetCurrentTenant ===
+2026-04-10 10:30:29.767 +01:00 [INF] Definindo tenant atual: ID='localhost', Name='localhost'
+2026-04-10 10:30:29.767 +01:00 [INF] ✅ Tenant atual definido com sucesso: 'localhost'
+2026-04-10 10:30:29.767 +01:00 [INF] Audit Log: {"TenantId":"localhost","Path":{"Value":"/api/ProductType","HasValue":true,"$type":"PathString"},"Method":"GET","Timestamp":"2026-04-10T09:30:29.7672260Z","UserAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36","IPAddress":"::1"}
+2026-04-10 10:30:29.769 +01:00 [INF] Executing endpoint 'Hotel.Api.Controllers.ProductTypeController.GetAll (Hotel.Api)'
+2026-04-10 10:30:29.770 +01:00 [INF] Route matched with {action = "GetAll", controller = "ProductType", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller Hotel.Api.Controllers.ProductTypeController (Hotel.Api).
+2026-04-10 10:30:29.770 +01:00 [INF] UnitOfWork - HttpContextAccessor: NULL
+2026-04-10 10:30:29.956 +01:00 [ERR] Failed executing DbCommand (183ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[ProductTypeCode], [p].[CaminhoImagem], [p].[ProductTypeDescription]
+FROM [ProductTypes] AS [p]
+2026-04-10 10:30:29.956 +01:00 [ERR] An exception occurred while iterating over the results of a query for context type 'Hotel.Infrastruture.Persistence.Context.GhotelDbContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'CaminhoImagem'.
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:77966621-b5f2-40c1-85db-11deefd6e3c5
+Error Number:207,State:1,Class:16
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'CaminhoImagem'.
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:77966621-b5f2-40c1-85db-11deefd6e3c5
+Error Number:207,State:1,Class:16
+2026-04-10 10:30:29.957 +01:00 [ERR] Erro ao listar ProductTypes
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'CaminhoImagem'.
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Hotel.Infrastruture.Persistence.Shared.RepositoryBase`1.GetAllAsync() in /Users/florindo/Documents/HOTEL/Hotel.Infrastruture/Persistence/Shared/RepositoryBase.cs:line 155
+   at Hotel.Api.Controllers.ProductTypeController.GetAll() in /Users/florindo/Documents/HOTEL/Hotel.Api/Controllers/ProductTypeController.cs:line 32
+ClientConnectionId:77966621-b5f2-40c1-85db-11deefd6e3c5
+Error Number:207,State:1,Class:16
+2026-04-10 10:30:29.960 +01:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType3`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-10 10:30:29.961 +01:00 [INF] Executed action Hotel.Api.Controllers.ProductTypeController.GetAll (Hotel.Api) in 191.2202ms
+2026-04-10 10:30:29.961 +01:00 [INF] Executed endpoint 'Hotel.Api.Controllers.ProductTypeController.GetAll (Hotel.Api)'
+2026-04-10 10:30:29.961 +01:00 [ERR] HTTP GET /api/ProductType responded 500 in 393.0382 ms
+2026-04-10 10:30:29.962 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5055/api/ProductType - 500 50 application/json; charset=utf-8 393.8542ms

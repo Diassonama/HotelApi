@@ -1,0 +1,246 @@
+### Teste da Nova Funcionalidade de Verificação de Disponibilidade com Mensagens Detalhadas
+
+# ============================================
+# 0. VERIFICAR DISPONIBILIDADE - Endpoint específico para verificação
+# ============================================
+GET http://localhost:5055/api/Reserva/verificar-disponibilidade?apartamentoId=101&dataEntrada=2025-01-01&dataSaida=2025-01-05
+
+### Resposta esperada quando disponível:
+# {
+#   "apartamentoId": 101,
+#   "dataEntrada": "2025-01-01",
+#   "dataSaida": "2025-01-05",
+#   "disponivel": true,
+#   "message": "Apartamento disponível",
+#   "detalhes": null
+# }
+
+### Resposta esperada quando NÃO disponível:
+# {
+#   "apartamentoId": 101,
+#   "dataEntrada": "2025-01-01",
+#   "dataSaida": "2025-01-05",
+#   "disponivel": false,
+#   "message": "Apartamento 101 (Suite Luxo) já está reservado para João Silva de 25/12/2024 a 05/01/2025 (Reserva #15).",
+#   "detalhes": "Apartamento 101 (Suite Luxo) já está reservado para João Silva de 25/12/2024 a 05/01/2025 (Reserva #15)."
+# }
+
+# ============================================
+# 1. CREATE RESERVA - Criar nova reserva (endpoint original)
+# ============================================
+POST http://localhost:5055/api/Reserva
+Content-Type: application/json
+
+{
+  "empresaId": 1,
+  "npx": 12345,
+  "quantidadeQuartos": 1,
+  "apartamentosReservados": [
+    {
+      "apartamentosId": 101,
+      "dataEntrada": "2025-01-01",
+      "dataSaida": "2025-01-05",
+      "clientesId": 1,
+      "tipoHospedagensId": 1,
+      "valorDiaria": 150.00,
+      "reservaConfirmada": true,
+      "reservaNoShow": false
+    }
+  ]
+}
+
+### Resposta de ERRO esperada (apartamento não disponível):
+# Status: 400 Bad Request
+# {
+#   "success": false,
+#   "message": "Apartamento não disponível",
+#   "errors": [
+#     "Erro na criação da reserva: Apartamento 101 (Suite Luxo) já está reservado para João Silva de 25/12/2024 a 05/01/2025 (Reserva #15)."
+#   ]
+# }
+
+# ============================================
+# 1.1. CREATE RESERVA WITH DETAILS - ✅ NOVA VERSÃO COM MENSAGENS DETALHADAS
+# ============================================
+POST http://localhost:5055/api/Reserva/create-with-details
+Content-Type: application/json
+
+{
+  "empresaId": 1,
+  "npx": 12347,
+  "quantidadeQuartos": 1,
+  "apartamentosReservados": [
+    {
+      "apartamentosId": 101,
+      "dataEntrada": "2025-01-01",
+      "dataSaida": "2025-01-05",
+      "clientesId": 1,
+      "tipoHospedagensId": 1,
+      "valorDiaria": 150.00,
+      "reservaConfirmada": true,
+      "reservaNoShow": false
+    }
+  ]
+}
+
+### ✅ Resposta de SUCESSO esperada:
+# Status: 201 Created
+# {
+#   "success": true,
+#   "message": "Reserva criada com sucesso",
+#   "data": {
+#     "reservaId": 25,
+#     "quantidadeApartamentos": 1,
+#     "valorTotal": 150.00
+#   },
+#   "errors": null
+# }
+
+### ✅ Resposta de ERRO esperada (mensagem CLARA para o usuário):
+# Status: 400 Bad Request
+# {
+#   "success": false,
+#   "message": "Apartamento não disponível",
+#   "errors": [
+#     "Apartamento 101 (Suite Luxo) já está reservado para João Silva de 25/12/2024 a 05/01/2025 (Reserva #15)."
+#   ],
+#   "data": null
+# }
+
+# ============================================
+# 2. CREATE RESERVA V2 - Criar nova reserva (versão 2)
+# ============================================
+POST http://localhost:5055/api/Reserva/v2
+Content-Type: application/json
+
+{
+  "empresaId": 1,
+  "npx": 12346,
+  "quantidadeQuartos": 1,
+  "apartamentos": [
+    {
+      "apartamentosId": 102,
+      "dataEntrada": "2025-01-10",
+      "dataSaida": "2025-01-15",
+      "clientesId": 2,
+      "tipoHospedagensId": 1,
+      "valorDiaria": 180.00,
+      "reservaConfirmada": true,
+      "reservaNoShow": false
+    }
+  ]
+}
+
+### Resposta de ERRO esperada (apartamento ocupado):
+# Status: 400 Bad Request
+# {
+#   "success": false,
+#   "message": "Apartamento não disponível",
+#   "errors": [
+#     "Apartamento 102 (Suite Master) está ocupado de 28/12/2024 a 15/01/2025."
+#   ]
+# }
+
+# ============================================
+# 3. ADD APARTAMENTOS - Adicionar apartamentos a reserva existente
+# ============================================
+POST http://localhost:5055/api/Reserva/adicionar-apartamentos
+Content-Type: application/json
+
+{
+  "reservaId": 1,
+  "apartamentos": [
+    {
+      "apartamentosId": 103,
+      "dataEntrada": "2025-01-01",
+      "dataSaida": "2025-01-05",
+      "clientesId": 3,
+      "tipoHospedagensId": 1,
+      "valorDiaria": 200.00,
+      "reservaConfirmada": true,
+      "reservaNoShow": false
+    }
+  ]
+}
+
+### Resposta de ERRO esperada (apartamento não encontrado):
+# Status: 400 Bad Request
+# {
+#   "success": false,
+#   "message": "Apartamento não disponível",
+#   "errors": [
+#     "Apartamento com ID 999 não foi encontrado."
+#   ]
+# }
+
+# ============================================
+# 4. UPDATE RESERVA - Atualizar reserva existente
+# ============================================
+PUT http://localhost:5055/api/Reserva
+Content-Type: application/json
+
+{
+  "id": 1,
+  "empresaId": 1,
+  "npx": 12345,
+  "quantidadeQuartos": 1,
+  "apartamentosReservados": [
+    {
+      "apartamentosId": 101,
+      "dataEntrada": "2025-01-01",
+      "dataSaida": "2025-01-05",
+      "clientesId": 1,
+      "tipoHospedagensId": 1,
+      "valorDiaria": 150.00,
+      "reservaConfirmada": true,
+      "reservaNoShow": false
+    }
+  ]
+}
+
+### Resposta de ERRO esperada (apartamento já reservado):
+# Status: 400 Bad Request
+# {
+#   "success": false,
+#   "message": "Apartamento não disponível",
+#   "data": "Erro na atualização da reserva: Apartamento 101 (Suite Luxo) já está reservado para Maria Santos de 01/01/2025 a 05/01/2025 (Reserva #20)."
+# }
+
+### ============================================
+### RESUMO DOS ENDPOINTS PARA CRIAÇÃO DE RESERVA:
+### ============================================
+
+### 📌 RECOMENDADO PARA INTERFACE DE USUÁRIO:
+# POST /api/Reserva/create-with-details - ✅ Retorna mensagens estruturadas para o usuário
+# POST /api/Reserva/v2 - ✅ Versão avançada com BaseCommandResponse
+
+### 📌 ENDPOINTS LEGADOS (mantidos para compatibilidade):
+# POST /api/Reserva - ⚠️ Mensagem de erro vai na exceção (capturada pelo controller)
+# POST /api/Reserva/create-original - ⚠️ Mesmo comportamento do endpoint acima
+
+### ============================================
+### TIPOS DE MENSAGENS DE ERRO PARA O UTILIZADOR:
+### ============================================
+
+### 🔴 APARTAMENTO JÁ RESERVADO:
+# "Apartamento 101 (Suite Luxo) já está reservado para João Silva de 25/12/2024 a 05/01/2025 (Reserva #15)."
+
+### 🏠 APARTAMENTO OCUPADO:
+# "Apartamento 102 (Suite Master) está ocupado de 28/12/2024 a 15/01/2025."
+
+### ❌ APARTAMENTO NÃO ENCONTRADO:
+# "Apartamento com ID 999 não foi encontrado."
+
+### ✅ VANTAGENS DA NOVA IMPLEMENTAÇÃO:
+# - Mensagens específicas e claras para o utilizador
+# - Informações detalhadas sobre conflitos (cliente, datas, reserva)
+# - Melhor experiência do utilizador (UX)
+# - Facilita resolução de problemas operacionais
+# - ✅ CORREÇÃO CRÍTICA: ID da reserva é gerado corretamente antes de criar apartamentos reservados
+
+### 🔧 CORREÇÃO TÉCNICA IMPORTANTE:
+# Problema anterior: reserva.Id era 0 quando tentávamos criar ApartamentosReservado
+# Solução implementada: 
+#   1. Criar reserva → Salvar no banco → Obter ID
+#   2. Usar o ID real para criar ApartamentosReservado
+#   3. Salvar apartamentos reservados com ID correto

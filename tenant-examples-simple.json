@@ -1,0 +1,149 @@
+[
+  {
+    "id": "hotel-cascais",
+    "name": "Hotel Cascais Palace",
+    "databaseServerName": "SQL1004.site4now.net",
+    "userID": "db_abc375_ghotel_admin",
+    "password": "RENT2024",
+    "databaseName": "db_abc375_ghotel_cascais",
+    "metadata": {
+      "region": "Lisboa",
+      "maxUsers": 50,
+      "isActive": true,
+      "prazo": 365,
+      "keySerial": "HSC-2025-001",
+      "customSettings": {
+        "timezone": "Europe/Lisbon",
+        "currency": "EUR",
+        "language": "pt-PT",
+        "hotel_category": "5_stars",
+        "check_in_time": "15:00",
+        "check_out_time": "12:00",
+        "email_notifications": "true",
+        "backup_frequency": "daily",
+        "wifi_included": "true",
+        "breakfast_included": "true",
+        "parking_available": "true",
+        "pet_friendly": "false"
+      }
+    }
+  },
+  {
+    "id": "hotel-porto",
+    "name": "Hotel Porto Vintage",
+    "databaseServerName": "SQL1004.site4now.net",
+    "userID": "db_abc376_ghotel_admin",
+    "password": "RENT2024",
+    "databaseName": "db_abc376_ghotel_porto",
+    "metadata": {
+      "region": "Porto",
+      "maxUsers": 25,
+      "isActive": true,
+      "prazo": 730,
+      "keySerial": "HPV-2025-002",
+      "customSettings": {
+        "timezone": "Europe/Lisbon",
+        "currency": "EUR",
+        "language": "pt-PT",
+        "hotel_category": "4_stars",
+        "check_in_time": "14:00",
+        "check_out_time": "11:00",
+        "email_notifications": "true",
+        "backup_frequency": "weekly",
+        "wifi_included": "true",
+        "parking_available": "true",
+        "breakfast_included": "false",
+        "city_center": "true"
+      }
+    }
+  },
+  {
+    "id": "pousada-algarve",
+    "name": "Pousada do Algarve",
+    "databaseServerName": "SQL1004.site4now.net",
+    "userID": "db_abc377_ghotel_admin",
+    "password": "RENT2024",
+    "databaseName": "db_abc377_ghotel_algarve",
+    "metadata": {
+      "region": "Faro",
+      "maxUsers": 15,
+      "isActive": true,
+      "prazo": 365,
+      "keySerial": "PAL-2025-003",
+      "customSettings": {
+        "timezone": "Europe/Lisbon",
+        "currency": "EUR",
+        "language": "pt-PT",
+        "hotel_category": "3_stars",
+        "check_in_time": "16:00",
+        "check_out_time": "10:00",
+        "email_notifications": "false",
+        "backup_frequency": "monthly",
+        "seasonal_pricing": "true",
+        "pool_access": "true",
+        "beach_proximity": "500m",
+        "family_friendly": "true"
+      }
+    }
+  },
+  {
+    "id": "hotel-luanda",
+    "name": "Hotel Luanda Premium",
+    "databaseServerName": "SQL1005.site4now.net",
+    "userID": "db_abc378_ghotel_admin",
+    "password": "RENT2024",
+    "databaseName": "db_abc378_ghotel_luanda",
+    "metadata": {
+      "region": "Luanda",
+      "maxUsers": 100,
+      "isActive": true,
+      "prazo": 365,
+      "keySerial": "HLP-2025-004",
+      "customSettings": {
+        "timezone": "Africa/Luanda",
+        "currency": "AOA",
+        "language": "pt-AO",
+        "hotel_category": "5_stars",
+        "check_in_time": "15:00",
+        "check_out_time": "12:00",
+        "email_notifications": "true",
+        "backup_frequency": "daily",
+        "business_center": "true",
+        "conference_rooms": "5",
+        "gym_available": "true",
+        "spa_services": "true",
+        "airport_shuttle": "true",
+        "concierge_service": "true"
+      }
+    }
+  },
+  {
+    "id": "hotel-teste-dev",
+    "name": "Hotel Desenvolvimento",
+    "databaseServerName": "localhost",
+    "userID": "sa",
+    "password": "RENT2024",
+    "databaseName": "GHotelDev",
+    "metadata": {
+      "region": "Desenvolvimento",
+      "maxUsers": 5,
+      "isActive": true,
+      "prazo": 90,
+      "keySerial": "DEV-2025-001",
+      "customSettings": {
+        "timezone": "Europe/Lisbon",
+        "currency": "EUR",
+        "language": "pt-PT",
+        "hotel_category": "test",
+        "check_in_time": "15:00",
+        "check_out_time": "12:00",
+        "email_notifications": "false",
+        "backup_frequency": "never",
+        "debug_mode": "true",
+        "test_environment": "true",
+        "log_level": "debug",
+        "cache_enabled": "false"
+      }
+    }
+  }
+]

@@ -1,0 +1,209 @@
+{
+  "tenant_examples": {
+    "description": "Exemplos de estruturas JSON para inserção de Tenants",
+    "note": "O campo 'ConnectionString' é construído automaticamente pela entidade",
+    
+    "tenant_hotel_exemplo1": {
+      "id": "hotel-cascais",
+      "name": "Hotel Cascais Palace",
+      "databaseServerName": "SQL1004.site4now.net",
+      "userID": "db_abc375_ghotel_admin",
+      "password": "RENT2024",
+      "databaseName": "db_abc375_ghotel_cascais",
+      "metadata": {
+        "region": "Lisboa",
+        "maxUsers": 50,
+        "isActive": true,
+        "prazo": 365,
+        "keySerial": "HSC-2025-001",
+        "customSettings": {
+          "timezone": "Europe/Lisbon",
+          "currency": "EUR",
+          "language": "pt-PT",
+          "hotel_category": "5_stars",
+          "check_in_time": "15:00",
+          "check_out_time": "12:00",
+          "email_notifications": "true",
+          "backup_frequency": "daily"
+        }
+      }
+    },
+
+    "tenant_hotel_exemplo2": {
+      "id": "hotel-porto",
+      "name": "Hotel Porto Vintage",
+      "databaseServerName": "SQL1004.site4now.net",
+      "userID": "db_abc376_ghotel_admin",
+      "password": "RENT2024",
+      "databaseName": "db_abc376_ghotel_porto",
+      "metadata": {
+        "region": "Porto",
+        "maxUsers": 25,
+        "isActive": true,
+        "prazo": 730,
+        "keySerial": "HPV-2025-002",
+        "customSettings": {
+          "timezone": "Europe/Lisbon",
+          "currency": "EUR",
+          "language": "pt-PT",
+          "hotel_category": "4_stars",
+          "check_in_time": "14:00",
+          "check_out_time": "11:00",
+          "email_notifications": "true",
+          "backup_frequency": "weekly",
+          "wifi_included": "true",
+          "parking_available": "true"
+        }
+      }
+    },
+
+    "tenant_hotel_exemplo3": {
+      "id": "pousada-algarve",
+      "name": "Pousada do Algarve",
+      "databaseServerName": "SQL1004.site4now.net",
+      "userID": "db_abc377_ghotel_admin",
+      "password": "RENT2024",
+      "databaseName": "db_abc377_ghotel_algarve",
+      "metadata": {
+        "region": "Faro",
+        "maxUsers": 15,
+        "isActive": true,
+        "prazo": 365,
+        "keySerial": "PAL-2025-003",
+        "customSettings": {
+          "timezone": "Europe/Lisbon",
+          "currency": "EUR",
+          "language": "pt-PT",
+          "hotel_category": "3_stars",
+          "check_in_time": "16:00",
+          "check_out_time": "10:00",
+          "email_notifications": "false",
+          "backup_frequency": "monthly",
+          "seasonal_pricing": "true",
+          "pool_access": "true",
+          "beach_proximity": "500m"
+        }
+      }
+    },
+
+    "tenant_hotel_internacional": {
+      "id": "hotel-luanda",
+      "name": "Hotel Luanda Premium",
+      "databaseServerName": "SQL1005.site4now.net",
+      "userID": "db_abc378_ghotel_admin",
+      "password": "RENT2024",
+      "databaseName": "db_abc378_ghotel_luanda",
+      "metadata": {
+        "region": "Luanda",
+        "maxUsers": 100,
+        "isActive": true,
+        "prazo": 365,
+        "keySerial": "HLP-2025-004",
+        "customSettings": {
+          "timezone": "Africa/Luanda",
+          "currency": "AOA",
+          "language": "pt-AO",
+          "hotel_category": "5_stars",
+          "check_in_time": "15:00",
+          "check_out_time": "12:00",
+          "email_notifications": "true",
+          "backup_frequency": "daily",
+          "business_center": "true",
+          "conference_rooms": "5",
+          "gym_available": "true",
+          "spa_services": "true"
+        }
+      }
+    },
+
+    "tenant_hotel_teste": {
+      "id": "localhost",
+      "name": "Hotel Teste Local",
+      "databaseServerName": "localhost",
+      "userID": "sa",
+      "password": "RENT2024",
+      "databaseName": "GHotelTest",
+      "metadata": {
+        "region": "Local",
+        "maxUsers": 5,
+        "isActive": true,
+        "prazo": 30,
+        "keySerial": "TEST-2025-001",
+        "customSettings": {
+          "timezone": "Europe/Lisbon",
+          "currency": "EUR",
+          "language": "pt-PT",
+          "hotel_category": "test",
+          "check_in_time": "15:00",
+          "check_out_time": "12:00",
+          "email_notifications": "false",
+          "backup_frequency": "never",
+          "debug_mode": "true",
+          "test_environment": "true"
+        }
+      }
+    }
+  },
+
+  "sql_insert_examples": {
+    "description": "Exemplos de INSERT SQL direto para a tabela Tenant",
+    
+    "insert_hotel_cascais": "INSERT INTO [Tenant] ([Id], [Name], [DatabaseServerName], [UserID], [Password], [DatabaseName], [ConnectionString], [Metadata_Region], [Metadata_MaxUsers], [Metadata_IsActive], [Metadata_Prazo], [Metadata_KeySerial], [Metadata_CustomSettings]) VALUES ('hotel-cascais', 'Hotel Cascais Palace', 'SQL1004.site4now.net', 'db_abc375_ghotel_admin', 'RENT2024', 'db_abc375_ghotel_cascais', 'Data Source=SQL1004.site4now.net;Initial Catalog=db_abc375_ghotel_cascais;User Id=db_abc375_ghotel_admin;Password=RENT2024;Encrypt=false', 'Lisboa', 50, 1, 365, 'HSC-2025-001', '{\"timezone\":\"Europe/Lisbon\",\"currency\":\"EUR\",\"language\":\"pt-PT\",\"hotel_category\":\"5_stars\",\"check_in_time\":\"15:00\",\"check_out_time\":\"12:00\",\"email_notifications\":\"true\",\"backup_frequency\":\"daily\"}')",
+    
+    "insert_localhost_test": "INSERT INTO [Tenant] ([Id], [Name], [DatabaseServerName], [UserID], [Password], [DatabaseName], [ConnectionString], [Metadata_Region], [Metadata_MaxUsers], [Metadata_IsActive], [Metadata_Prazo], [Metadata_KeySerial], [Metadata_CustomSettings]) VALUES ('localhost', 'Hotel Teste Local', 'localhost', 'sa', 'RENT2024', 'GHotelTest', 'Data Source=localhost;Initial Catalog=GHotelTest;User Id=sa;Password=RENT2024;Encrypt=false', 'Local', 5, 1, 30, 'TEST-2025-001', '{\"timezone\":\"Europe/Lisbon\",\"currency\":\"EUR\",\"language\":\"pt-PT\",\"hotel_category\":\"test\",\"debug_mode\":\"true\",\"test_environment\":\"true\"}')"
+  },
+
+  "api_endpoint_examples": {
+    "description": "Exemplos de como usar via API REST (assumindo que existe um endpoint)",
+    
+    "POST /api/tenant": {
+      "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer {token}"
+      },
+      "body": {
+        "id": "novo-hotel",
+        "name": "Novo Hotel",
+        "databaseServerName": "SQL1004.site4now.net",
+        "userID": "db_novo_admin",
+        "password": "RENT2024",
+        "databaseName": "db_novo_hotel",
+        "metadata": {
+          "region": "Lisboa",
+          "maxUsers": 25,
+          "isActive": true,
+          "prazo": 365,
+          "keySerial": "NH-2025-005",
+          "customSettings": {
+            "timezone": "Europe/Lisbon",
+            "currency": "EUR",
+            "language": "pt-PT"
+          }
+        }
+      }
+    }
+  },
+
+  "validation_rules": {
+    "id": "Obrigatório, único, sem espaços",
+    "name": "Obrigatório, nome do hotel/estabelecimento",
+    "databaseServerName": "Obrigatório, servidor de banco de dados",
+    "userID": "Obrigatório, usuário do banco",
+    "password": "Obrigatório, senha do banco",
+    "databaseName": "Obrigatório, nome da base de dados",
+    "metadata.region": "Obrigatório, região do tenant",
+    "metadata.maxUsers": "Obrigatório, maior que 0",
+    "metadata.isActive": "Opcional, padrão true",
+    "metadata.prazo": "Opcional, padrão 365 dias",
+    "metadata.keySerial": "Opcional, chave serial do sistema",
+    "metadata.customSettings": "Opcional, configurações personalizadas em formato JSON"
+  },
+
+  "notes": {
+    "connectionString": "É construída automaticamente pela entidade usando: 'Data Source={databaseServerName};Initial Catalog={databaseName};User Id={userID};Password={password};Encrypt=false'",
+    "customSettings": "Armazenado como JSON no banco, mas usado como Dictionary<string,string> no código",
+    "prazo": "Dias de validade do tenant",
+    "keySerial": "Chave serial para validação do sistema",
+    "isActive": "Controla se o tenant está ativo"
+  }
+}

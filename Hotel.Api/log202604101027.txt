@@ -1,0 +1,19 @@
+2026-04-10 10:27:17.766 +01:00 [INF] Application is shutting down...
+2026-04-10 10:27:24.134 +01:00 [INF] API Inicializado....
+2026-04-10 10:27:24.173 +01:00 [INF] calling from program
+2026-04-10 10:27:24.175 +01:00 [INF] Registrando TenantResolutionMiddleware...
+2026-04-10 10:27:24.175 +01:00 [INF] TenantResolutionMiddleware registrado.
+2026-04-10 10:27:24.223 +01:00 [INF] User profile is available. Using '/Users/florindo/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2026-04-10 10:27:24.374 +01:00 [INF] Now listening on: http://localhost:5055
+2026-04-10 10:27:24.374 +01:00 [INF] Now listening on: http://[::]:5055
+2026-04-10 10:27:24.375 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-10 10:27:24.375 +01:00 [INF] Hosting environment: Development
+2026-04-10 10:27:24.375 +01:00 [INF] Content root path: /Users/florindo/Documents/HOTEL/Hotel.Api
+2026-04-10 10:27:47.669 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5055/swagger/index.html - null null
+2026-04-10 10:27:47.760 +01:00 [INF] === TenantService inicializado ===
+2026-04-10 10:27:47.761 +01:00 [INF] TenantResolutionMiddleware: Iniciando execução...
+2026-04-10 10:27:47.761 +01:00 [INF] TenantId identificado: localhost
+2026-04-10 10:27:47.761 +01:00 [INF] TenantId from headers: 
+2026-04-10 10:27:47.762 +01:00 [INF] === ResolveTenantAsync [e75e640b] ===
+2026-04-10 10:27:47.762 +01:00 [INF] Buscando tenant: 'localhost' [e75e640b]
+2026-04-10 10:27:48.023 +01:00 [WRN] The property 'TenantMetadata.CustomSettings' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.

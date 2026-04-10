@@ -1,0 +1,121 @@
+### Testes para UsuarioController - Endpoints melhorados
+
+@baseUrl = http://localhost:5055
+@authToken = Bearer SEU_TOKEN_AQUI
+
+### 1. Login do usuário
+POST {{baseUrl}}/api/Usuario/login
+Content-Type: application/json
+
+{
+  "email": "admin@hotel.com",
+  "password": "Admin@123"
+}
+
+### 2. Obter informações do usuário atual (requer autenticação)
+GET {{baseUrl}}/api/Usuario/GetUsr
+Authorization: {{authToken}}
+
+### 3. Obter dados completos do usuário logado (requer autenticação)
+GET {{baseUrl}}/api/Usuario/usuariologado
+Authorization: {{authToken}}
+
+### 4. Listar todos os usuários (requer autenticação)
+GET {{baseUrl}}/api/Usuario/getAll
+Authorization: {{authToken}}
+
+### 5. Refresh login (requer autenticação)
+POST {{baseUrl}}/api/Usuario/refresh-login
+Authorization: {{authToken}}
+
+### 6. Alterar senha (requer autenticação)
+POST {{baseUrl}}/api/Usuario/change-password
+Authorization: {{authToken}}
+Content-Type: application/json
+
+{
+  "currentPassword": "senhaAtual",
+  "newPassword": "novaSenha@123",
+  "confirmPassword": "novaSenha@123"
+}
+
+### 7. Logout (requer autenticação)
+POST {{baseUrl}}/api/Usuario/logout
+Authorization: {{authToken}}
+Content-Type: application/json
+
+{
+  "userId": "ID_DO_USUARIO"
+}
+
+### 8. Recuperar senha (não requer autenticação)
+POST {{baseUrl}}/api/Usuario/recover-password
+Content-Type: application/json
+
+{
+  "email": "usuario@hotel.com"
+}
+
+### 9. Registrar novo usuário (não requer autenticação)
+POST {{baseUrl}}/api/Usuario/register
+Content-Type: application/json
+
+{
+  "firstName": "João",
+  "lastName": "Silva",
+  "userName": "joao.silva",
+  "email": "joao.silva@hotel.com",
+  "password": "MinhaSenh@123",
+  "confirmPassword": "MinhaSenh@123",
+  "phoneNumber": "922285032"
+}
+
+### 10. Confirmar email (não requer autenticação)
+GET {{baseUrl}}/api/Usuario/confirm-email?email=usuario@hotel.com&token=TOKEN_AQUI
+
+### Exemplos de resposta esperada para endpoints melhorados:
+
+# GET /api/Usuario/GetUsr
+# {
+#   "success": true,
+#   "message": "✅ Informações do usuário obtidas com sucesso",
+#   "data": {
+#     "userName": "admin",
+#     "userId": "123e4567-e89b-12d3-a456-426614174000",
+#     "email": "admin@hotel.com"
+#   },
+#   "errors": null
+# }
+
+# GET /api/Usuario/usuariologado  
+# {
+#   "success": true,
+#   "message": "✅ Dados do usuário logado obtidos com sucesso",
+#   "data": {
+#     "id": "123e4567-e89b-12d3-a456-426614174000",
+#     "userName": "admin",
+#     "email": "admin@hotel.com",
+#     "firstName": "Administrador",
+#     "lastName": "Sistema"
+#   },
+#   "errors": null
+# }
+
+# GET /api/Usuario/getAll
+# {
+#   "success": true,
+#   "message": "✅ Usuários carregados com sucesso",
+#   "data": [
+#     {
+#       "id": "123e4567-e89b-12d3-a456-426614174000",
+#       "userName": "admin",
+#       "email": "admin@hotel.com",
+#       "firstName": "Admin",
+#       "lastName": "Sistema",
+#       "phoneNumber": "922285032",
+#       "emailConfirmed": true,
+#       "phoneNumberConfirmed": false
+#     }
+#   ],
+#   "errors": null
+# }

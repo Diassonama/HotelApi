@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Hotel.Domain.Common;
-using Hotel.Domain.Enums;
+using static Hotel.Domain.Entities.Checkins;
 
 namespace Hotel.Domain.Entities
 {
@@ -14,7 +14,7 @@ namespace Hotel.Domain.Entities
         private Pedido()
         {
             _itemPedidos = new List<ItemPedido>();
-            SituacaoPagamento = SituacaoPagamentoPedido.Pendente;
+            SituacaoPagamento = SituacaoDoPagamento.Pendente;
             DataPedido = DateTime.Now;
             RecalcularValorTotal();
         }
@@ -34,7 +34,7 @@ namespace Hotel.Domain.Entities
             Observacao = observacao?.Trim();
             
             _itemPedidos = new List<ItemPedido>();
-            SituacaoPagamento = SituacaoPagamentoPedido.Pendente;
+            SituacaoPagamento = SituacaoDoPagamento.Pendente;
             DataPedido = DateTime.Now;
             NumePedido = GerarNumeroPedido();
             RecalcularValorTotal();
@@ -49,14 +49,14 @@ namespace Hotel.Domain.Entities
         public string Observacao { get; private set; }
         public DateTime DataPedido { get; private set; }
         public DateTime? DataFinalizacao { get; private set; }
-        public SituacaoPagamentoPedido SituacaoPagamento { get; private set; }
+        public SituacaoDoPagamento SituacaoPagamento { get; private set; }
         public decimal Valor { get; private set; }
         
         // Propriedades calculadas
         public decimal ValorTotal => Valor;
         public int QuantidadeItens => _itemPedidos.Count;
-        public bool PedidoFinalizado => SituacaoPagamento == SituacaoPagamentoPedido.Pago;
-        public bool PodeCancelar => SituacaoPagamento == SituacaoPagamentoPedido.Pendente;
+        public bool PedidoFinalizado => SituacaoPagamento == SituacaoDoPagamento.Pago;
+        public bool PodeCancelar => SituacaoPagamento == SituacaoDoPagamento.Pendente;
 
         // Navigation Properties
         public virtual PontoDeVenda PontoVenda { get; private set; }
@@ -120,13 +120,13 @@ namespace Hotel.Domain.Entities
 
         public void ConfirmarPagamento()
         {
-            if (SituacaoPagamento == SituacaoPagamentoPedido.Pago)
+            if (SituacaoPagamento == SituacaoDoPagamento.Pago)
                 throw new InvalidOperationException("Pedido já foi pago");
             
             if (!_itemPedidos.Any())
                 throw new InvalidOperationException("Não é possível confirmar pagamento de pedido sem itens");
 
-            SituacaoPagamento = SituacaoPagamentoPedido.Pago;
+            SituacaoPagamento = SituacaoDoPagamento.Pago;
             DataFinalizacao = DateTime.Now;
         }
 
@@ -135,19 +135,19 @@ namespace Hotel.Domain.Entities
             if (!PodeCancelar)
                 throw new InvalidOperationException("Pedido não pode ser cancelado");
 
-            SituacaoPagamento = SituacaoPagamentoPedido.Cancelado;
+            SituacaoPagamento = SituacaoDoPagamento.Cancelado;
             DataFinalizacao = DateTime.Now;
         }
 
         public void EstornarPagamento(string motivo)
         {
-            if (SituacaoPagamento != SituacaoPagamentoPedido.Pago)
+            if (SituacaoPagamento != SituacaoDoPagamento.Pago)
                 throw new InvalidOperationException("Só é possível estornar pedidos pagos");
             
             if (string.IsNullOrWhiteSpace(motivo))
                 throw new ArgumentException("Motivo do estorno é obrigatório", nameof(motivo));
 
-            SituacaoPagamento = SituacaoPagamentoPedido.Estornado;
+            SituacaoPagamento = SituacaoDoPagamento.Cancelado;
             Observacao = $"{Observacao} | ESTORNO: {motivo}".Trim('|', ' ');
         }
 
@@ -168,7 +168,7 @@ namespace Hotel.Domain.Entities
         // Métodos privados auxiliares
         private void ValidarPedidoParaEdicao()
         {
-            if (SituacaoPagamento != SituacaoPagamentoPedido.Pendente)
+            if (SituacaoPagamento != SituacaoDoPagamento.Pendente)
                 throw new InvalidOperationException("Não é possível editar pedido que não está pendente");
         }
 
@@ -190,11 +190,11 @@ namespace Hotel.Domain.Entities
     }
 
     // Enum para situação do pagamento
-    public enum SituacaoPagamentoPedido
+/*     public enum SituacaoPagamentoPedido
     {
         Pendente = 1,
         Pago = 2,
         Cancelado = 3,
         Estornado = 4
-    }
+    } */
 }

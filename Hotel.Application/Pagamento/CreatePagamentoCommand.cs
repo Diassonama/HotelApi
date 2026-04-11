@@ -45,13 +45,26 @@ namespace Hotel.Application.Pagamento
 
                 try
                 {
+                    if (request?.pagamentoRequest == null)
+                    {
+                        return new BaseCommandResponse
+                        {
+                            Success = false,
+                            Message = "Dados de pagamento não informados."
+                        };
+                    }
+
+                    await EnriquecerOrigemPedidoSeAplicavel(request, correlationId);
+
                     _logger.LogInformation("🔄 [PAGAMENTO-{CorrelationId}] INICIANDO processamento de pagamento", correlationId);
                     _logger.LogInformation("📋 [PAGAMENTO-{CorrelationId}] REQUEST: {Request}", correlationId, JsonSerializer.Serialize(new {
                         CheckinId = request.pagamentoRequest?.CheckinsId,
                         ValorPago = request.pagamentoRequest?.ValorPago,
                         DataPagamento = request.pagamentoRequest?.DataPagamento,
                         TipoPagamento = request.pagamentoRequest?.TipoPagamentosId,
-                        HospedeId = request.pagamentoRequest?.HospedesId
+                        HospedeId = request.pagamentoRequest?.HospedesId,
+                        Origem = request.pagamentoRequest?.Origem,
+                        OrigemId = request.pagamentoRequest?.OrigemId
                     }));
 
                     // ✅ 1. VALIDAÇÃO INICIAL
@@ -80,7 +93,7 @@ namespace Hotel.Application.Pagamento
                     // ✅ 3. OBTER ENTIDADES NECESSÁRIAS
                     _logger.LogInformation("📂 [PAGAMENTO-{CorrelationId}] Obtendo entidades necessárias", correlationId);
                     
-                    var checkin = await ObterCheckinValido(request.pagamentoRequest.CheckinsId, correlationId);
+                    var checkin = await ObterCheckinValido(request.pagamentoRequest.CheckinsId, request.pagamentoRequest.Origem, correlationId);
                     _logger.LogInformation("✅ [PAGAMENTO-{CorrelationId}] Check-in obtido: ID={CheckinId}, ValorTotal={ValorTotal}, SituacaoPagamento={Situacao}", 
                         correlationId, checkin.Id, checkin.ValorTotalFinal, checkin.situacaoDoPagamento);
 
@@ -212,9 +225,14 @@ namespace Hotel.Application.Pagamento
                 } */
             }
 
-            private async Task<Domain.Entities.Checkins> ObterCheckinValido(int checkinId, string correlationId)
+            private static bool IsOrigemHotel(string origem) =>
+                string.IsNullOrWhiteSpace(origem) ||
+                origem.Equals("Diarias", StringComparison.OrdinalIgnoreCase) ||
+                origem.Equals("Hotel", StringComparison.OrdinalIgnoreCase);
+
+            private async Task<Domain.Entities.Checkins> ObterCheckinValido(int checkinId, string origem, string correlationId)
             {
-                _logger.LogInformation("🔍 [PAGAMENTO-{CorrelationId}] Buscando check-in: {CheckinId}", correlationId, checkinId);
+                _logger.LogInformation("🔍 [PAGAMENTO-{CorrelationId}] Buscando check-in: {CheckinId} (Origem: {Origem})", correlationId, checkinId, origem);
                 
                 var checkin = await _unitOfWork.checkins.GetByIdAsync(checkinId);
                 
@@ -227,14 +245,13 @@ namespace Hotel.Application.Pagamento
                 _logger.LogInformation("📋 [PAGAMENTO-{CorrelationId}] Check-in encontrado: ID={Id}, SituacaoPagamento={Situacao}, ValorTotal={Valor}", 
                     correlationId, checkin.Id, checkin.situacaoDoPagamento, checkin.ValorTotalFinal);
 
-                if (checkin.situacaoDoPagamento == SituacaoDoPagamento.Pago)
+                // Só bloqueia pelo status do checkin se for pagamento de Hotel/Diárias.
+                // Para Restaurante, Frigobar, etc., o pedido tem o seu próprio SituacaoPagamento.
+                if (IsOrigemHotel(origem) && checkin.situacaoDoPagamento == SituacaoDoPagamento.Pago)
                 {
-                    _logger.LogError("❌ [PAGAMENTO-{CorrelationId}] Pagamento já realizado para check-in: {CheckinId}", correlationId, checkinId);
+                    _logger.LogError("❌ [PAGAMENTO-{CorrelationId}] Pagamento do checkin já realizado: {CheckinId}", correlationId, checkinId);
                     throw new InvalidOperationException("O pagamento já foi realizado na sua totalidade.");
                 }
-
-                 if (checkin.situacaoDoPagamento == SituacaoDoPagamento.Pago)
-                         throw new InvalidOperationException("O pagamento já foi realizado na sua totalidade.");
 
 
                 var valorPago = checkin.Pagamentos?.Sum(p => p.Valor) ?? 0;
@@ -278,7 +295,9 @@ namespace Hotel.Application.Pagamento
                 _logger.LogInformation("📊 [PAGAMENTO-{CorrelationId}] Análise de valores - Solicitado: {Solicitado}, Pendente: {Pendente}", 
                     correlationId, request.pagamentoRequest.ValorPago, valorPendente);
 
-                 if (request.pagamentoRequest.ValorPago > valorPendente)
+                // Só valida o excedente do checkin se for pagamento de Hotel/Diárias.
+                // Para Restaurante/Frigobar, o valor já foi validado no controller do pedido.
+                if (IsOrigemHotel(request.pagamentoRequest.Origem) && request.pagamentoRequest.ValorPago > valorPendente)
                 {
                     _logger.LogError("❌ [PAGAMENTO-{CorrelationId}] Valor excede pendente - Solicitado: {Solicitado}, Pendente: {Pendente}", 
                         correlationId, request.pagamentoRequest.ValorPago, valorPendente);
@@ -287,6 +306,14 @@ namespace Hotel.Application.Pagamento
                 try
                 {
                     _logger.LogInformation("🏗️ [PAGAMENTO-{CorrelationId}] Construindo objeto pagamento", correlationId);
+
+                    var origem = string.IsNullOrWhiteSpace(request.pagamentoRequest.Origem)
+                        ? "Diarias"
+                        : request.pagamentoRequest.Origem;
+
+                    var origemId = request.pagamentoRequest.OrigemId > 0
+                        ? request.pagamentoRequest.OrigemId
+                        : request.pagamentoRequest.CheckinsId;
                     
                     var novoPagamento = new Domain.Entities.Pagamento(
                         request.pagamentoRequest.ValorPago,
@@ -294,8 +321,9 @@ namespace Hotel.Application.Pagamento
                         request.pagamentoRequest.HospedesId,
                      //   request.pagamentoRequest.CheckinsId,
                         _logado.IdUtilizador,
-                        request.pagamentoRequest.Origem, 
-                        request.pagamentoRequest.OrigemId
+                        origem,
+                        origemId,
+                        request.pagamentoRequest.Observacao
                         );
 
                     _logger.LogInformation("✅ [PAGAMENTO-{CorrelationId}] Objeto pagamento criado", correlationId);
@@ -381,9 +409,26 @@ namespace Hotel.Application.Pagamento
                     await _unitOfWork.caixa.Update(caixa);
                     _logger.LogInformation("✅ [PAGAMENTO-{CorrelationId}] Saldo do caixa atualizado", correlationId);
 
-                    var observacao = checkin.situacaoDoPagamento == SituacaoDoPagamento.Pago 
-                        ? $"PAG. TOTAL ({hospedagem.Apartamentos.Codigo})" 
-                        : $"PAG. {SituacaoDoPagamento.Parcial} ({hospedagem.Apartamentos.Codigo})";
+                    string observacao;
+
+                    if (!IsOrigemHotel(request.pagamentoRequest.Origem))
+                    {
+                        // Pagamento de pedido (Restaurante, Frigobar, etc.)
+                        var pedido = await _unitOfWork.Pedidos.GetByIdWithItemsAsync(request.pagamentoRequest.OrigemId);
+                        var numePedido = pedido?.NumePedido ?? $"#{request.pagamentoRequest.OrigemId}";
+                        var origemNome = request.pagamentoRequest.Origem;
+
+                        if (request.pagamentoRequest.HospedesId > 0 && hospedagem?.Apartamentos?.Codigo != null)
+                            observacao = $"{origemNome} - PDO {numePedido} - Qrt {hospedagem.Apartamentos.Codigo}";
+                        else
+                            observacao = $"{origemNome} - PDO {numePedido}";
+                    }
+                    else
+                    {
+                        observacao = checkin.situacaoDoPagamento == SituacaoDoPagamento.Pago 
+                            ? $"PAG. TOTAL ({hospedagem.Apartamentos.Codigo})" 
+                            : $"PAG. {SituacaoDoPagamento.Parcial} ({hospedagem.Apartamentos.Codigo})";
+                    }
 
                     _logger.LogInformation("📝 [PAGAMENTO-{CorrelationId}] Criando lançamento no caixa: {Observacao}", correlationId, observacao);
                     var lancamentoCaixa = await CriarLancamentoCaixa(request, pagamentoId, caixa.Id, observacao, correlationId);
@@ -471,6 +516,44 @@ namespace Hotel.Application.Pagamento
                     Success = false,
                     Message = message
                 };
+            }
+
+            private async Task EnriquecerOrigemPedidoSeAplicavel(CreatePagamentoCommand request, string correlationId)
+            {
+                if (request?.pagamentoRequest == null || request.pagamentoRequest.OrigemId <= 0)
+                    return;
+
+                var pedido = await _unitOfWork.Pedidos.GetByIdWithItemsAsync(request.pagamentoRequest.OrigemId);
+                if (pedido == null)
+                    return;
+
+                request.pagamentoRequest.Origem = !string.IsNullOrWhiteSpace(pedido.PontoVenda?.Nome)
+                    ? pedido.PontoVenda.Nome
+                    : "PontoDeVenda";
+
+                request.pagamentoRequest.OrigemId = pedido.Id;
+
+                if (request.pagamentoRequest.CheckinsId <= 0)
+                    request.pagamentoRequest.CheckinsId = pedido.IdCheckin;
+
+                if (request.pagamentoRequest.HospedesId <= 0)
+                    request.pagamentoRequest.HospedesId = pedido.HospedeId;
+
+                if (request.pagamentoRequest.Valor <= 0)
+                    request.pagamentoRequest.Valor = (float)pedido.ValorTotal;
+
+                if (request.pagamentoRequest.ValorPago <= 0)
+                    request.pagamentoRequest.ValorPago = (float)pedido.ValorTotal;
+
+                if (request.pagamentoRequest.DataPagamento == default)
+                    request.pagamentoRequest.DataPagamento = DateTime.Now;
+
+                _logger.LogInformation(
+                    "🧭 [PAGAMENTO-{CorrelationId}] Origem resolvida pelo pedido {PedidoId}: Origem={Origem}, OrigemId={OrigemId}",
+                    correlationId,
+                    pedido.Id,
+                    request.pagamentoRequest.Origem,
+                    request.pagamentoRequest.OrigemId);
             }
         }
     }

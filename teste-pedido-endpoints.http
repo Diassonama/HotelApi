@@ -5,6 +5,8 @@
 @authToken = Bearer SEU_TOKEN_AQUI
 @pedidoId = 1
 @checkinId = 1
+@tipoPagamentoDinheiro = 1
+@tipoPagamentoCartao = 2
 
 ### 1. Criar pedido
 POST {{baseUrl}}/api/Pedido
@@ -19,19 +21,13 @@ Content-Type: application/json
   "itens": [
     {
       "produtoId": 101,
-      "nomeProduto": "Água 500ml",
-      "precoUnitario": 500,
-      "quantidade": 2,
-      "observacao": "Sem gelo",
-      "categoria": "Bebidas"
+      "preco": 500,
+      "quantidade": 2
     },
     {
       "produtoId": 102,
-      "nomeProduto": "Sandes Mista",
-      "precoUnitario": 2500,
-      "quantidade": 1,
-      "observacao": "",
-      "categoria": "Comidas"
+      "preco": 2500,
+      "quantidade": 1
     }
   ]
 }
@@ -51,11 +47,8 @@ Content-Type: application/json
 
 {
   "produtoId": 103,
-  "nomeProduto": "Sumo Natural",
-  "precoUnitario": 1200,
-  "quantidade": 1,
-  "observacao": "Laranja",
-  "categoria": "Bebidas"
+  "preco": 1200,
+  "quantidade": 1
 }
 
 ### 5. Atualizar quantidade de item
@@ -84,6 +77,46 @@ Authorization: {{authToken}}
 ### 8. Confirmar pagamento do pedido
 PUT {{baseUrl}}/api/Pedido/{{pedidoId}}/confirmar-pagamento
 Authorization: {{authToken}}
+Content-Type: application/json
+
+{
+  "tipoPagamentosId": {{tipoPagamentoDinheiro}},
+  "valorPago": 3500,
+  "observacao": "Pagamento do pedido"
+}
+
+### 8.1 Confirmar pagamento - Frigobar (origem virá do PontoDeVenda do pedido)
+PUT {{baseUrl}}/api/Pedido/10/confirmar-pagamento
+Authorization: {{authToken}}
+Content-Type: application/json
+
+{
+  "tipoPagamentosId": {{tipoPagamentoDinheiro}},
+  "valorPago": 1200,
+  "observacao": "Consumo de frigobar"
+}
+
+### 8.2 Confirmar pagamento - Restaurante (origem virá do PontoDeVenda do pedido)
+PUT {{baseUrl}}/api/Pedido/11/confirmar-pagamento
+Authorization: {{authToken}}
+Content-Type: application/json
+
+{
+  "tipoPagamentosId": {{tipoPagamentoCartao}},
+  "valorPago": 5400,
+  "observacao": "Consumo de restaurante"
+}
+
+### 8.3 Confirmar pagamento - Lavandaria (origem virá do PontoDeVenda do pedido)
+PUT {{baseUrl}}/api/Pedido/12/confirmar-pagamento
+Authorization: {{authToken}}
+Content-Type: application/json
+
+{
+  "tipoPagamentosId": {{tipoPagamentoDinheiro}},
+  "valorPago": 1800,
+  "observacao": "Servico de lavandaria"
+}
 
 ### 9. Estornar pagamento do pedido
 PUT {{baseUrl}}/api/Pedido/{{pedidoId}}/estornar
@@ -104,16 +137,13 @@ Authorization: {{authToken}}
 GET {{baseUrl}}/api/Pedido/999999
 Authorization: {{authToken}}
 
-### 12. Adicionar item com dados invalidos (precoUnitario menor ou igual a zero)
+### 12. Adicionar item com dados invalidos (preco menor ou igual a zero)
 POST {{baseUrl}}/api/Pedido/{{pedidoId}}/itens
 Authorization: {{authToken}}
 Content-Type: application/json
 
 {
   "produtoId": 200,
-  "nomeProduto": "Item invalido",
-  "precoUnitario": 0,
-  "quantidade": 1,
-  "observacao": "",
-  "categoria": "Teste"
+  "preco": 0,
+  "quantidade": 1
 }

@@ -17,6 +17,7 @@ namespace Hotel.Application.Dtos
         public string Empresa { get; set; }
         public string UtilizadorCheckin { get; set; }
         public string UtilizadorCheckout { get; set; }
+        public string Operador { get; set; }
         public string Quarto { get; set; }
         public string TipoQuarto { get; set; }
         public DateTime DataEntrada { get; set; }
@@ -31,6 +32,7 @@ namespace Hotel.Application.Dtos
         public float APagar { get; set; }
         public List<NotaHospedagemPagamentoDto> Pagamentos { get; set; } = new();
         public List<NotaHospedagemHistoricoDto> Historicos { get; set; } = new();
+        public List<NotaHospedagemPedidoDto> Pedidos { get; set; } = new();
     }
 
     public class NotaHospedagemPagamentoDto
@@ -49,5 +51,22 @@ namespace Hotel.Application.Dtos
         public DateTime Data { get; set; }
         public string Observacao { get; set; }
         public string Operador { get; set; }
+    }
+
+    public class NotaHospedagemPedidoDto
+    {
+        public string NumePedido { get; set; }
+        public DateTime DataPedido { get; set; }
+        public string PontoVendaNome { get; set; }
+        public List<NotaHospedagemPedidoItemDto> Itens { get; set; } = new();
+        public float Total { get; set; }
+    }
+
+    public class NotaHospedagemPedidoItemDto
+    {
+        public string Descricao { get; set; }
+        public int Quantidade { get; set; }
+        public float PrecoUnitario { get; set; }
+        public float Total { get; set; }
     }
 }

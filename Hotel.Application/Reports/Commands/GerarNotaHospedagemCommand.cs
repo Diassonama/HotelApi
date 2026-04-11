@@ -71,6 +71,7 @@ namespace Hotel.Application.Reports.Commands
                 var empresa = await _unitOfWork.Empresa.Get(hospedagem.EmpresasId);
                 var pagamentos = await _unitOfWork.pagamentos.GetAllByCheckinIdAsync(request.CheckinId);
                 var historicos = await _unitOfWork.historico.GetAllByCheckinIdAsync(request.CheckinId);
+                var pedidos = await _unitOfWork.Pedidos.GetByCheckinIdAsync(request.CheckinId);
                 var valorPago = await ObterValorPago(request.CheckinId);
 
                 var nomeHospede = hospede.Clientes?.Nome ?? "N/D";
@@ -92,6 +93,7 @@ namespace Hotel.Application.Reports.Commands
                     Empresa = nomeEmpresa,
                     UtilizadorCheckin = await ResolverNomeUtilizador(checkin.IdUtilizadorCheckin),
                     UtilizadorCheckout = await ResolverNomeUtilizador(checkin.IdUtilizadorCheckOut),
+                    Operador = await ResolverNomeUtilizador(null),
                     Quarto = apartamento.Codigo,
                     TipoQuarto = apartamento.TipoApartamentos?.Descricao ?? "N/D",
                     DataEntrada = hospedagem.DataAbertura,
@@ -105,7 +107,8 @@ namespace Hotel.Application.Reports.Commands
                     Pago = valorPago,
                     APagar = checkin.ValorTotalFinal - valorPago,
                     Pagamentos = await MapearPagamentosAsync(pagamentos, nomeHospede),
-                    Historicos = await MapearHistoricosAsync(historicos)
+                    Historicos = await MapearHistoricosAsync(historicos),
+                    Pedidos = MapearPedidos(pedidos)
                 };
 
                 var pdfBytes = _reciboService.GerarNotaHospedagem(notaDto);
@@ -189,6 +192,31 @@ namespace Hotel.Application.Reports.Commands
                     Data = historico.DataHora == default ? historico.DateCreated : historico.DataHora,
                     Observacao = historico.Observacao ?? string.Empty,
                     Operador = operador
+                });
+            }
+
+            return resultado;
+        }
+
+        private static List<NotaHospedagemPedidoDto> MapearPedidos(IEnumerable<Hotel.Domain.Entities.Pedido> pedidos)
+        {
+            var resultado = new List<NotaHospedagemPedidoDto>();
+
+            foreach (var pedido in pedidos ?? Enumerable.Empty<Hotel.Domain.Entities.Pedido>())
+            {
+                resultado.Add(new NotaHospedagemPedidoDto
+                {
+                    NumePedido     = pedido.NumePedido,
+                    DataPedido     = pedido.DataPedido,
+                    PontoVendaNome = pedido.PontoVenda?.Nome ?? string.Empty,
+                    Total          = (float)pedido.ValorTotal,
+                    Itens          = pedido.ItemPedidos?.Select(i => new NotaHospedagemPedidoItemDto
+                    {
+                        Descricao      = i.Produto?.Nome ?? $"Produto #{i.ProdutoId}",
+                        Quantidade     = i.Quantidade,
+                        PrecoUnitario  = (float)i.Preco,
+                        Total          = (float)i.ValorTotal
+                    }).ToList() ?? new()
                 });
             }
 

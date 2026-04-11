@@ -149,9 +149,13 @@ namespace Hotel.Application.Reports.Commands
             var lista = new List<MovimentoPagamentoDto>();
             foreach (var l in lancamentos)
             {
-                var operador = MontarNome(l.Utilizadores) ?? "-";
+                var operador = MontarNome(l.Utilizadores) ?? l.Utilizadores?.UserName ?? "-";
                 var forma = l.TipoPagamentos?.Descricao ?? "-";
-                var observacao = l.Pagamentos?.Observacao ?? l.Observacao ?? "-";
+                var observacao = !string.IsNullOrWhiteSpace(l.Observacao)
+                    ? l.Observacao
+                    : (!string.IsNullOrWhiteSpace(l.PlanodeContas?.Descricao)
+                        ? l.PlanodeContas.Descricao
+                        : (l.Pagamentos?.Observacao ?? "-"));
 
                 lista.Add(new MovimentoPagamentoDto
                 {

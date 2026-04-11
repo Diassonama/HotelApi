@@ -22,6 +22,7 @@ namespace Hotel.Infrastruture.Persistence.Repositories
         {
             return await _context.Pedidos
                 .Include(p => p.ItemPedidos)
+                    .ThenInclude(i => i.Produto)
                 .Include(p => p.Hospede)
                     .ThenInclude(h => h.Clientes)
                 .Include(p => p.PontoVenda)

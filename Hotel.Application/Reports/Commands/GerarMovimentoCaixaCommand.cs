@@ -133,7 +133,11 @@ namespace Hotel.Application.Reports.Commands
                 {
                     Data = l.DataHoraLancamento.ToString("dd-MM-yyyy"),
                     FormaPagamento = l.TipoPagamentos?.Descricao ?? "-",
-                    Observacao = l.Observacao ?? (l.Pagamentos?.Observacao ?? "-"),
+                    Observacao = !string.IsNullOrWhiteSpace(l.Observacao)
+                        ? l.Observacao
+                        : (!string.IsNullOrWhiteSpace(l.PlanodeContas?.Descricao)
+                            ? l.PlanodeContas.Descricao
+                            : (l.Pagamentos?.Observacao ?? "-")),
                     Operador = MontarNome(l.Utilizadores) ?? "Sistema",
                     Entradas = l.TipoLancamento == Hotel.Domain.Enums.TipoLancamento.E ? l.Valor : 0f,
                     Saidas = l.TipoLancamento == Hotel.Domain.Enums.TipoLancamento.S ? l.Valor : 0f

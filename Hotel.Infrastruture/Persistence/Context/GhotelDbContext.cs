@@ -622,6 +622,7 @@ namespace Hotel.Infrastruture.Persistence.Context
             modelBuilder.ApplyConfiguration(new PaisConfiguration());
             modelBuilder.ApplyConfiguration(new PatrimonioConfiguration());
             modelBuilder.ApplyConfiguration(new PedidoConfiguration());
+            modelBuilder.ApplyConfiguration(new ItemPedidoConfiguration());
             modelBuilder.ApplyConfiguration(new PerfilConfiguration());
             modelBuilder.ApplyConfiguration(new PlanoDeContaConfiguration());
             modelBuilder.ApplyConfiguration(new PontoDeVendaConfiguration());

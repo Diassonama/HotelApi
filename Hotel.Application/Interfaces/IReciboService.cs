@@ -17,6 +17,6 @@ namespace Hotel.Application.Interfaces
         byte[] GerarRelatorioGovernancaArrumacao(IEnumerable<GovernancaArrumacaoDto> linhas, string titulo);
         byte[] GerarRelatorioVistoriaQuartos(IEnumerable<VistoriaQuartoDto> linhas, string titulo, string funcionario, DateTime dataReferencia);
         void SalvarReciboCheckout(ReciboCheckoutDto recibo, string caminhoSaida);
- 
+        byte[] GerarReciboPedido(ReciboPedidoDto recibo);
     }
 }

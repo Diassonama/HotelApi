@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Hotel.Api.Controllers.Shared;
 using Hotel.Application.DTOs.Pedido;
+using Hotel.Application.Pagamento;
+using Hotel.Domain.Dtos;
 using Hotel.Domain.Entities;
 using Hotel.Domain.Enums;
 using Hotel.Domain.Interface;
@@ -41,7 +43,13 @@ namespace Hotel.Api.Controllers
 
                 var pedido = await _unitOfWork.Pedidos.GetByIdWithItemsAsync(id);
                 if (pedido == null)
+                {
+                    _logger.LogWarning("⚠️ [PEDIDO-GET-{CorrelationId}] Pedido ID {Id} não encontrado.", correlationId, id);
                     return NotFound(new { mensagem = $"Pedido com ID {id} não encontrado." });
+                }
+
+                _logger.LogInformation("✅ [PEDIDO-GET-{CorrelationId}] Pedido {Id} encontrado. Situação: {Situacao}, Valor: {Valor}, Itens: {QtdItens}",
+                    correlationId, id, pedido.SituacaoPagamento, pedido.ValorTotal, pedido.QuantidadeItens);
 
                 return Ok(MapToDto(pedido));
             }
@@ -67,6 +75,8 @@ namespace Hotel.Api.Controllers
 
                 var pedidos = await _unitOfWork.Pedidos.GetByCheckinIdAsync(checkinId);
                 var lista = pedidos.Select(MapToListDto).ToList();
+
+                _logger.LogInformation("✅ [PEDIDO-LIST-{CorrelationId}] {Count} pedido(s) encontrado(s) para checkin {CheckinId}", correlationId, lista.Count, checkinId);
 
                 return Ok(lista);
             }
@@ -144,6 +154,9 @@ namespace Hotel.Api.Controllers
             var correlationId = Guid.NewGuid().ToString("N")[..8];
             try
             {
+                _logger.LogInformation("➕ [PEDIDO-ADD-ITEM-{CorrelationId}] Adicionando item ProdutoId:{ProdutoId} (Qtd:{Qtd}, Preço:{Preco}) ao pedido {PedidoId}",
+                    correlationId, dto.ProdutoId, dto.Quantidade, dto.Preco, id);
+
                 var pedido = await _unitOfWork.Pedidos.GetByIdWithItemsAsync(id);
                 if (pedido == null)
                     return NotFound(new { mensagem = $"Pedido com ID {id} não encontrado." });
@@ -185,6 +198,8 @@ namespace Hotel.Api.Controllers
             var correlationId = Guid.NewGuid().ToString("N")[..8];
             try
             {
+                _logger.LogInformation("🗑️ [PEDIDO-REMOVE-ITEM-{CorrelationId}] Removendo ProdutoId:{ProdutoId} do pedido {PedidoId}", correlationId, produtoId, id);
+
                 var pedido = await _unitOfWork.Pedidos.GetByIdWithItemsAsync(id);
                 if (pedido == null)
                     return NotFound(new { mensagem = $"Pedido com ID {id} não encontrado." });
@@ -222,6 +237,9 @@ namespace Hotel.Api.Controllers
             var correlationId = Guid.NewGuid().ToString("N")[..8];
             try
             {
+                _logger.LogInformation("✏️ [PEDIDO-UPDATE-QTY-{CorrelationId}] Atualizando qtd ProdutoId:{ProdutoId} → {NovaQtd} no pedido {PedidoId}",
+                    correlationId, dto.ProdutoId, dto.NovaQuantidade, id);
+
                 var pedido = await _unitOfWork.Pedidos.GetByIdWithItemsAsync(id);
                 if (pedido == null)
                     return NotFound(new { mensagem = $"Pedido com ID {id} não encontrado." });
@@ -261,6 +279,8 @@ namespace Hotel.Api.Controllers
             var correlationId = Guid.NewGuid().ToString("N")[..8];
             try
             {
+                _logger.LogInformation("📝 [PEDIDO-UPDATE-OBS-{CorrelationId}] Atualizando observação do pedido {PedidoId}", correlationId, id);
+
                 var pedido = await _unitOfWork.Pedidos.GetByIdWithItemsAsync(id);
                 if (pedido == null)
                     return NotFound(new { mensagem = $"Pedido com ID {id} não encontrado." });
@@ -291,16 +311,73 @@ namespace Hotel.Api.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> ConfirmarPagamento(int id)
+        public async Task<IActionResult> ConfirmarPagamento(int id, [FromBody] ConfirmarPagamentoPedidoDto dto)
         {
             var correlationId = Guid.NewGuid().ToString("N")[..8];
             try
             {
                 _logger.LogInformation("💳 [PEDIDO-CONFIRMAR-{CorrelationId}] Confirmando pagamento do pedido {PedidoId}", correlationId, id);
 
+                if (dto == null)
+                    return BadRequest(new { mensagem = "Dados do pagamento não informados." });
+
+                _logger.LogDebug("🔍 [PEDIDO-CONFIRMAR-{CorrelationId}] Buscando pedido {PedidoId} com itens...", correlationId, id);
                 var pedido = await _unitOfWork.Pedidos.GetByIdWithItemsAsync(id);
                 if (pedido == null)
+                {
+                    _logger.LogWarning("⚠️ [PEDIDO-CONFIRMAR-{CorrelationId}] Pedido {PedidoId} não encontrado.", correlationId, id);
                     return NotFound(new { mensagem = $"Pedido com ID {id} não encontrado." });
+                }
+
+                _logger.LogInformation("📦 [PEDIDO-CONFIRMAR-{CorrelationId}] Pedido {PedidoId} carregado — Situação:{Situacao}, Valor:{Valor}, Itens:{QtdItens}",
+                    correlationId, id, pedido.SituacaoPagamento, pedido.ValorTotal, pedido.QuantidadeItens);
+
+                foreach (var item in pedido.ItemPedidos)
+                    _logger.LogDebug("   🧾 Item ProdutoId:{ProdutoId} Qtd:{Qtd} Preco:{Preco} Total:{Total}",
+                        item.ProdutoId, item.Quantidade, item.Preco, item.ValorTotal);
+
+                if (pedido.PedidoFinalizado)
+                    return BadRequest(new { mensagem = "Pedido já foi pago." });
+
+                var valorPagamento = dto.ValorPago ?? pedido.ValorTotal;
+                if (valorPagamento <= 0)
+                    return BadRequest(new { mensagem = "Valor do pagamento deve ser maior que zero." });
+
+                var pagamentoCommand = new CreatePagamentoCommand
+                {
+                    pagamentoRequest = new PagamentoRequest
+                    {
+                        CheckinsId = pedido.IdCheckin,
+                        HospedesId = pedido.HospedeId,
+                        Valor = (float)valorPagamento,
+                        ValorPago = (float)valorPagamento,
+                        DataPagamento = DateTime.Now,
+                        TipoPagamentosId = dto.TipoPagamentosId,
+                        Observacao = dto.Observacao,
+                        OrigemId = pedido.Id,
+                        Origem = "Restaurante"
+
+                    }
+                };
+
+                _logger.LogInformation("💸 [PEDIDO-CONFIRMAR-{CorrelationId}] Enviando pagamento — Valor:{Valor}, TipoPagtoId:{TipoPagtoId}",
+                    correlationId, valorPagamento, dto.TipoPagamentosId);
+
+                var respostaPagamento = await Mediator.Send(pagamentoCommand, CancellationToken.None);
+
+                _logger.LogInformation("💳 [PEDIDO-CONFIRMAR-{CorrelationId}] Resposta pagamento — Success:{Success}, Msg:{Msg}",
+                    correlationId, respostaPagamento.Success, respostaPagamento.Message);
+
+                if (!respostaPagamento.Success)
+                {
+                    _logger.LogWarning("⚠️ [PEDIDO-CONFIRMAR-{CorrelationId}] Pagamento recusado: {Msg} | Erros: {Erros}",
+                        correlationId, respostaPagamento.Message, string.Join("; ", respostaPagamento.Errors ?? new List<string>()));
+                    return BadRequest(new
+                    {
+                        mensagem = respostaPagamento.Message ?? "Falha ao processar pagamento do pedido.",
+                        erros = respostaPagamento.Errors
+                    });
+                }
 
                 pedido.ConfirmarPagamento();
 
@@ -314,6 +391,7 @@ namespace Hotel.Api.Controllers
                     mensagem = "Pagamento confirmado com sucesso.",
                     numePedido = pedido.NumePedido,
                     valorTotal = pedido.ValorTotal,
+                    valorPago = valorPagamento,
                     dataFinalizacao = pedido.DataFinalizacao
                 });
             }

@@ -41,6 +41,19 @@ namespace Hotel.Application.DTOs.Pedido
         public string Motivo { get; set; } = string.Empty;
     }
 
+    public class ConfirmarPagamentoPedidoDto
+    {
+        [Required(ErrorMessage = "Tipo de pagamento é obrigatório")]
+        [Range(1, int.MaxValue, ErrorMessage = "Tipo de pagamento deve ser maior que zero")]
+        public int TipoPagamentosId { get; set; }
+
+        [Range(0.01, double.MaxValue, ErrorMessage = "Valor pago deve ser maior que zero")]
+        public decimal? ValorPago { get; set; }
+
+        [StringLength(500, ErrorMessage = "Observação não pode exceder 500 caracteres")]
+        public string? Observacao { get; set; }
+    }
+
     public class DescontoCalculadoDto
     {
         public int PedidoId { get; set; }

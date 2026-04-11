@@ -50,6 +50,8 @@ namespace Hotel.Infrastruture.Persistence.Repositories
             var query = _context.LancamentoCaixas
                 .Include(l => l.TipoPagamentos)
                 .Include(l => l.Utilizadores)
+                .Include(l => l.Pagamentos)
+                .Include(l => l.PlanodeContas)
                 .AsQueryable();
 
             // Filtro de operador baseado no perfil
@@ -78,6 +80,7 @@ namespace Hotel.Infrastruture.Persistence.Repositories
                 .Include(l => l.TipoPagamentos)
                 .Include(l => l.Pagamentos)
                 .Include(l => l.Utilizadores)
+                .Include(l => l.PlanodeContas)
                 .Where(l => l.DataHoraLancamento.Date == date.Date)
                 .AsQueryable();
 

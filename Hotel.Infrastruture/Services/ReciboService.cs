@@ -347,12 +347,71 @@ namespace Hotel.Infrastruture.Services
                             }
                         });
 
+                        // ─── PEDIDOS (consumos) ───────────────────────────────────
+                        if (nota.Pedidos != null && nota.Pedidos.Count > 0)
+                        {
+                            column.Item().PaddingTop(18).Text("Consumos / Pedidos").Bold().FontSize(9);
+
+                            column.Item().PaddingTop(4).Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.ConstantColumn(80);  // pedido / ponto venda
+                                    columns.RelativeColumn();    // descrição
+                                    columns.ConstantColumn(30);  // qtd
+                                    columns.ConstantColumn(72);  // preço
+                                    columns.ConstantColumn(72);  // total
+                                });
+
+                                table.Header(header =>
+                                {
+                                    header.Cell().Element(HeaderCell).Text("Pedido").Bold();
+                                    header.Cell().Element(HeaderCell).Text("Descrição").Bold();
+                                    header.Cell().Element(HeaderCell).Text("Qtd").Bold().AlignCenter();
+                                    header.Cell().Element(HeaderCell).Text("P. Unit.").Bold().AlignRight();
+                                    header.Cell().Element(HeaderCell).Text("Total").Bold().AlignRight();
+                                });
+
+                                foreach (var pedido in nota.Pedidos)
+                                {
+                                    var nomeRef = $"{NomeArquivoValido(pedido.NumePedido)}\n{NomeArquivoValido(pedido.PontoVendaNome)}\n{pedido.DataPedido:dd/MM/yyyy HH:mm}";
+
+                                    if (pedido.Itens != null && pedido.Itens.Count > 0)
+                                    {
+                                        var firstItem = pedido.Itens[0];
+                                        table.Cell().RowSpan((uint)pedido.Itens.Count).Element(BodyCell).Text(nomeRef).FontSize(7.5f);
+
+                                        table.Cell().Element(BodyCell).Text(NomeArquivoValido(firstItem.Descricao));
+                                        table.Cell().Element(BodyCell).AlignCenter().Text(firstItem.Quantidade.ToString());
+                                        table.Cell().Element(BodyCell).AlignRight().Text(Moeda(firstItem.PrecoUnitario));
+                                        table.Cell().Element(BodyCell).AlignRight().Text(Moeda(firstItem.Total));
+
+                                        for (int idx = 1; idx < pedido.Itens.Count; idx++)
+                                        {
+                                            var item = pedido.Itens[idx];
+                                            table.Cell().Element(BodyCell).Text(NomeArquivoValido(item.Descricao));
+                                            table.Cell().Element(BodyCell).AlignCenter().Text(item.Quantidade.ToString());
+                                            table.Cell().Element(BodyCell).AlignRight().Text(Moeda(item.PrecoUnitario));
+                                            table.Cell().Element(BodyCell).AlignRight().Text(Moeda(item.Total));
+                                        }
+                                    }
+                                    else
+                                    {
+                                        table.Cell().Element(BodyCell).Text(nomeRef).FontSize(7.5f);
+                                        table.Cell().ColumnSpan(4).Element(BodyCell).Text("Sem itens.").Italic();
+                                    }
+                                }
+                            });
+                        }
+
                         column.Item().PaddingTop(22).LineHorizontal(1).LineColor(Colors.Black);
                         column.Item().PaddingTop(10).Row(row =>
                         {
                             row.RelativeItem().Column(left =>
                             {
                                 left.Item().Text($"Utilizador CheckOut: {NomeArquivoValido(nota.UtilizadorCheckout)}").FontSize(9);
+                                if (!string.IsNullOrWhiteSpace(nota.Operador))
+                                    left.Item().PaddingTop(4).Text($"Operador: {NomeArquivoValido(nota.Operador)}").FontSize(9);
                                 left.Item().PaddingTop(12).Text("Documento Processado por Computador").FontSize(8);
                             });
 
@@ -1038,6 +1097,151 @@ namespace Hotel.Infrastruture.Services
                             .PaddingHorizontal(5)
                             .DefaultTextStyle(x => x.FontSize(7));
                     }
+                });
+            }).GeneratePdf();
+        }
+
+        public byte[] GerarReciboPedido(ReciboPedidoDto recibo)
+        {
+            var enUS = new System.Globalization.CultureInfo("en-US");
+
+            DateTime angolaNow;
+            try
+            {
+                angolaNow = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow,
+                    TimeZoneInfo.FindSystemTimeZoneById("Africa/Luanda"));
+            }
+            catch
+            {
+                try
+                {
+                    angolaNow = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow,
+                        TimeZoneInfo.FindSystemTimeZoneById("W. Central Africa Standard Time"));
+                }
+                catch
+                {
+                    angolaNow = DateTime.UtcNow.AddHours(1);
+                }
+            }
+
+            string Moeda(decimal v) => v.ToString("N2", enUS);
+
+            return Document.Create(container =>
+            {
+                container.Page(page =>
+                {
+                    page.Size(new PageSize(90, 250, Unit.Millimetre));
+                    page.Margin(8, Unit.Millimetre);
+                    page.DefaultTextStyle(x => x.FontSize(9));
+
+                    page.Content().Column(column =>
+                    {
+                        // ─── CABEÇALHO ────────────────────────────────────────────
+                        column.Item().Text(recibo.NomeHotel ?? "-").Bold().FontSize(11).AlignCenter();
+                        if (!string.IsNullOrWhiteSpace(recibo.Endereco))
+                            column.Item().Text(recibo.Endereco).FontSize(8).AlignCenter();
+                        if (!string.IsNullOrWhiteSpace(recibo.Cidade))
+                            column.Item().Text(recibo.Cidade).FontSize(8).AlignCenter();
+                        if (!string.IsNullOrWhiteSpace(recibo.NumContribuinte))
+                            column.Item().Text(recibo.NumContribuinte).FontSize(8).AlignCenter();
+
+                        column.Item().PaddingVertical(4).Height(0.5f).BorderBottom(0.5f).BorderColor(Colors.Black);
+
+                        // ─── TÍTULO DO PEDIDO ─────────────────────────────────────
+                        column.Item().PaddingVertical(3)
+                            .Text(recibo.NumePedido ?? "PEDIDO").Bold().FontSize(13).AlignCenter();
+
+                        if (!string.IsNullOrWhiteSpace(recibo.PontoVendaNome))
+                            column.Item().Text(recibo.PontoVendaNome).FontSize(9).AlignCenter();
+
+                        // ─── CLIENTE / QUARTO ─────────────────────────────────────
+                        column.Item().Height(4);
+                        column.Item().Text(recibo.NomeCliente ?? "Cliente Diverso").Bold().FontSize(9).AlignCenter();
+
+                        if (!string.IsNullOrWhiteSpace(recibo.ApartamentoCodigo))
+                            column.Item().Text($"Quarto: {recibo.ApartamentoCodigo}").FontSize(8).AlignCenter();
+
+                        column.Item().PaddingBottom(2)
+                            .Text($"Data: {recibo.DataPedido:dd/MM/yyyy HH:mm}").FontSize(8).AlignCenter();
+                        column.Item().PaddingBottom(4)
+                            .Text($"Impresso: {angolaNow:d/M/yyyy h:mm:sstt}").FontSize(8).AlignCenter();
+
+                        column.Item().Height(0.5f).BorderBottom(0.5f).BorderColor(Colors.Black);
+
+                        // ─── TABELA DE ITENS ──────────────────────────────────────
+                        column.Item().PaddingVertical(4).Table(table =>
+                        {
+                            table.ColumnsDefinition(columns =>
+                            {
+                                columns.RelativeColumn(3);   // descrição
+                                columns.ConstantColumn(22);  // qtd
+                                columns.ConstantColumn(30);  // preço unit
+                                columns.ConstantColumn(30);  // total
+                            });
+
+                            // cabeçalho da tabela
+                            table.Header(header =>
+                            {
+                                header.Cell().PaddingBottom(3).Text("Descrição").Bold().FontSize(7.5f);
+                                header.Cell().PaddingBottom(3).AlignCenter().Text("Qtd").Bold().FontSize(7.5f);
+                                header.Cell().PaddingBottom(3).AlignRight().Text("PUnit").Bold().FontSize(7.5f);
+                                header.Cell().PaddingBottom(3).AlignRight().Text("Total").Bold().FontSize(7.5f);
+                            });
+
+                            if (recibo.Itens != null && recibo.Itens.Count > 0)
+                            {
+                                foreach (var item in recibo.Itens)
+                                {
+                                    table.Cell().PaddingVertical(2).Text(item.Descricao ?? "-").FontSize(8);
+                                    table.Cell().PaddingVertical(2).AlignCenter().Text(item.Quantidade.ToString()).FontSize(8);
+                                    table.Cell().PaddingVertical(2).AlignRight().Text(Moeda(item.PrecoUnitario)).FontSize(8);
+                                    table.Cell().PaddingVertical(2).AlignRight().Text(Moeda(item.ValorTotal)).FontSize(8);
+                                }
+                            }
+                            else
+                            {
+                                table.Cell().ColumnSpan(4).PaddingVertical(4).Text("Sem itens registados.").Italic().FontSize(8);
+                            }
+                        });
+
+                        column.Item().Height(0.5f).BorderBottom(0.5f).BorderColor(Colors.Black);
+
+                        // ─── TOTALIZADORES ────────────────────────────────────────
+                        column.Item().PaddingVertical(3).Row(row =>
+                        {
+                            row.RelativeItem().Text("TOTAL").Bold().FontSize(11);
+                            row.ConstantItem(55).Text(Moeda(recibo.ValorTotal)).Bold().FontSize(11).AlignRight();
+                        });
+                        column.Item().Row(row =>
+                        {
+                            row.RelativeItem().Text("PAGOU(-)").Bold().FontSize(9);
+                            row.ConstantItem(55).Text(Moeda(recibo.ValorPago)).FontSize(9).AlignRight();
+                        });
+
+                        if (!string.IsNullOrWhiteSpace(recibo.FormaPagamento))
+                        {
+                            column.Item().PaddingBottom(3).Row(row =>
+                            {
+                                row.RelativeItem().Text("Forma Pag.").FontSize(9);
+                                row.ConstantItem(55).Text(recibo.FormaPagamento).FontSize(9).AlignRight();
+                            });
+                        }
+
+                        column.Item().PaddingVertical(2).Height(0.5f).BorderBottom(0.5f).BorderColor(Colors.Black);
+
+                        // ─── OBSERVAÇÃO ───────────────────────────────────────────
+                        if (!string.IsNullOrWhiteSpace(recibo.Observacao))
+                        {
+                            column.Item().PaddingVertical(4).Text($"Obs: {recibo.Observacao}").FontSize(8);
+                            column.Item().Height(0.5f).BorderBottom(0.5f).BorderColor(Colors.Black);
+                        }
+
+                        // ─── RODAPÉ ───────────────────────────────────────────────
+                        column.Item().PaddingTop(8)
+                            .Text($"Operador: {recibo.Operador ?? "-"}").FontSize(8).AlignCenter();
+                        column.Item().PaddingTop(6)
+                            .Text("Processado por computador").FontSize(7).AlignCenter();
+                    });
                 });
             }).GeneratePdf();
         }

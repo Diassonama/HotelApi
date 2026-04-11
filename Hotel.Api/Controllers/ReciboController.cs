@@ -826,6 +826,87 @@ namespace Hotel.Api.Controllers
             return !string.IsNullOrWhiteSpace(pdfBase64);
         }
 
+        #region Recibo Pedido
+
+        /// <summary>
+        /// Gerar recibo de pedido (restaurante/frigobar) em PDF base64
+        /// </summary>
+        [HttpGet("pedido/{pedidoId:int}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> GerarReciboPedido(int pedidoId)
+        {
+            var correlationId = Guid.NewGuid().ToString("N")[..8];
+
+            try
+            {
+                _logger.LogInformation("📄 [RECIBO-PEDIDO-{CorrelationId}] GET pedido/{PedidoId}", correlationId, pedidoId);
+
+                var command = new GerarReciboPedidoCommand { PedidoId = pedidoId };
+                var result = await Mediator.Send(command);
+
+                if (!result.Success)
+                {
+                    _logger.LogWarning("⚠️ [RECIBO-PEDIDO-{CorrelationId}] Falha: {Message}", correlationId, result.Message);
+                    return BadRequest(new { success = false, message = result.Message });
+                }
+
+                _logger.LogInformation("✅ [RECIBO-PEDIDO-{CorrelationId}] Recibo gerado para PedidoId {PedidoId}", correlationId, pedidoId);
+                return Ok(new { success = true, message = result.Message, data = result.Data });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "❌ [RECIBO-PEDIDO-{CorrelationId}] Erro PedidoId {PedidoId}: {Message}", correlationId, pedidoId, ex.Message);
+                return StatusCode(500, new { success = false, message = "Erro ao gerar recibo do pedido", error = ex.Message });
+            }
+        }
+
+        /// <summary>
+        /// Download direto do recibo de pedido em PDF
+        /// </summary>
+        [HttpGet("pedido/{pedidoId:int}/download")]
+        [ProducesResponseType(typeof(FileContentResult), 200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> DownloadReciboPedido(int pedidoId)
+        {
+            var correlationId = Guid.NewGuid().ToString("N")[..8];
+
+            try
+            {
+                _logger.LogInformation("📥 [RECIBO-PEDIDO-DL-{CorrelationId}] Download PedidoId {PedidoId}", correlationId, pedidoId);
+
+                var command = new GerarReciboPedidoCommand { PedidoId = pedidoId };
+                var result = await Mediator.Send(command);
+
+                if (!result.Success)
+                    return BadRequest(new { success = false, message = result.Message });
+
+                string nomeArquivo = $"Recibo_Pedido_{pedidoId}.pdf";
+
+                if (!TryExtractPdf(result.Data, out var pdfBase64, out var downloadNome))
+                    return StatusCode(500, new { success = false, message = "Erro ao processar PDF" });
+
+                if (!string.IsNullOrEmpty(downloadNome))
+                    nomeArquivo = downloadNome;
+
+                byte[] pdfBytes = Convert.FromBase64String(pdfBase64);
+
+                _logger.LogInformation("✅ [RECIBO-PEDIDO-DL-{CorrelationId}] Download pronto — {Bytes} bytes", correlationId, pdfBytes.Length);
+                return File(pdfBytes, "application/pdf", nomeArquivo);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "❌ [RECIBO-PEDIDO-DL-{CorrelationId}] Erro PedidoId {PedidoId}: {Message}", correlationId, pedidoId, ex.Message);
+                return StatusCode(500, new { success = false, message = "Erro ao fazer download do recibo", error = ex.Message });
+            }
+        }
+
+        #endregion
+
         private async Task<string> ObterEmailDestinoPorCheckin(int checkinId, bool enviarParaEmpresa)
         {
             var hospede = await _unitOfWork.hospedes.GetByCheckinIdAsync(checkinId);

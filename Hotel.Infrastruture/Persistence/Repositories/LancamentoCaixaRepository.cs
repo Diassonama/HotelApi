@@ -76,12 +76,16 @@ namespace Hotel.Infrastruture.Persistence.Repositories
 
         public async Task<List<LancamentoCaixa>> GetPagamentosFechamentoCaixaAsync(DateTime date, int? caixaId, string perfil, string usuario)
         {
+            // Janela do dia útil: 07h do dia D até 08h do dia D+1, cobrindo o turno da manhã (07h-15h) e o turno da noite (15h-08h)
+            var inicioTurno = date.Date.AddHours(7);
+            var fimTurno    = date.Date.AddDays(1).AddHours(8);
+
             var query = _context.LancamentoCaixas
                 .Include(l => l.TipoPagamentos)
                 .Include(l => l.Pagamentos)
                 .Include(l => l.Utilizadores)
                 .Include(l => l.PlanodeContas)
-                .Where(l => l.DataHoraLancamento.Date == date.Date)
+                .Where(l => l.DataHoraLancamento >= inicioTurno && l.DataHoraLancamento < fimTurno)
                 .AsQueryable();
 
             if (caixaId.HasValue)

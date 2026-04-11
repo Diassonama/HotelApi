@@ -175,6 +175,10 @@ namespace Hotel.Infrastruture.Persistence.Repositories
 
         public async Task<List<Checkins>> GetCheckinsFechamentoCaixaAsync(DateTime date, int? caixaId)
         {
+          // Janela do dia útil: 07h do dia D até 08h do dia D+1
+          var inicioTurno = date.Date.AddHours(7);
+          var fimTurno    = date.Date.AddDays(1).AddHours(8);
+
           var query = _context.Checkins
             .Include(c => c.Hospedagem)
               .ThenInclude(h => h.Apartamentos)
@@ -183,7 +187,7 @@ namespace Hotel.Infrastruture.Persistence.Repositories
             .Include(c => c.Hospedes)
               .ThenInclude(h => h.Clientes)
             .Include(c => c.UtilizadoresCheckin)
-            .Where(c => c.DataEntrada.Date == date.Date && !c.CheckoutRealizado)
+            .Where(c => c.DataEntrada >= inicioTurno && c.DataEntrada < fimTurno && !c.CheckoutRealizado)
             .AsQueryable();
 
           if (caixaId.HasValue)
@@ -197,6 +201,10 @@ namespace Hotel.Infrastruture.Persistence.Repositories
 
         public async Task<List<Checkins>> GetCheckoutsFechamentoCaixaAsync(DateTime date, int? caixaId)
         {
+          // Janela do dia útil: 07h do dia D até 08h do dia D+1
+          var inicioTurno = date.Date.AddHours(7);
+          var fimTurno    = date.Date.AddDays(1).AddHours(8);
+
           var query = _context.Checkins
             .Include(c => c.Hospedagem)
               .ThenInclude(h => h.Apartamentos)
@@ -205,7 +213,7 @@ namespace Hotel.Infrastruture.Persistence.Repositories
             .Include(c => c.Hospedes)
               .ThenInclude(h => h.Clientes)
             .Include(c => c.UtilizadoresCheckout)
-            .Where(c => c.CheckoutRealizado && c.Hospedagem.Any(h => h.PrevisaoFechamento.Date == date.Date))
+            .Where(c => c.CheckoutRealizado && c.Hospedagem.Any(h => h.PrevisaoFechamento >= inicioTurno && h.PrevisaoFechamento < fimTurno))
             .AsQueryable();
 
           if (caixaId.HasValue)

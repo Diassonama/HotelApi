@@ -43,10 +43,14 @@ namespace Hotel.Infrastruture.Persistence.Repositories
 
         public async Task<List<Historico>> GetHistoricoFechamentoCaixaAsync(DateTime date, int? caixaId)
         {
+            // Janela do dia útil: 07h do dia D até 08h do dia D+1
+            var inicioTurno = date.Date.AddHours(7);
+            var fimTurno    = date.Date.AddDays(1).AddHours(8);
+
             var query = _context.Historicos
                 .Include(h => h.Utilizadores)
                 .Include(h => h.Checkins)
-                .Where(h => h.DataHora.Date == date.Date)
+                .Where(h => h.DataHora >= inicioTurno && h.DataHora < fimTurno)
                 .AsQueryable();
 
             if (caixaId.HasValue)
